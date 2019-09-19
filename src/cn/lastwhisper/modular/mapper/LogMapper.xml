@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,null
 		</if>
 		<if test='operatedate!=null'>
-			,#{operatedate}
+			,sysdate
 		</if>
 		<if test='operatedate==null'>
 			,null

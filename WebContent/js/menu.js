@@ -1,4 +1,4 @@
-$(function() {
+﻿$(function() {
 	loadTree();
 	// 添加数据对话框
 	$('#insertDlg').dialog({

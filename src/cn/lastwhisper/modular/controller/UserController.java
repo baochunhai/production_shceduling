@@ -58,12 +58,12 @@ public class UserController {
 			log.setOperateresult("正常");
 			log.setOperatetype("登录");
 			log.setIp(UserUtils.getIpAddress());
-			try {
-				logService.addLog(log);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				logService.addLog(log);
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			//return GlobalResult.build(200, "");
 			User user = userService.findUserByCodeAndPwd(user_code, user_pwd);
 			if (user != null) {

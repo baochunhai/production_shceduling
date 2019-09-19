@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 根据user_code和user_pwd查询user表 -->
 	<select id="selectUserBycodeAndpwd"
 		parameterType="java.lang.String" resultType="user">
-		select * from user
+		select * from user_u
 		where
 		user_code=#{user_code} and
 		user_pwd=#{user_pwd}
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 		*
 		FROM
-		user
+		user_u
 		<if test="user_name!=null">
 			where
 			user_name like '%${user_name}%'
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 根据用户名模糊查询用户 自动补全 -->
 	<select id="selectUserName" parameterType="java.lang.String"
 		resultType="user">
-		select user_name from user
+		select user_name from user_u
 		where
 		user_name like concat('%', #{user_name}, '%') 
 	</select>
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUserByUserCode"
 		parameterType="java.lang.String" resultType="user">
 		select
-		user_code,user_name,user_birthday from user
+		user_code,user_name,user_birthday from user_u
 		where
 		user_code =
 		#{user_code}
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 添加用户 -->
 	<insert id="insertUser" parameterType="user">
-		insert into user
+		insert into user_u
 		values
 		(0
 		<if test='user_code!=null'>
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 更新用户信息根据与用户编号 -->
 	<update id="updateUser" parameterType="user">
-		update user set
+		update user_u set
 		<if test='user_code!=null'>
 			user_code = #{user_code}
 		</if>
@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 更新用户密码 -->
 	<update id="updatePwdById" parameterType="user">
-		update user set
+		update user_u set
 		<if test='user_pwd!=null'>
 			user_pwd = #{user_pwd}
 		</if>
@@ -118,7 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 更新用户信息根据账号 -->
 	<update id="updateUserByUserCode" parameterType="user">
-		update user set
+		update user_u set
 		<if test='user_name!=null'>
 			user_name = #{user_name}
 		</if>
@@ -136,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 根据主键删除用户 -->
 	<delete id="deleteUserById">
-		delete from user where
+		delete from user_u where
 		user_id=#{user_id}
 	</delete>
 	<!-- 根据用户id删除对应角色 -->

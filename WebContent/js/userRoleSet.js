@@ -1,4 +1,4 @@
-$(function() {
+﻿$(function() {
 	$('#grid').datagrid({
 		url : 'user/userlistByPage',
 		frozenColumns : [ [ {

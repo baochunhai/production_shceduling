@@ -13,6 +13,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -36,7 +37,7 @@ import cn.lastwhisper.modular.service.UserService;
  * 
  * @ClassName: UserServiceImpl
  * @Description: 用户相关
- * @author: 最后的轻语_dd43
+ * @author: 鲍春海
  * @date: 2019年4月30日
  */
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUserByCodeAndPwd(String user_code, String user_pwd) {
 		// 密码加密
-//		user_pwd = encrypt(user_pwd, user_code);
+		user_pwd = encrypt(user_pwd, user_code);
 		System.out.println(user_pwd);
 		// 获取数据库用户信息
 		User userinfo = userMapper.selectUserBycodeAndpwd(user_code, user_pwd);
@@ -70,10 +71,10 @@ public class UserServiceImpl implements UserService {
 	 * @param salt   账号
 	 * @return
 	 */
-//	private String encrypt(String source, String salt) {
-//		Md5Hash md5 = new Md5Hash(source, salt, hashIterations);
-//		return md5.toString();
-//	}
+	private String encrypt(String source, String salt) {
+		Md5Hash md5 = new Md5Hash(source, salt, hashIterations);
+		return md5.toString();
+	}
 
 	@LogAnno(operateType = "添加用户")
 //	@RequiresPermissions("用户管理")

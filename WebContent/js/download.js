@@ -1,4 +1,4 @@
-// Ajax 文件下载
+﻿// Ajax 文件下载
 $.download = function(url, data){    // 获得url和data
     var inputs = '';    
     $.each(data, function(name, value) {        	

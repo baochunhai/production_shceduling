@@ -1,1 +1,1 @@
-var baseName = "permission"
+﻿var baseName = "permission"
