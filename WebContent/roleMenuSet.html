@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>è§’è‰²æƒé™è®¾ç½®</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>½ÇÉ«È¨ÏŞÉèÖÃ</title>
 <link rel="stylesheet" type="text/css"
 	href="ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
@@ -13,27 +13,27 @@
 <script type="text/javascript" src="js/roleMenuSet.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript">
-	//ç”¨äºsearch.jsè‡ªåŠ¨è¡¥å…¨
+	//ÓÃÓÚsearch.js×Ô¶¯²¹È«
 	var _url='role/searchRoleName';
 	var _value='name';
 </script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'center',title:'è§’è‰²åˆ—è¡¨'"
+	<div data-options="region:'center',title:'½ÇÉ«ÁĞ±í'"
 		style="width: 600px;padding: 4px; background-color: #eee">
-		<!--æœç´¢åŒº  -->
-		<div data-options="region:'north',title:'æŸ¥è¯¢'"
+		<!--ËÑË÷Çø  -->
+		<div data-options="region:'north',title:'²éÑ¯'"
 			style="padding: 4px; background-color: #eee; height: 40px">
 			<form id="searchForm">
 				<table cellpadding="5">
 					<tr>
-						<td>è§’è‰²åï¼š</td>
+						<td>½ÇÉ«Ãû£º</td>
 						<td><input name="name" class="easyui-combobox"
 							id="inputtable" /></td>
 						<td><a class="easyui-linkbutton"
-							data-options="iconCls:'icon-search'" id="btnSearch">æŸ¥è¯¢</a></td>
+							data-options="iconCls:'icon-search'" id="btnSearch">²éÑ¯</a></td>
 						<td><a class="easyui-linkbutton"
-							data-options="iconCls:'icon-remove'" id="btnReset">é‡ç½®</a></td>
+							data-options="iconCls:'icon-remove'" id="btnReset">ÖØÖÃ</a></td>
 					</tr>
 				</table>
 			</form>
@@ -41,10 +41,10 @@
 		<div style="height: 4px;"></div>
 		<table id="grid"></table>
 	</div>
-	<div data-options="region:'east',title:'æƒé™åˆ—è¡¨',split:true"
+	<div data-options="region:'east',title:'È¨ÏŞÁĞ±í',split:true"
 		style="width: 500px;">
 		<ul id="tree"></ul>
-		<button id="btnSave">ä¿å­˜</button>
+		<button id="btnSave">±£´æ</button>
 	</div>
 
 </body>

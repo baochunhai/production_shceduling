@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>è§’è‰²ç®¡ç†</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>½ÇÉ«¹ÜÀí</title>
 <link rel="stylesheet" type="text/css"
 	href="ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
@@ -13,53 +13,53 @@
 <script type="text/javascript" src="js/crud.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript">
-	//ç”¨äºsearch.jsè‡ªåŠ¨è¡¥å…¨
+	//ÓÃÓÚsearch.js×Ô¶¯²¹È«
 	var _url = 'role/searchRoleName';
 	var _value = 'name';
-	//ç”¨äºcrud.jsçš„esayuiåˆå§‹å‚æ•°
+	//ÓÃÓÚcrud.jsµÄesayui³õÊ¼²ÎÊı
 	var name = "role/role";
-	var title = 'è§’è‰²ç®¡ç†';
+	var title = '½ÇÉ«¹ÜÀí';
 	var idField = 'uuid';
 	var columns = [ [ {
 		field : 'name',
-		title : 'åç§°',
+		title : 'Ãû³Æ',
 		width : 100
 	} ] ];
 </script>
 </head>
 <body class="easyui-layout">
-	<!--æœç´¢åŒº  -->
-	<div data-options="region:'north',title:'æŸ¥è¯¢'"
+	<!--ËÑË÷Çø  -->
+	<div data-options="region:'north',title:'²éÑ¯'"
 		style="padding: 4px; background-color: #eee; height: 80px">
 		<form id="searchForm">
 			<table cellpadding="5">
 				<tr>
-					<td>è§’è‰²å ï¼š</td>
+					<td>½ÇÉ«Ãû £º</td>
 					<td><input name="name" class="easyui-combobox" id="inputtable" /></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'" id="btnSearch">æŸ¥è¯¢</a></td>
+						data-options="iconCls:'icon-search'" id="btnSearch">²éÑ¯</a></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove'" id="btnReset">é‡ç½®</a></td>
+						data-options="iconCls:'icon-remove'" id="btnReset">ÖØÖÃ</a></td>
 			</table>
 		</form>
 	</div>
-	<!-- æ•°æ®è¡¨æ ¼åŒº -->
+	<!-- Êı¾İ±í¸ñÇø -->
 	<div data-options="region:'center',collapsible:true,split:true"
 		style="width: 600px;">
 		<table id="grid"></table>
 	</div>
-	<!-- æ·»åŠ ã€ä¿®æ”¹ -->
+	<!-- Ìí¼Ó¡¢ĞŞ¸Ä -->
 	<div id="editDlg" class="easyui-window" data-options="closed:true">
 		<form id="editForm">
 			<input name="uuid" type="hidden">
 
 			<table>
 				<tr>
-					<td>åç§°</td>
+					<td>Ãû³Æ</td>
 					<td><input name="name"></td>
 				</tr>
 			</table>
-			<button id="btnSave" type="button">ä¿å­˜</button>
+			<button id="btnSave" type="button">±£´æ</button>
 		</form>
 	</div>
 </body>

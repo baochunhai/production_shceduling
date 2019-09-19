@@ -1,4 +1,4 @@
-window.onload = function() {
+﻿window.onload = function() {
 	$('#loading-mask').fadeOut();
 }
 var onlyOpenTitle = "欢迎使用";// 不允许关闭的标签的标题
