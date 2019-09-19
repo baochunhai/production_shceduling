@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<!-- 批量扫描别名 -->
 		<package name="cn.lastwhisper.modular.pojo" />
+		<!-- <typeAlias alias="page" type="*"/> -->
 	</typeAliases>
 	<!-- 由于整合不在此处扫描mapper包 -->
 	<!-- 配置分页插件 -->
@@ -20,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <plugin interceptor="com.github.pagehelper.PageHelper">
             <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->        
             <property name="dialect" value="oracle"/>
+            <property name="reasonable" value="true" />
         </plugin>
     </plugins>
 </configuration>
