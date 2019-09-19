@@ -36,7 +36,7 @@ import cn.lastwhisper.modular.service.MenuService;
  * @author: 最后的轻语_dd43
  * @date: 2019年4月6日
  */
-@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
+@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 @Service
 public class MenuServiceImpl implements MenuService {
 
