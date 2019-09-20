@@ -2,7 +2,7 @@
  * @Title:  RoleService.java   
  * @Package cn.lastwhisper.service   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author:     最后的轻语_dd43   
+ * @author:     鲍春海   
  * @date:   2019年4月6日 下午2:45:32   
  * @version V1.0 
  */
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 
  * @ClassName:  GlobalResult   
  * @Description:全局返回值
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月5日
  */
 public class GlobalResult implements Serializable{

@@ -9,7 +9,7 @@ import cn.lastwhisper.modular.pojo.Log;
 /**
  * 日志Service
  * 
- * @author lastwhisper
+ * @author 鲍春海
  *
  */
 public interface LogService {

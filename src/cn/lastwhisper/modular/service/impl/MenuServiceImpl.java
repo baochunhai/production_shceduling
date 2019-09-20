@@ -33,7 +33,7 @@ import cn.lastwhisper.modular.service.MenuService;
 /**
  * @ClassName: MenuServiceImpl
  * @Description: 菜单相关的操作
- * @author: 最后的轻语_dd43
+ * @author: 鲍春海
  * @date: 2019年4月6日
  */
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)

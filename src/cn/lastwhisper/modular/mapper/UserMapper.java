@@ -10,7 +10,7 @@ import cn.lastwhisper.modular.pojo.User;
  * 
  * @ClassName:  UserMapper   
  * @Description:mybatis的接口，用于操作用户相关表  
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月5日
  */
 public interface UserMapper {
@@ -55,7 +55,7 @@ public interface UserMapper {
 	 * 
 	 * @Title: selectUserByUserCode   
 	 * @Description: 证据用户账号查询对应用户
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param user_code 用户账号
 	 * @return
 	 */
@@ -94,7 +94,7 @@ public interface UserMapper {
 	 * 
 	 * @Title: updatePwd   
 	 * @Description: 更新密码
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param oldPwd
 	 * @param newPwd
 	 * @return

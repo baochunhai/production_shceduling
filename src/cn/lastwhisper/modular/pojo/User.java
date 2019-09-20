@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * 
  * @ClassName:  User   
  * @Description:用户实体类
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月5日
  */
 public class User implements Serializable{

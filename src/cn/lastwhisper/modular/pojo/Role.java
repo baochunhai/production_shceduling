@@ -2,7 +2,7 @@
  * @Title:  Role.java   
  * @Package cn.lastwhisper.pojo   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author: 最后的轻语_dd43     
+ * @author: 鲍春海     
  * @date:   2019年4月6日 下午2:34:44   
  * @version V1.0 
  */
@@ -11,7 +11,7 @@ package cn.lastwhisper.modular.pojo;
 /**   
  * @ClassName:  Role   
  * @Description:角色实体类
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月6日
  */
 public class Role {

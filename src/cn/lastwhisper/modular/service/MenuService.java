@@ -17,7 +17,7 @@ import cn.lastwhisper.modular.pojo.Menu;
 /**   
  * @ClassName:  MenuService   
  * @Description:TODO(这里用一句话描述这个类的作用)   
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月6日
  */
 public interface MenuService {
@@ -26,7 +26,7 @@ public interface MenuService {
 	 * 
 	 * @Title: findMenuList   
 	 * @Description: 查找所有数据
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海   
 	 * @return
 	 */
 	List<Tree> findMenuList();
@@ -35,7 +35,7 @@ public interface MenuService {
 	 * 
 	 * @Title: findMenuById   
 	 * @Description: 根据菜单id查找菜单，显示菜单详情
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param menuid
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public interface MenuService {
 	 * 
 	 * @Title: addMenu   
 	 * @Description: 添加数据
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param Menu
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public interface MenuService {
 	 * 
 	 * @Title: deleteMenuById   
 	 * @Description: 根据id删除数据
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param menuid
 	 * @return
 	 */
@@ -65,7 +65,7 @@ public interface MenuService {
 	 * 
 	 * @Title: updateMenuById   
 	 * @Description: 根据id修改数据
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param Menu
 	 * @return
 	 */

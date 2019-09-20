@@ -2,7 +2,7 @@
  * @Title:  RoleService.java   
  * @Package cn.lastwhisper.service   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author:     最后的轻语_dd43   
+ * @author:     鲍春海   
  * @date:   2019年4月6日 下午2:45:32   
  * @version V1.0 
  */
@@ -14,7 +14,7 @@ import java.util.List;
  * 
  * @ClassName:  EasyUIDataGridResult   
  * @Description:easyui分页
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月6日
  */
 public class EasyUIDataGridResult implements Serializable {

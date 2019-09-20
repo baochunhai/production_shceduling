@@ -15,7 +15,7 @@ import cn.lastwhisper.modular.pojo.User;
  * 
  * @ClassName:  UserService   
  * @Description:处理用户相关业务  
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月5日
  */
 public interface UserService {

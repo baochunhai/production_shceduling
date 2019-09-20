@@ -28,7 +28,7 @@ import cn.lastwhisper.modular.service.UserService;
  * 
  * @ClassName: UserController
  * @Description:用户相关操作请求接收器
- * @author: 最后的轻语_dd43
+ * @author: 鲍春海
  * @date: 2019年4月6日
  */
 @Controller
@@ -264,7 +264,7 @@ public class UserController {
 	 * 
 	 * @Title: userdoImport
 	 * @Description: 导入用户信息excel
-	 * @author: 最后的轻语_dd43
+	 * @author: 鲍春海
 	 * @return
 	 */
 	@RequestMapping(value = "/user/userdoImport", method = RequestMethod.POST)

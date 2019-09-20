@@ -2,7 +2,7 @@
  * @Title:  RoleService.java   
  * @Package cn.lastwhisper.service   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author:     最后的轻语_dd43   
+ * @author:     鲍春海   
  * @date:   2019年4月6日 下午2:45:32   
  * @version V1.0 
  */
@@ -19,7 +19,7 @@ import cn.lastwhisper.modular.pojo.User;
  * 
  * @ClassName:  UserUtils   
  * @Description:获取当前登录的用户  
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月5日
  */
 public class UserUtils {
@@ -37,7 +37,7 @@ public class UserUtils {
 	 * 
 	 * @Title: removeSubjectUser   
 	 * @Description: 从shiro中移除登录的用户
-	 * @author: 最后的轻语_dd43
+	 * @author: 鲍春海
 	 */
 //	public static void removeSubjectUser() {
 //		SecurityUtils.getSubject().logout();
@@ -46,7 +46,7 @@ public class UserUtils {
 	 * 
 	 * @Title: getRequest   
 	 * @Description: 获取当前的request
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @return
 	 */
 	public static HttpServletRequest getRequest() {
@@ -102,7 +102,7 @@ public class UserUtils {
 	 * 
 	 * @Title: removeSessionUser   
 	 * @Description: 从session中移除user（开启shiro后失效）
-	 * @author: 最后的轻语_dd43
+	 * @author: 鲍春海
 	 */
 	public static void removeSessionUser() {
 		getRequest().getSession().removeAttribute("user");;

@@ -2,7 +2,7 @@
  * @Title:  LogMapper.java   
  * @Package cn.lastwhisper.modular.mapper   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author: 最后的轻语_dd43     
+ * @author: 鲍春海     
  * @date:   2019年4月30日 下午9:42:54   
  * @version V1.0 
  */
@@ -17,7 +17,7 @@ import cn.lastwhisper.modular.pojo.Log;
 /**   
  * @ClassName:  LogMapper   
  * @Description:TODO(这里用一句话描述这个类的作用)   
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月30日
  */
 public interface LogMapper {
@@ -25,7 +25,7 @@ public interface LogMapper {
 	/**   
 	 * @Title: insertLog   
 	 * @Description: 向数据库添加日志
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param log
 	 * @return      
 	 */
@@ -34,7 +34,7 @@ public interface LogMapper {
 	 * 
 	 * @Title: selectUserlistByPage   
 	 * @Description: 查询
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param log
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public interface LogMapper {
 	 * 
 	 * @Title: selectLogOperateor   
 	 * @Description: 模糊查询操作人
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param operateor
 	 * @return
 	 */

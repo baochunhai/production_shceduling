@@ -27,7 +27,7 @@ import cn.lastwhisper.modular.service.RoleService;
 /**   
  * @ClassName:  RoleController   
  * @Description:接收角色相关请求
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月6日
  */
 @Controller
@@ -41,7 +41,7 @@ public class RoleController {
 	* @param page
 	* @param rows
 	* @return EasyUIDataGridResult
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月14日下午6:48:36
 	 */
 	@RequestMapping("/role/rolelistByPage")
@@ -73,7 +73,7 @@ public class RoleController {
 	* @Description: 接收更新角色的数据 
 	* @param role
 	* @return GlobalResult
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月14日下午8:19:07
 	 */
 	@RequestMapping(value = "/role/roleupdate" , method = RequestMethod.POST)
@@ -88,7 +88,7 @@ public class RoleController {
 	* @Description: 添加角色 
 	* @param role
 	* @return GlobalResult
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月15日上午11:52:43
 	 */
 	@RequestMapping(value = "/role/roleadd" , method = RequestMethod.POST)
@@ -109,7 +109,7 @@ public class RoleController {
 	* @Title: rolelistByEnble 
 	* @Description: 返回datagrid格式json 
 	* @return EasyUIDataGridResult
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月16日下午12:36:00
 	 */
 	@RequestMapping(value = "/role/rolelist")
@@ -124,7 +124,7 @@ public class RoleController {
 	* @Description: 根据角色id加载对应权限菜单 
 	* @param roleuuid
 	* @return List<EasyUIOptionalTreeNode>
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月16日下午7:19:56
 	 */
 	@RequestMapping(value = "/role/findRoleMenuByRoleid" , method = RequestMethod.POST)
@@ -140,7 +140,7 @@ public class RoleController {
 	* @param roleuuid
 	* @param checkedIds
 	* @return GlobalResult
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月16日下午8:16:05
 	 */
 	@RequestMapping(value = "/role/updateRoleMenu" , method = RequestMethod.POST)

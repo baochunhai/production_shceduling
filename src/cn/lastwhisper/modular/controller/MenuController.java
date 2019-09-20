@@ -2,7 +2,7 @@
  * @Title:  MenuController.java   
  * @Package cn.lastwhisper.controller   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author: 最后的轻语_dd43     
+ * @author: 鲍春海     
  * @date:   2019年4月6日 下午5:05:32   
  * @version V1.0 
  */
@@ -25,7 +25,7 @@ import cn.lastwhisper.modular.service.MenuService;
 /**   
  * @ClassName:  MenuController   
  * @Description:菜单管理
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年4月6日
  */
 @Controller
@@ -102,7 +102,7 @@ public class MenuController {
 	* @Title: loadMenu 
 	* @Description: 根据session中的user_id加载菜单
 	* @return Menu
-	* @author 最后的轻语_dd43
+	* @author 鲍春海
 	* @date 2019年2月16日下午9:18:20
 	 */
 	@RequestMapping(value="/menu/loadMenus")

@@ -21,7 +21,7 @@ import cn.lastwhisper.modular.service.LogService;
 /**
  * AOP实现日志
  * 
- * @author 最后的轻语_dd43
+ * @author 鲍春海
  * 
  */
 @Order(3)

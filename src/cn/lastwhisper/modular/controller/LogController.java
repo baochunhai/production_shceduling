@@ -26,7 +26,7 @@ import cn.lastwhisper.modular.service.LogService;
  * 
  * @ClassName:  LogController   
  * @Description: 日志
- * @author:     最后的轻语_dd43
+ * @author:     鲍春海
  * @date:       2019年5月1日
  */
 @Controller
@@ -38,7 +38,7 @@ public class LogController {
 	 * 
 	 * @Title: rolelistByPage   
 	 * @Description: 返回分页日志
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海  
 	 * @param log
 	 * @param page
 	 * @param rows
@@ -57,7 +57,7 @@ public class LogController {
 	 * 
 	 * @Title: searchLogOperateor   
 	 * @Description: 模糊查询用户名
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海   
 	 * @param q
 	 * @return
 	 */

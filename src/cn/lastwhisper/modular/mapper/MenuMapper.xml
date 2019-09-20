@@ -23,12 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 查询所有菜单的id、name -->
 	<select id="selectMenuIdName" resultType="menu">
-		SELECT menuid,menuname FROM menu where pid = #{pid} 
+		SELECT menuid,menuname FROM menu where pid = #{pid} order by menuid  
 	</select>
 	
 	<!-- 查询所有菜单的所有属性 -->
 	<select id="selectMenu" resultType="menu">
-		SELECT menuid,menuname,url,icon,pid FROM menu where pid = #{pid} 
+		SELECT menuid,menuname,url,icon,pid FROM menu where pid = #{pid}  order by menuid 
 	</select>
 	
 	<!-- 根据userid加载对应菜单 -->
@@ -45,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND role.uuid = role_menu.roleuuid  
 			AND role_menu.menuuuid = menu.menuid 
 			AND user_role.userid = #{userid}
+			order by menuid
 	</select>
 <!-- 查询菜单结束 -->
 

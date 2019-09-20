@@ -33,7 +33,7 @@ import cn.lastwhisper.modular.service.RoleService;
 /**
  * @ClassName: RoleServiceImpl
  * @Description:TODO(这里用一句话描述这个类的作用)
- * @author: 最后的轻语_dd43
+ * @author: 鲍春海
  * @date: 2019年4月6日
  */
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)

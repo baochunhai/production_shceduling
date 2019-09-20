@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 日志注解
  * 
- * @author lastwhisper
+ * @author 鲍春海
  *
  */
 @Target(ElementType.METHOD) // 方法注解

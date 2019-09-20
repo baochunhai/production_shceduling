@@ -21,7 +21,7 @@ import cn.lastwhisper.modular.service.LogService;
  * 
  * @ClassName: LogServiceImpl
  * @Description: 日志管理
- * @author: 最后的轻语_dd43
+ * @author: 鲍春海
  * @date: 2019年4月30日
  */
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)

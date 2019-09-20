@@ -84,7 +84,8 @@ function InitLeftMenu() {
 	$("#nav").accordion({
 		animate : true,
 		fit : true,
-		border : true
+		border : true,
+		multiple: true //设置成true，可以同时展示多个
 	});
 	var selectedPanelname = '';
 

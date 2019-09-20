@@ -20,7 +20,7 @@ import cn.lastwhisper.modular.pojo.Role;
  * 
  * @ClassName: RoleService 
  * @Description: 处理角色相关业务
- * @author:     最后的轻语_dd43 
+ * @author:     鲍春海
  * @date: 2019年2月14日 下午6:31:37
  */
 public interface RoleService {
