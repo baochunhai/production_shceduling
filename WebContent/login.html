@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>»ùÓÚ¸ĞÖªĞÅÏ¢µÄÖÆÔì¹ı³Ì¶¯Ì¬ÅÅ²úÏµÍ³</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>åŸºäºæ„ŸçŸ¥ä¿¡æ¯çš„åˆ¶é€ è¿‡ç¨‹åŠ¨æ€æ’äº§ç³»ç»Ÿ</title>
 <link rel="stylesheet" type="text/css" href="css/login.css"/>
 <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
@@ -13,22 +13,22 @@
 <script type="text/javascript" src="js/config.js"></script>
 <script type="text/javascript">
 /**
- * µÇÂ½
+ * ç™»é™†
  */
 function login(){
 	var formdata = $('#loginform').serializeJSON();
-	//Ìá½»µÇÂ½ÑéÖ¤
+	//æäº¤ç™»é™†éªŒè¯
 	$.ajax({
 		url: 'user/login',
 		data:formdata,
 		dataType: 'json',
 		type: 'post',
 		success:function(rtn){
-			//µÇÂ½³É¹¦
+			//ç™»é™†æˆåŠŸ
 			if(rtn.status==200){
 				location.href="index.html";
 			}else{
-				$.messager.alert('ÌáÊ¾',rtn.msg,'info');
+				$.messager.alert('æç¤º',rtn.msg,'info');
 			}
 		}
 	});
@@ -38,19 +38,19 @@ function login(){
 <body>
 <div class='signup_container'>
 <div class="w-load"><div class="spin"></div></div>
-    <h1 class='signup_title'>»ùÓÚ¸ĞÖªĞÅÏ¢µÄÖÆÔì¹ı³Ì¶¯Ì¬ÅÅ²úÏµÍ³</h1>
+    <h1 class='signup_title'>åŸºäºæ„ŸçŸ¥ä¿¡æ¯çš„åˆ¶é€ è¿‡ç¨‹åŠ¨æ€æ’äº§ç³»ç»Ÿ</h1>
     <div id="userInfo">
     	<span style="float:left; margin-left:40px; height:200px; border:0px solid red"><img src='images/erp.jpg' id='admin'/></span>
         <span style="float:left; margin-left:40px; height:200px; border:0px solid red">
             <div id="signup_forms" class="signup_forms clearfix">
                   <form class="signup_form_form" id="loginform" method="post" >
                           <div class="form_row first_row">
-                              <label for="signup_email">ÇëÊäÈëÓÃ»§Ãû</label>
-                              <input type="text" name="user_code" placeholder="ÇëÊäÈëÓÃ»§Ãû" id="signup_name" value="admin" >
+                              <label for="signup_email">è¯·è¾“å…¥ç”¨æˆ·å</label>
+                              <input type="text" name="user_code" placeholder="è¯·è¾“å…¥ç”¨æˆ·å" id="signup_name" value="admin" >
                           </div>
                           <div class="form_row">
-                              <label for="signup_password">ÇëÊäÈëÃÜÂë</label>
-                              <input type="password" name="user_pwd" placeholder="ÇëÊäÈëÃÜÂë" id="signup_password" value="admin" >
+                              <label for="signup_password">è¯·è¾“å…¥å¯†ç </label>
+                              <input type="password" name="user_pwd" placeholder="è¯·è¾“å…¥å¯†ç " id="signup_password" value="admin" >
                           </div>
                  </form>
             </div> 
@@ -61,7 +61,7 @@ function login(){
     
     
 
-    <div class="login-btn-set"><div class='rem'>¼Ç×¡ÎÒ</div> <a href='javascript:login()' class='login-btn'></a></div>
+    <div class="login-btn-set"><div class='rem'>è®°ä½æˆ‘</div> <a href='javascript:login()' class='login-btn'></a></div>
 </div>
 
 </body>

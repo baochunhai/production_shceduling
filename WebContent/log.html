@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>½ÇÉ«¹ÜÀí</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>è§’è‰²ç®¡ç†</title>
 <link rel="stylesheet" type="text/css"
 	href="ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
@@ -14,56 +14,56 @@
 <script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript" src="ui/date.js"></script>
 <script type="text/javascript">
-	//ÓÃÓÚsearch.js×Ô¶¯²¹È«
+	//ç”¨äºsearch.jsè‡ªåŠ¨è¡¥å…¨
 	var _url = 'log/searchLogOperateor';
 	var _value = 'operateor';
-	//ÓÃÓÚcrud.jsµÄesayui³õÊ¼²ÎÊı
+	//ç”¨äºcrud.jsçš„esayuiåˆå§‹å‚æ•°
 	var name = "log/log";
-	var title = 'ÈÕÖ¾¹ÜÀí';
+	var title = 'æ—¥å¿—ç®¡ç†';
 	var idField = 'id';
 	var columns = [ [ {
 		field : 'operateor',
-		title : '²Ù×÷ÈË',
+		title : 'æ“ä½œäºº',
 		width : 100
 	}, {
 		field : 'operatetype',
-		title : '²Ù×÷',
+		title : 'æ“ä½œ',
 		width : 100
 	}, {
 		field : 'operatedate',
-		title : '²Ù×÷ÈÕÆÚ',
+		title : 'æ“ä½œæ—¥æœŸ',
 		width : 100,
 		formatter : function(value) {
 			return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
 		}
 	}, {
 		field : 'operateresult',
-		title : '²Ù×÷½á¹û',
+		title : 'æ“ä½œç»“æœ',
 		width : 100
 	} , {
 		field : 'ip',
-		title : 'ipµØÖ·',
+		title : 'ipåœ°å€',
 		width : 100
 	} ] ];
 </script>
 </head>
 <body class="easyui-layout">
-	<!--ËÑË÷Çø  -->
-	<div data-options="region:'north',title:'²éÑ¯'"
+	<!--æœç´¢åŒº  -->
+	<div data-options="region:'north',title:'æŸ¥è¯¢'"
 		style="padding: 4px; background-color: #eee; height: 80px">
 		<form id="searchForm">
 			<table cellpadding="5">
 				<tr>
-					<td>²Ù×÷ÈË £º</td>
+					<td>æ“ä½œäºº ï¼š</td>
 					<td><input name="name" class="easyui-combobox" id="inputtable" /></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'" id="btnSearch">²éÑ¯</a></td>
+						data-options="iconCls:'icon-search'" id="btnSearch">æŸ¥è¯¢</a></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove'" id="btnReset">ÖØÖÃ</a></td>
+						data-options="iconCls:'icon-remove'" id="btnReset">é‡ç½®</a></td>
 			</table>
 		</form>
 	</div>
-	<!-- Êı¾İ±í¸ñÇø -->
+	<!-- æ•°æ®è¡¨æ ¼åŒº -->
 	<div data-options="region:'center',collapsible:true,split:true"
 		style="width: 600px;">
 		<table id="grid"></table>

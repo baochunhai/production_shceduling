@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!--数据库驱动路径，一定要引用本地的驱动包，否则会报找不到mysql driver class -->
+	<classPathEntry
+		location="D:\JAVA\maven\repositories\wisdom\WebContent\WEB-INF\lib\ojdbc6.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<!-- 删除代码中带有 代码生成器的注释信息 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection
+			connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+			driverClass="oracle.jdbc.driver.OracleDriver" password="wisdom"
+			userId="tiger" />
+		<javaModelGenerator
+			targetPackage="cn.lastwhisper.productplan.pojo"
+			targetProject="wisdom/src/main/java" />
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="wisdom/src/main/resources" />
+		<javaClientGenerator
+			targetPackage="cn.lastwhisper.productplan.mapper"
+			targetProject="wisdom/src/main/java"
+			type="XMLMAPPER" />
+
+		<table tableName=""></table>
+		<!-- <table tableName="om_menu" schema="" enableSelectByExample="false" 
+			enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="fasle" 
+			/> -->
+	</context>
+</generatorConfiguration>

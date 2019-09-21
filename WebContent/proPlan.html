@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>Ô±¹¤¹ÜÀí</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>å‘˜å·¥ç®¡ç†</title>
 <link rel="stylesheet" type="text/css"
 	href="ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
@@ -15,33 +15,33 @@
 <script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript" src="js/download.js"></script>
 <script type="text/javascript">
-	//ÓÃÓÚsearch.js×Ô¶¯²¹È«
+	//ç”¨äºsearch.jsè‡ªåŠ¨è¡¥å…¨
 	var _url = 'user/searchUserName';
 	var _value = 'user_name';
-	//ÓÃÓÚcrud.jsµÄesayui³õÊ¼²ÎÊı
+	//ç”¨äºcrud.jsçš„esayuiåˆå§‹å‚æ•°
 	var name = "user/user";
-	var title = 'ÓÃ»§¹ÜÀí';
+	var title = 'ç”¨æˆ·ç®¡ç†';
 	var idField = 'user_id';
 	var height = 300;
 	var width = 300;
 	var columns = [ [ {
 		field : 'user_code',
-		title : 'ÕËºÅ',
+		title : 'è´¦å·',
 		width : 100
 	}, {
 		field : 'user_pwd',
-		title : 'ÃÜÂë',
+		title : 'å¯†ç ',
 		width : 100,
 		formatter : function(value) {
 			return "*********";
 		}
 	}, {
 		field : 'user_name',
-		title : 'ÕæÊµĞÕÃû',
+		title : 'çœŸå®å§“å',
 		width : 100
 	}, {
 		field : 'user_birthday',
-		title : '×¢²áÈÕÆÚ',
+		title : 'æ³¨å†Œæ—¥æœŸ',
 		width : 100,
 		formatter : function(value) {
 			return new Date(value).Format("yyyy-MM-dd");
@@ -50,61 +50,61 @@
 </script>
 </head>
 <body class="easyui-layout">
-	<!--ËÑË÷Çø  -->
-	<div data-options="region:'north',title:'²éÑ¯'"
+	<!--æœç´¢åŒº  -->
+	<div data-options="region:'north',title:'æŸ¥è¯¢'"
 		style="padding: 4px; background-color: #eee; height: 80px">
 		<form id="searchForm">
 			<table cellpadding="5">
 				<tr>
-					<td>ÓÃ»§Ãû £º</td>
+					<td>ç”¨æˆ·å ï¼š</td>
 					<td><input name="user_name" class="easyui-combobox"
 						id="inputtable" /></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'" id="btnSearch">²éÑ¯</a></td>
+						data-options="iconCls:'icon-search'" id="btnSearch">æŸ¥è¯¢</a></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove'" id="btnReset">ÖØÖÃ</a></td>
+						data-options="iconCls:'icon-remove'" id="btnReset">é‡ç½®</a></td>
 			</table>
 		</form>
 	</div>
-	<!-- Êı¾İ±í¸ñÇø -->
+	<!-- æ•°æ®è¡¨æ ¼åŒº -->
 	<div data-options="region:'center',collapsible:true,split:true"
 		style="width: 600px;">
 		<table id="grid"></table>
 	</div>
-	<!-- Ìí¼Ó¡¢ĞŞ¸Ä -->
+	<!-- æ·»åŠ ã€ä¿®æ”¹ -->
 	<div id="editDlg" class="easyui-window" data-options="closed:true">
 		<form id="editForm">
 			<input name="user_id" type="hidden">
 			<table style="align-content: center;">
 				<tr>
-					<td>ÕËºÅ</td>
+					<td>è´¦å·</td>
 					<td><input name="user_code" class="easyui-validatebox"
 						data-options="
-					required:true,missingMessage:'ÕËºÅ²»ÄÜÎª¿Õ!'
+					required:true,missingMessage:'è´¦å·ä¸èƒ½ä¸ºç©º!'
 					">
 					</td>
 				</tr>
 				<tr>
-					<td>ÃÜÂë</td>
+					<td>å¯†ç </td>
 					<td><input type="password" name="user_pwd"></td>
 				</tr>
 				<tr>
-					<td>ÕæÊµĞÕÃû</td>
+					<td>çœŸå®å§“å</td>
 					<td><input name="user_name"></td>
 				</tr>
 				<tr>
-					<td>×¢²áÈÕÆÚ</td>
+					<td>æ³¨å†Œæ—¥æœŸ</td>
 					<td><input name="user_birthday" class="easyui-datebox"
 						editable="false"></td>
 				</tr>
 			</table>
-			<button id="btnSave" type="button" >×¢²á</button>
+			<button id="btnSave" type="button" >æ³¨å†Œ</button>
 		</form>
 	</div>
-	<!-- µ¼Èë´°¿Ú -->
+	<!-- å¯¼å…¥çª—å£ -->
 	<div id="importDlg" style="padding: 2px;">
 		<form id="importForm" enctype="multipart/form-data">
-			µ¼ÈëÎÄ¼ş:<input type="file" name="file">
+			å¯¼å…¥æ–‡ä»¶:<input type="file" name="file">
 		</form>
 	</div>
 </body>
