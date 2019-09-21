@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertUser" parameterType="user">
 		insert into user_u
 		values
-		(0
+		(seq_user_u.nextval 
 		<if test='user_code!=null'>
 			,#{user_code}
 		</if>
@@ -72,11 +72,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test='user_birthday!=null'>
 			,#{user_birthday}
+			<!-- to_date(to_char(#{user_birthday},'yyyy-mm-dd'),'yyyy-mm-dd') -->
 		</if>
 		<if test='user_birthday==null'>
 			,null
 		</if>
-		);
+		)
 	</insert>
 	<!-- 给用户添加对应角色信息 -->
 	<insert id="insertUserRole">

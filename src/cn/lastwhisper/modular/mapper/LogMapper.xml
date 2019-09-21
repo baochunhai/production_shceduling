@@ -23,37 +23,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertLog" parameterType="int">
 		insert into log
-		values(0
+		values(seq_log.NEXTVAL
 		<if test='operateor!=null'>
 			,#{operateor}
 		</if>
 		<if test='operateor==null'>
-			,null
+			,''
 		</if>
 		<if test='operatetype!=null'>
 			,#{operatetype}
 		</if>
 		<if test='operatetype==null'>
-			,null
+			,''
 		</if>
 		<if test='operatedate!=null'>
 			,sysdate
 		</if>
 		<if test='operatedate==null'>
-			,null
+			,''
 		</if>
 		<if test='operateresult!=null'>
 			,#{operateresult}
 		</if>
 		<if test='operateresult==null'>
-			,null
+			,''
 		</if>
 		<if test='ip!=null'>
 			,#{ip}
 		</if>
 		<if test='ip==null'>
-			,null
+			,''
 		</if>
-		);
+		)
 	</insert>
 </mapper>

@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
 //			user.setUser_pwd(user_pwd);
 			user.setUser_pwd(user.getUser_pwd());
 		}
+		//user.setUser_birthday();
 		Integer integer = userMapper.insertUser(user);
 		if (integer == 0) {
 			return new GlobalResult(400, "用户添加失败", null);

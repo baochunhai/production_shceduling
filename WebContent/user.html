@@ -41,7 +41,7 @@
 		width : 100
 	}, {
 		field : 'user_birthday',
-		title : '出生日期',
+		title : '注册日期',
 		width : 100,
 		formatter : function(value) {
 			return new Date(value).Format("yyyy-MM-dd");
@@ -56,7 +56,7 @@
 		<form id="searchForm">
 			<table cellpadding="5">
 				<tr>
-					<td>真实姓名 ：</td>
+					<td>用户名 ：</td>
 					<td><input name="user_name" class="easyui-combobox"
 						id="inputtable" /></td>
 					<td><a class="easyui-linkbutton"
@@ -75,7 +75,7 @@
 	<div id="editDlg" class="easyui-window" data-options="closed:true">
 		<form id="editForm">
 			<input name="user_id" type="hidden">
-			<table>
+			<table style="align-content: center;">
 				<tr>
 					<td>账号</td>
 					<td><input name="user_code" class="easyui-validatebox"
@@ -93,12 +93,12 @@
 					<td><input name="user_name"></td>
 				</tr>
 				<tr>
-					<td>出生日期</td>
+					<td>注册日期</td>
 					<td><input name="user_birthday" class="easyui-datebox"
 						editable="false"></td>
 				</tr>
 			</table>
-			<button id="btnSave" type="button">保存</button>
+			<button id="btnSave" type="button" >注册</button>
 		</form>
 	</div>
 	<!-- 导入窗口 -->

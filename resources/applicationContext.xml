@@ -65,7 +65,7 @@
 	<!-- 配置mapper扫描，并创建mapper.java的实例对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage"
-			value="cn.lastwhisper.modular.mapper" />
+			value="cn.lastwhisper.*.mapper" />
 		<property name="sqlSessionFactoryBeanName"
 			value="sqlSessionFactory" />
 	</bean>
