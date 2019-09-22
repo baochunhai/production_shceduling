@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.UseraccountMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Useraccount">
+    <id column="USERNO" jdbcType="CHAR" property="userno" />
+    <result column="USERNAME" jdbcType="CHAR" property="username" />
+    <result column="PW" jdbcType="CHAR" property="pw" />
+    <result column="USERTYPE" jdbcType="CHAR" property="usertype" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.USERACCOUNT
+    where USERNO = #{userno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Useraccount">
+    insert into WISDOM.USERACCOUNT (USERNO, USERNAME, PW, 
+      USERTYPE)
+    values (#{userno,jdbcType=CHAR}, #{username,jdbcType=CHAR}, #{pw,jdbcType=CHAR}, 
+      #{usertype,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Useraccount">
+    update WISDOM.USERACCOUNT
+    set USERNAME = #{username,jdbcType=CHAR},
+      PW = #{pw,jdbcType=CHAR},
+      USERTYPE = #{usertype,jdbcType=CHAR}
+    where USERNO = #{userno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select USERNO, USERNAME, PW, USERTYPE
+    from WISDOM.USERACCOUNT
+    where USERNO = #{userno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select USERNO, USERNAME, PW, USERTYPE
+    from WISDOM.USERACCOUNT
+  </select>
+</mapper>

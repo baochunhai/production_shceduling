@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.WorkerMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Worker">
+    <id column="WORKERNO" jdbcType="CHAR" property="workerno" />
+    <result column="WORKERNAME" jdbcType="CHAR" property="workername" />
+    <result column="WCOEFFICIENCY" jdbcType="CHAR" property="wcoefficiency" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.WORKER
+    where WORKERNO = #{workerno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Worker">
+    insert into WISDOM.WORKER (WORKERNO, WORKERNAME, WCOEFFICIENCY
+      )
+    values (#{workerno,jdbcType=CHAR}, #{workername,jdbcType=CHAR}, #{wcoefficiency,jdbcType=CHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Worker">
+    update WISDOM.WORKER
+    set WORKERNAME = #{workername,jdbcType=CHAR},
+      WCOEFFICIENCY = #{wcoefficiency,jdbcType=CHAR}
+    where WORKERNO = #{workerno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select WORKERNO, WORKERNAME, WCOEFFICIENCY
+    from WISDOM.WORKER
+    where WORKERNO = #{workerno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select WORKERNO, WORKERNAME, WCOEFFICIENCY
+    from WISDOM.WORKER
+  </select>
+</mapper>

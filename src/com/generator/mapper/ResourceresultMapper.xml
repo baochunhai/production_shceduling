@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.ResourceresultMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Resourceresult">
+    <result column="PNO" jdbcType="CHAR" property="pno" />
+    <result column="GXID" jdbcType="CHAR" property="gxid" />
+    <result column="GXNAME" jdbcType="CHAR" property="gxname" />
+    <result column="AR140620E5" jdbcType="CHAR" property="ar140620e5" />
+    <result column="AR130822E4" jdbcType="CHAR" property="ar130822e4" />
+    <result column="AR101P01" jdbcType="CHAR" property="ar101p01" />
+    <result column="AR101P02" jdbcType="CHAR" property="ar101p02" />
+    <result column="AR101P03" jdbcType="CHAR" property="ar101p03" />
+    <result column="AR101P04" jdbcType="CHAR" property="ar101p04" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.Resourceresult">
+    insert into WISDOM.RESOURCERESULT (PNO, GXID, GXNAME, AR140620E5, 
+      AR130822E4, AR101P01, AR101P02, 
+      AR101P03, AR101P04)
+    values (#{pno,jdbcType=CHAR}, #{gxid,jdbcType=CHAR}, #{gxname,jdbcType=CHAR}, #{ar140620e5,jdbcType=CHAR}, 
+      #{ar130822e4,jdbcType=CHAR}, #{ar101p01,jdbcType=CHAR}, #{ar101p02,jdbcType=CHAR}, 
+      #{ar101p03,jdbcType=CHAR}, #{ar101p04,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PNO, GXID, GXNAME, AR140620E5, AR130822E4, AR101P01, AR101P02, AR101P03, AR101P04
+    from WISDOM.RESOURCERESULT
+  </select>
+</mapper>

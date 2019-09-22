@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.GaselectedmpsnoMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Gaselectedmpsno">
+    <id column="MPSNO" jdbcType="CHAR" property="mpsno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.GASELECTEDMPSNO
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Gaselectedmpsno">
+    insert into WISDOM.GASELECTEDMPSNO (MPSNO)
+    values (#{mpsno,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MPSNO
+    from WISDOM.GASELECTEDMPSNO
+  </select>
+</mapper>

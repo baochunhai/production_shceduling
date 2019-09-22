@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.CdsproctimeMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Cdsproctime">
+    <id column="PARTNO" jdbcType="CHAR" property="partno" />
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <result column="PROCESSTIME" jdbcType="DECIMAL" property="processtime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from WISDOM.CDSPROCTIME
+    where PARTNO = #{partno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Cdsproctime">
+    insert into WISDOM.CDSPROCTIME (PARTNO, MACHINENO, PROCESSTIME
+      )
+    values (#{partno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR}, #{processtime,jdbcType=DECIMAL}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Cdsproctime">
+    update WISDOM.CDSPROCTIME
+    set PROCESSTIME = #{processtime,jdbcType=DECIMAL}
+    where PARTNO = #{partno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select PARTNO, MACHINENO, PROCESSTIME
+    from WISDOM.CDSPROCTIME
+    where PARTNO = #{partno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PARTNO, MACHINENO, PROCESSTIME
+    from WISDOM.CDSPROCTIME
+  </select>
+</mapper>

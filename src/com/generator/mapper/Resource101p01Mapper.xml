@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.Resource101p01Mapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Resource101p01">
+    <result column="PNO" jdbcType="CHAR" property="pno" />
+    <result column="GXID" jdbcType="CHAR" property="gxid" />
+    <result column="GXNAME" jdbcType="CHAR" property="gxname" />
+    <result column="WORKER" jdbcType="CHAR" property="worker" />
+    <result column="EQUIPMENT" jdbcType="CHAR" property="equipment" />
+    <result column="R101P01" jdbcType="CHAR" property="r101p01" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.Resource101p01">
+    insert into WISDOM.RESOURCE_101P01 (PNO, GXID, GXNAME, WORKER, 
+      EQUIPMENT, R101P01)
+    values (#{pno,jdbcType=CHAR}, #{gxid,jdbcType=CHAR}, #{gxname,jdbcType=CHAR}, #{worker,jdbcType=CHAR}, 
+      #{equipment,jdbcType=CHAR}, #{r101p01,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PNO, GXID, GXNAME, WORKER, EQUIPMENT, R101P01
+    from WISDOM.RESOURCE_101P01
+  </select>
+</mapper>

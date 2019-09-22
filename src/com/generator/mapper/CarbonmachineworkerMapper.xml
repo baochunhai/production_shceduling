@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.CarbonmachineworkerMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Carbonmachineworker">
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from WISDOM.CARBONMACHINEWORKER
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Carbonmachineworker">
+    insert into WISDOM.CARBONMACHINEWORKER (PROCESSNO, MACHINENO)
+    values (#{processno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PROCESSNO, MACHINENO
+    from WISDOM.CARBONMACHINEWORKER
+  </select>
+</mapper>

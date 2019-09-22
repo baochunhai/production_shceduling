@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.GaparallelMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Gaparallel">
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <id column="MPSNO" jdbcType="CHAR" property="mpsno" />
+    <result column="PARTNO" jdbcType="DECIMAL" property="partno" />
+    <result column="PROCTIME" jdbcType="DECIMAL" property="proctime" />
+    <result column="STARTTIME" jdbcType="CHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="CHAR" property="endtime" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from WISDOM.GAPARALLEL
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+      and MPSNO = #{mpsno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Gaparallel">
+    insert into WISDOM.GAPARALLEL (PROCESSNO, MACHINENO, MPSNO, 
+      PARTNO, PROCTIME, STARTTIME, 
+      ENDTIME, STATUS)
+    values (#{processno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR}, #{mpsno,jdbcType=CHAR}, 
+      #{partno,jdbcType=DECIMAL}, #{proctime,jdbcType=DECIMAL}, #{starttime,jdbcType=CHAR}, 
+      #{endtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Gaparallel">
+    update WISDOM.GAPARALLEL
+    set PARTNO = #{partno,jdbcType=DECIMAL},
+      PROCTIME = #{proctime,jdbcType=DECIMAL},
+      STARTTIME = #{starttime,jdbcType=CHAR},
+      ENDTIME = #{endtime,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR}
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+      and MPSNO = #{mpsno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select PROCESSNO, MACHINENO, MPSNO, PARTNO, PROCTIME, STARTTIME, ENDTIME, STATUS
+    from WISDOM.GAPARALLEL
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+      and MPSNO = #{mpsno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PROCESSNO, MACHINENO, MPSNO, PARTNO, PROCTIME, STARTTIME, ENDTIME, STATUS
+    from WISDOM.GAPARALLEL
+  </select>
+</mapper>

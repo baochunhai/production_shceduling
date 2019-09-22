@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.铝蒙皮工时计算知识Mapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.铝蒙皮工时计算知识">
+    <result column="工艺顺序" jdbcType="CHAR" property="工艺顺序" />
+    <result column="工序名称" jdbcType="CHAR" property="工序名称" />
+    <result column="工序类型" jdbcType="CHAR" property="工序类型" />
+    <result column="工位名称" jdbcType="CHAR" property="工位名称" />
+    <result column="X" jdbcType="CHAR" property="x" />
+    <result column="Y" jdbcType="CHAR" property="y" />
+    <result column="Z" jdbcType="CHAR" property="z" />
+    <result column="PNO" jdbcType="CHAR" property="pno" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.铝蒙皮工时计算知识">
+    insert into WISDOM.铝蒙皮工时计算知识 (工艺顺序, 工序名称, 工序类型, 工位名称, 
+      X, Y, Z, PNO
+      )
+    values (#{工艺顺序,jdbcType=CHAR}, #{工序名称,jdbcType=CHAR}, #{工序类型,jdbcType=CHAR}, #{工位名称,jdbcType=CHAR}, 
+      #{x,jdbcType=CHAR}, #{y,jdbcType=CHAR}, #{z,jdbcType=CHAR}, #{pno,jdbcType=CHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 工艺顺序, 工序名称, 工序类型, 工位名称, X, Y, Z, PNO
+    from WISDOM.铝蒙皮工时计算知识
+  </select>
+</mapper>

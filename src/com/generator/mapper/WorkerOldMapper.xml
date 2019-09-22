@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.WorkerOldMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.WorkerOld">
+    <result column="USERNO" jdbcType="CHAR" property="userno" />
+    <result column="USERNAME" jdbcType="CHAR" property="username" />
+    <result column="PW" jdbcType="CHAR" property="pw" />
+    <result column="USERTYPE" jdbcType="CHAR" property="usertype" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.WorkerOld">
+    insert into WISDOM.WORKER_OLD (USERNO, USERNAME, PW, 
+      USERTYPE)
+    values (#{userno,jdbcType=CHAR}, #{username,jdbcType=CHAR}, #{pw,jdbcType=CHAR}, 
+      #{usertype,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select USERNO, USERNAME, PW, USERTYPE
+    from WISDOM.WORKER_OLD
+  </select>
+</mapper>

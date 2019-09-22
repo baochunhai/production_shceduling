@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.UserRole">
+    <result column="USERID" jdbcType="DECIMAL" property="userid" />
+    <result column="ROLEUUID" jdbcType="DECIMAL" property="roleuuid" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.UserRole">
+    insert into WISDOM.USER_ROLE (USERID, ROLEUUID)
+    values (#{userid,jdbcType=DECIMAL}, #{roleuuid,jdbcType=DECIMAL})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select USERID, ROLEUUID
+    from WISDOM.USER_ROLE
+  </select>
+</mapper>

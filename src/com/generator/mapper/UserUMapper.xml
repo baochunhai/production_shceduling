@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.UserUMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.UserU">
+    <id column="USER_ID" jdbcType="DECIMAL" property="userId" />
+    <result column="USER_CODE" jdbcType="VARCHAR" property="userCode" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
+    <result column="USER_BIRTHDAY" jdbcType="TIMESTAMP" property="userBirthday" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from WISDOM.USER_U
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.UserU">
+    insert into WISDOM.USER_U (USER_ID, USER_CODE, USER_NAME, 
+      USER_PWD, USER_BIRTHDAY)
+    values (#{userId,jdbcType=DECIMAL}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.UserU">
+    update WISDOM.USER_U
+    set USER_CODE = #{userCode,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      USER_BIRTHDAY = #{userBirthday,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select USER_ID, USER_CODE, USER_NAME, USER_PWD, USER_BIRTHDAY
+    from WISDOM.USER_U
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select USER_ID, USER_CODE, USER_NAME, USER_PWD, USER_BIRTHDAY
+    from WISDOM.USER_U
+  </select>
+</mapper>

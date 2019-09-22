@@ -1,6 +1,6 @@
-package com.user.entity;
+package com.generator.entity;
 
-public class MPS {
+public class Mps {
     private String mpsno;
 
     private String taskno;

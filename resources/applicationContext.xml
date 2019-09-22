@@ -16,8 +16,8 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
 	<!-- 加载配置文件 -->
-	<context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
-
+	<!-- <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/> -->
+	<context:property-placeholder file-encoding="UTF-8" location="classpath:*.properties"/>
 	<!-- 注解开发 -->
 	<!-- 自动扫描组件，这里要把controler下面的 controller去除，他们是在spring3-servlet.xml中配置的，如果不去除会影响事务管理的。 -->
 	<context:component-scan
@@ -28,10 +28,10 @@
 	<!-- 数据源，使用Druid -->
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-		<property name="username" value="wisdom" />
-		<property name="password" value="tiger" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 		<!-- 配置初始化大小、最小、最大 -->
 		<property name="maxActive" value="20" />
 		<property name="initialSize" value="20" />

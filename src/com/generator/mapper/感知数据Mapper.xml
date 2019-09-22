@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.感知数据Mapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.感知数据">
+    <id column="任务号" jdbcType="CHAR" property="任务号" />
+    <result column="进入工序时间" jdbcType="CHAR" property="进入工序时间" />
+    <result column="离开工序时间" jdbcType="CHAR" property="离开工序时间" />
+    <result column="齐套性情况" jdbcType="CHAR" property="齐套性情况" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.感知数据
+    where 任务号 = #{任务号,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.感知数据">
+    insert into WISDOM.感知数据 (任务号, 进入工序时间, 离开工序时间, 齐套性情况
+      )
+    values (#{任务号,jdbcType=CHAR}, #{进入工序时间,jdbcType=CHAR}, #{离开工序时间,jdbcType=CHAR}, #{齐套性情况,jdbcType=CHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.感知数据">
+    update WISDOM.感知数据
+    set 进入工序时间 = #{进入工序时间,jdbcType=CHAR},
+      离开工序时间 = #{离开工序时间,jdbcType=CHAR},
+      齐套性情况 = #{齐套性情况,jdbcType=CHAR}
+    where 任务号 = #{任务号,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 任务号, 进入工序时间, 离开工序时间, 齐套性情况
+    from WISDOM.感知数据
+    where 任务号 = #{任务号,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 任务号, 进入工序时间, 离开工序时间, 齐套性情况
+    from WISDOM.感知数据
+  </select>
+</mapper>

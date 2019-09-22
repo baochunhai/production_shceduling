@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.铝蒙皮工位安排知识Mapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.铝蒙皮工位安排知识">
+    <result column="工艺顺序" jdbcType="CHAR" property="工艺顺序" />
+    <result column="工序名称" jdbcType="CHAR" property="工序名称" />
+    <result column="工序类型" jdbcType="CHAR" property="工序类型" />
+    <result column="工位名称" jdbcType="CHAR" property="工位名称" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.铝蒙皮工位安排知识">
+    insert into WISDOM.铝蒙皮工位安排知识 (工艺顺序, 工序名称, 工序类型, 工位名称
+      )
+    values (#{工艺顺序,jdbcType=CHAR}, #{工序名称,jdbcType=CHAR}, #{工序类型,jdbcType=CHAR}, #{工位名称,jdbcType=CHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 工艺顺序, 工序名称, 工序类型, 工位名称
+    from WISDOM.铝蒙皮工位安排知识
+  </select>
+</mapper>

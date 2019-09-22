@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.FaultymachineMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Faultymachine">
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <id column="FSTARTTIME" jdbcType="CHAR" property="fstarttime" />
+    <result column="PRECOVERYTIME" jdbcType="CHAR" property="precoverytime" />
+    <result column="FENDTIME" jdbcType="CHAR" property="fendtime" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from WISDOM.FAULTYMACHINE
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Faultymachine">
+    insert into WISDOM.FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 
+      FENDTIME, STATUS)
+    values (#{machineno,jdbcType=CHAR}, #{fstarttime,jdbcType=CHAR}, #{precoverytime,jdbcType=CHAR}, 
+      #{fendtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Faultymachine">
+    update WISDOM.FAULTYMACHINE
+    set PRECOVERYTIME = #{precoverytime,jdbcType=CHAR},
+      FENDTIME = #{fendtime,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR}
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select MACHINENO, FSTARTTIME, PRECOVERYTIME, FENDTIME, STATUS
+    from WISDOM.FAULTYMACHINE
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MACHINENO, FSTARTTIME, PRECOVERYTIME, FENDTIME, STATUS
+    from WISDOM.FAULTYMACHINE
+  </select>
+</mapper>

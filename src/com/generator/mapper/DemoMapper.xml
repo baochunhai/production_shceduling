@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.DemoMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Demo">
+    <result column="FID" jdbcType="CHAR" property="fid" />
+    <result column="FTYPE" jdbcType="CHAR" property="ftype" />
+    <result column="FNAME" jdbcType="CHAR" property="fname" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.Demo">
+    insert into WISDOM.DEMO (FID, FTYPE, FNAME)
+    values (#{fid,jdbcType=CHAR}, #{ftype,jdbcType=CHAR}, #{fname,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select FID, FTYPE, FNAME
+    from WISDOM.DEMO
+  </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.RoleMenuMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.RoleMenu">
+    <result column="MENUUUID" jdbcType="VARCHAR" property="menuuuid" />
+    <result column="ROLEUUID" jdbcType="DECIMAL" property="roleuuid" />
+  </resultMap>
+  <insert id="insert" parameterType="com.generator.entity.RoleMenu">
+    insert into WISDOM.ROLE_MENU (MENUUUID, ROLEUUID)
+    values (#{menuuuid,jdbcType=VARCHAR}, #{roleuuid,jdbcType=DECIMAL})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MENUUUID, ROLEUUID
+    from WISDOM.ROLE_MENU
+  </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.AluminumknowledgeMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Aluminumknowledge">
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <result column="PROCESSNAME" jdbcType="CHAR" property="processname" />
+    <result column="PROCESSTYPE" jdbcType="CHAR" property="processtype" />
+    <result column="STATIONNAME" jdbcType="CHAR" property="stationname" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.ALUMINUMKNOWLEDGE
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Aluminumknowledge">
+    insert into WISDOM.ALUMINUMKNOWLEDGE (PROCESSNO, PROCESSNAME, PROCESSTYPE, 
+      STATIONNAME)
+    values (#{processno,jdbcType=CHAR}, #{processname,jdbcType=CHAR}, #{processtype,jdbcType=CHAR}, 
+      #{stationname,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Aluminumknowledge">
+    update WISDOM.ALUMINUMKNOWLEDGE
+    set PROCESSNAME = #{processname,jdbcType=CHAR},
+      PROCESSTYPE = #{processtype,jdbcType=CHAR},
+      STATIONNAME = #{stationname,jdbcType=CHAR}
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select PROCESSNO, PROCESSNAME, PROCESSTYPE, STATIONNAME
+    from WISDOM.ALUMINUMKNOWLEDGE
+    where PROCESSNO = #{processno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PROCESSNO, PROCESSNAME, PROCESSTYPE, STATIONNAME
+    from WISDOM.ALUMINUMKNOWLEDGE
+  </select>
+</mapper>

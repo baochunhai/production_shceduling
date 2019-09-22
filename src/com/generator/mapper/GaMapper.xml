@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.GaMapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Ga">
+    <id column="PARTNO" jdbcType="DECIMAL" property="partno" />
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <result column="PROCTIME" jdbcType="DECIMAL" property="proctime" />
+    <result column="STARTTIME" jdbcType="CHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="CHAR" property="endtime" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="MPSNO" jdbcType="CHAR" property="mpsno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from WISDOM.GA
+    where PARTNO = #{partno,jdbcType=DECIMAL}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Ga">
+    insert into WISDOM.GA (PARTNO, PROCESSNO, MACHINENO, 
+      PROCTIME, STARTTIME, ENDTIME, 
+      STATUS, MPSNO)
+    values (#{partno,jdbcType=DECIMAL}, #{processno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR}, 
+      #{proctime,jdbcType=DECIMAL}, #{starttime,jdbcType=CHAR}, #{endtime,jdbcType=CHAR}, 
+      #{status,jdbcType=CHAR}, #{mpsno,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Ga">
+    update WISDOM.GA
+    set PROCTIME = #{proctime,jdbcType=DECIMAL},
+      STARTTIME = #{starttime,jdbcType=CHAR},
+      ENDTIME = #{endtime,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      MPSNO = #{mpsno,jdbcType=CHAR}
+    where PARTNO = #{partno,jdbcType=DECIMAL}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select PARTNO, PROCESSNO, MACHINENO, PROCTIME, STARTTIME, ENDTIME, STATUS, MPSNO
+    from WISDOM.GA
+    where PARTNO = #{partno,jdbcType=DECIMAL}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PARTNO, PROCESSNO, MACHINENO, PROCTIME, STARTTIME, ENDTIME, STATUS, MPSNO
+    from WISDOM.GA
+  </select>
+</mapper>

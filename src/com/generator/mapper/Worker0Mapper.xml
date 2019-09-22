@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.mapper.Worker0Mapper">
+  <resultMap id="BaseResultMap" type="com.generator.entity.Worker0">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="NAME" jdbcType="CHAR" property="name" />
+    <result column="PW" jdbcType="CHAR" property="pw" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.WORKER0
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.generator.entity.Worker0">
+    insert into WISDOM.WORKER0 (ID, NAME, PW)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=CHAR}, #{pw,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Worker0">
+    update WISDOM.WORKER0
+    set NAME = #{name,jdbcType=CHAR},
+      PW = #{pw,jdbcType=CHAR}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, NAME, PW
+    from WISDOM.WORKER0
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, NAME, PW
+    from WISDOM.WORKER0
+  </select>
+</mapper>
