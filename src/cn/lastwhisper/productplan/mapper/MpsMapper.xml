@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.generator.mapper.MpsMapper">
-  <resultMap id="BaseResultMap" type="com.generator.entity.Mps">
+<mapper namespace="cn.lastwhisper.productplan.mapper.MpsMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.productplan.pojo.Mps">
     <id column="MPSNO" jdbcType="CHAR" property="mpsno" />
     <result column="TASKNO" jdbcType="CHAR" property="taskno" />
     <result column="PROCESSFILENO" jdbcType="CHAR" property="processfileno" />
@@ -17,7 +17,7 @@
     delete from WISDOM.MPS
     where MPSNO = #{mpsno,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.generator.entity.Mps">
+  <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Mps">
     insert into WISDOM.MPS (MPSNO, TASKNO, PROCESSFILENO, 
       MANUNUMBER, STARTDATE, ENDDATE, 
       DEPARTMENT, STATUS, TYPE, URGENT
@@ -27,7 +27,7 @@
       #{department,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{urgent,jdbcType=CHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.generator.entity.Mps">
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Mps">
     update WISDOM.MPS
     set TASKNO = #{taskno,jdbcType=CHAR},
       PROCESSFILENO = #{processfileno,jdbcType=CHAR},

@@ -1,4 +1,4 @@
-package com.generator.entity;
+package cn.lastwhisper.productplan.pojo;
 
 public class Mps {
     private String mpsno;

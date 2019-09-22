@@ -1,6 +1,6 @@
-package com.generator.mapper;
+package cn.lastwhisper.productplan.mapper;
 
-import com.generator.entity.Mps;
+import cn.lastwhisper.productplan.pojo.Mps;
 import java.util.List;
 
 public interface MpsMapper {

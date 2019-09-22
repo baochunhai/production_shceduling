@@ -24,11 +24,11 @@
 			 userId="${jdbc.username}"
 			password="${jdbc.password}" />
         <!-- 生成实体类配置 -->
-        <javaModelGenerator targetPackage="com.generator.entity" targetProject="wisdom/src"/>
+        <javaModelGenerator targetPackage="${target.entity}" targetProject="wisdom/src"/>
         <!-- 生成mapper.xml配置文件 -->
-        <sqlMapGenerator targetPackage="com.generator.mapper" targetProject="wisdom/src"/>
+        <sqlMapGenerator targetPackage="${target.mapper}" targetProject="wisdom/src"/>
         <!-- 生成mapper接口文件配置 -->
-        <javaClientGenerator targetPackage="com.generator.mapper" targetProject="wisdom/src"
+        <javaClientGenerator targetPackage="${target.mapper}" targetProject="wisdom/src"
                              type="XMLMAPPER"/>
 
         <!-- 罗列要生成哪些表 , %表示生成全部的表 -->
@@ -45,7 +45,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>-->
-        <table schema="wisdom" tableName="%" 
+        <table schema="wisdom" tableName="${target.tableName}" 
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" />
