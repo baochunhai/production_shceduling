@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.productplan.mapper.NewsensordataMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.productplan.pojo.Newsensordata">
+    <id column="RECORDDATE" jdbcType="CHAR" property="recorddate" />
+    <id column="MPSNO" jdbcType="CHAR" property="mpsno" />
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <result column="TASKNO" jdbcType="CHAR" property="taskno" />
+    <result column="STARTTIME" jdbcType="CHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="CHAR" property="endtime" />
+    <result column="INTEGRITY" jdbcType="CHAR" property="integrity" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from NEWSENSORDATA
+    where RECORDDATE = #{recorddate,jdbcType=CHAR}
+      and MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata">
+    insert into NEWSENSORDATA (RECORDDATE, MPSNO, PROCESSNO, 
+      TASKNO, STARTTIME, ENDTIME, 
+      INTEGRITY, STATUS)
+    values (#{recorddate,jdbcType=CHAR}, #{mpsno,jdbcType=CHAR}, #{processno,jdbcType=CHAR}, 
+      #{taskno,jdbcType=CHAR}, #{starttime,jdbcType=CHAR}, #{endtime,jdbcType=CHAR}, 
+      #{integrity,jdbcType=CHAR}, #{status,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata">
+    update NEWSENSORDATA
+    set TASKNO = #{taskno,jdbcType=CHAR},
+      STARTTIME = #{starttime,jdbcType=CHAR},
+      ENDTIME = #{endtime,jdbcType=CHAR},
+      INTEGRITY = #{integrity,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR}
+    where RECORDDATE = #{recorddate,jdbcType=CHAR}
+      and MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
+    from NEWSENSORDATA
+    where RECORDDATE = #{recorddate,jdbcType=CHAR}
+      and MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
+    from NEWSENSORDATA
+  </select>
+  <select id="selectSensordatalistByPage" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata" resultMap="BaseResultMap">
+	select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
+    from NEWSENSORDATA where 1=1
+		<if test=" mpsno!=null and mpsno!=''">
+		   and mpsno like  concat(concat('%',#{mpsno}),'%')
+		</if>
+		<if test="integrity!=null and integrity!=''">
+		   and	integrity = #{integrity}
+		</if>
+		<if test="status!=null and status!=''">
+		   and	status = #{status} 
+		</if>
+		 order by RecordDate, StartTime 
+	</select>
+  
+</mapper>

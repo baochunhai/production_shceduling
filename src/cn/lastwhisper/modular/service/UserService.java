@@ -100,7 +100,7 @@ public interface UserService {
 	 * 
 	 * @Title: updatePwd   
 	 * @Description: 更新用户的密码
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param user 当前用户
 	 * @param oldPwd 旧密码
 	 * @param newPwd 新密码
@@ -120,7 +120,7 @@ public interface UserService {
 	 * 
 	 * @Title: export   
 	 * @Description: 导出excel
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param os
 	 * @param user
 	 */
@@ -130,7 +130,7 @@ public interface UserService {
 	 * 
 	 * @Title: doImport   
 	 * @Description: 导入excel
-	 * @author: 最后的轻语_dd43    
+	 * @author: 鲍春海    
 	 * @param is
 	 * @throws IOException
 	 */

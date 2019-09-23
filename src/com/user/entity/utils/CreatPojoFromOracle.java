@@ -11,6 +11,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.Properties;
 /**
  * 用于生成Oracle表的实体类，使用时：
  * 修改23行tablename的名字
@@ -21,10 +22,11 @@ import java.util.Date;
 public class CreatPojoFromOracle {
 	private String packageOutPath = "com.user.entity";//指定实体生成所在包的路径
     private String authorName = "***";//作者名字
-    private String tablename = "MPS";//表名
+    private String tablename = "log";//表名
     private String[] colnames; // 列名数组
     private String[] colTypes; //列名类型数组
     private int[] colSizes; //列名大小数组
+    private String[] comments;//注释
     private boolean f_util = false; // 是否需要导入包java.util.*
     private boolean f_sql = false; // 是否需要导入包java.sql.*
 
@@ -50,7 +52,16 @@ public class CreatPojoFromOracle {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-            con = DriverManager.getConnection(URL,NAME,PASS);
+            Properties props =new Properties();
+
+            props.put("remarksReporting","true");
+            props.setProperty("user",NAME);  //设置Properties对象属性
+            props.setProperty("password",PASS);
+            
+            //con = DriverManager.getConnection(URL,NAME,PASS);
+            
+            con = DriverManager.getConnection(URL, props);
+           // DriverManager.getConnection(url, info)
             pStemt = (Statement) con.createStatement();
             ResultSet rs = pStemt.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -58,10 +69,12 @@ public class CreatPojoFromOracle {
             colnames = new String[size];
             colTypes = new String[size];
             colSizes = new int[size];
+            comments = new String[size];
+            
             for (int i = 0; i < size; i++) {
                 colnames[i] = rsmd.getColumnName(i + 1);
                 colTypes[i] = rsmd.getColumnTypeName(i + 1);
-
+                
                 if(colTypes[i].equalsIgnoreCase("date") || colTypes[i].equalsIgnoreCase("timestamp")){
                     f_util = true;
                 }

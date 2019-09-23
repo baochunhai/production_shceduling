@@ -51,4 +51,19 @@
     STATUS, TYPE, URGENT
     from WISDOM.MPS
   </select>
+  
+  <select id="selectPlanelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
+	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
+    STATUS, TYPE, URGENT
+    from WISDOM.MPS where 1=1
+		<if test="startdate!=null and startdate!=''">
+		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}
+		</if>
+		<if test="enddate!=null and enddate!=''">
+		   and	to_char(enddate,'yyyy-mm-dd') = #{enddate}
+		</if>
+		<if test="urgent!=null and urgent!=''">
+		   and	urgent like '%${urgent}%'
+		</if>
+	</select>
 </mapper>

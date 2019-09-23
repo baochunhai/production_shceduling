@@ -15,23 +15,24 @@ $(function() {
 		frozenColumns : [ [ {
 			field : 'ck',
 			checkbox : true
-		}, {
-			title : '编号',
+		}/*, {
+			title : '',
 			field : idField,
 			sortable : true,
-			width:100
-		} ] ],
+			width:0
+		} */] ],
+		sortable : true,
 		fitColumns:true,
 		iconCls : 'icon-tip',
-		singleSelect : true,// 如果为true，则只允许选择一行。
+		singleSelect : false,// 如果为true，则只允许选择一行。
 		pagination : true,// 如果为true，则在DataGrid控件底部显示分页工具栏。
 		striped : true,// 是否显示斑马线效果。
 		collapsible : true,	//定义是否显示可折叠按钮。
 		rownumbers : true,//如果为true，则显示一个行号列。
 		nowrap : true,//如果为true，则在同一行中显示数据。设置为true可以提高加载性能。
-		sortName : idField,//定义哪些列可以进行排序。
+		/*sortName : idField,//定义哪些列可以进行排序。
 		sortOrder : 'asc',//定义列的排序顺序，只能是'asc'或'desc'。
-		remoteSort : false,//定义从服务器对数据进行排序。
+*/		remoteSort : false,//定义从服务器对数据进行排序。
 		loading : true,//显示载入状态。
 		loadMsg : '数据加载中...',// 在从远程站点加载数据的时候显示提示消息。
 		pageNumber : 1,// 在设置分页属性的时候初始化页码。
@@ -171,6 +172,7 @@ $(function() {
 function del(selected) {
 	$.messager.confirm("确认", "确认要删除吗？", function(yes) {
 		if (yes) {
+			alert(selected)
 			$.ajax({
 				url : name + 'delete',
 				data : selected,

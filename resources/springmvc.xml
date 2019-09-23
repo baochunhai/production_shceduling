@@ -17,8 +17,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
 
 	<!-- 扫描所有的controller 但是不扫描service -->
-	<context:component-scan
-		base-package="cn.lastwhisper.modular.controller">
+	<context:component-scan base-package="cn.lastwhisper.*.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"
@@ -35,6 +34,16 @@
 		<!-- 最大上传文件大小 -->
 		<property name="maxUploadSize" value="8388608" />
 	</bean>
+ <!-- 解析器注册 -->  
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+    <property name="messageConverters">  
+        <list>  
+            <ref bean="stringHttpMessageConverter"/>  
+        </list>  
+    </property>  
+</bean> 
+<!-- String类型解析器，允许直接返回String类型的消息 -->  
+<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"/> 
 </beans>
 		
 		
