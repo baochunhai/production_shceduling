@@ -12,13 +12,13 @@
     <result column="STATUS" jdbcType="CHAR" property="status" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from NEWSENSORDATA
+    delete from WISDOM.NEWSENSORDATA
     where RECORDDATE = #{recorddate,jdbcType=CHAR}
       and MPSNO = #{mpsno,jdbcType=CHAR}
       and PROCESSNO = #{processno,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata">
-    insert into NEWSENSORDATA (RECORDDATE, MPSNO, PROCESSNO, 
+    insert into WISDOM.NEWSENSORDATA (RECORDDATE, MPSNO, PROCESSNO, 
       TASKNO, STARTTIME, ENDTIME, 
       INTEGRITY, STATUS)
     values (#{recorddate,jdbcType=CHAR}, #{mpsno,jdbcType=CHAR}, #{processno,jdbcType=CHAR}, 
@@ -26,7 +26,7 @@
       #{integrity,jdbcType=CHAR}, #{status,jdbcType=CHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata">
-    update NEWSENSORDATA
+    update WISDOM.NEWSENSORDATA
     set TASKNO = #{taskno,jdbcType=CHAR},
       STARTTIME = #{starttime,jdbcType=CHAR},
       ENDTIME = #{endtime,jdbcType=CHAR},
@@ -38,15 +38,16 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
-    from NEWSENSORDATA
+    from WISDOM.NEWSENSORDATA
     where RECORDDATE = #{recorddate,jdbcType=CHAR}
       and MPSNO = #{mpsno,jdbcType=CHAR}
       and PROCESSNO = #{processno,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
-    from NEWSENSORDATA
+    from WISDOM.NEWSENSORDATA
   </select>
+
   <select id="selectSensordatalistByPage" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata" resultMap="BaseResultMap">
 	select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
     from NEWSENSORDATA where 1=1
@@ -54,10 +55,10 @@
 		   and mpsno like  concat(concat('%',#{mpsno}),'%')
 		</if>
 		<if test="integrity!=null and integrity!=''">
-		   and	integrity = #{integrity}
+		   and	trim(integrity) = #{integrity,jdbcType=CHAR}
 		</if>
 		<if test="status!=null and status!=''">
-		   and	status = #{status} 
+		   and	trim(status) =#{status,jdbcType=CHAR}
 		</if>
 		 order by RecordDate, StartTime 
 	</select>

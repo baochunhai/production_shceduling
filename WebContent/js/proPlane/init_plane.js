@@ -6,6 +6,27 @@ var method = "";
 var listParam = "";
 var saveParam = "";
 $(function() {
+	//如果是process,查询mpsno
+	if(name=="process"){
+		$.ajax({
+			url : name + "AllMps",
+			data : "",
+			dataType : 'json',
+			type : 'post',
+			success : function(rtn) {
+				// 成功的话，我们要关闭窗口
+				var data = [];
+				data.push({"text":"请选择","value":""});
+				$.each(rtn, function (i, item) {
+					//alert(item.mpsno)
+					data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
+				});
+				
+				$("#mpsno").combobox('loadData',data)
+			}
+		});
+		
+	}
 	// 加载表格数据
 	$('#grid').datagrid({
 		url : name + 'listByPage' + listParam,
@@ -36,7 +57,7 @@ $(function() {
 		loading : true,//显示载入状态。
 		loadMsg : '数据加载中...',// 在从远程站点加载数据的时候显示提示消息。
 		pageNumber : 1,// 在设置分页属性的时候初始化页码。
-		pageSize : 50,// 在设置分页属性的时候初始化页面大小。
+		pageSize : 10,// 在设置分页属性的时候初始化页面大小。
 		pageList : [ 10, 20, 30, 40, 50 ],//在设置分页属性的时候 初始化页面大小选择列表。
 		/*toolbar : [ {
 			text : '新增',
@@ -163,7 +184,7 @@ $(function() {
 					} ]
 				});
 	}
-
+	
 });
 
 /**
