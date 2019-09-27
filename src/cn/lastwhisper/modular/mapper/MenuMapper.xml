@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectMenuList" resultMap="menuTree">
 		select * from menu where menuid='0'
 	</select>
+	
 <!-- 查询二级菜单 -->
 	<select id="selectChild" resultMap="menuTree">
 		select * from menu where pid = #{menuid}
@@ -92,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test='is_parent == null'>
 			,null
 		</if>
-		);
+		)
 	</insert>
 <!-- 	根据id删除数据-->
 	<update id="deleteMenuById">

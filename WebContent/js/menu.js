@@ -211,11 +211,12 @@ function loadDataGrid(menuid) {
 				// 打开添加窗口
 				var selected = $('#tt').tree('getSelected');
 				var children = selected.children;
-				if(children.length==0){
-					$.messager.alert("提示", "该菜单目录暂时不支持三级以上的菜单", 'warning');
-				}else{
-					$("#insertDlg").dialog('open');
-				}
+//				if(children.length==0){
+//					$.messager.alert("提示", "该菜单目录暂时不支持三级以上的菜单", 'warning');
+//				}else{
+//					$("#insertDlg").dialog('open');
+//				}
+				$("#insertDlg").dialog('open');
 			}
 		}, '-', {
 			iconCls : 'icon-save',
