@@ -63,7 +63,7 @@
 		   and	to_char(enddate,'yyyy-mm-dd') = #{enddate}
 		</if>
 		<if test="urgent!=null and urgent!=''">
-		   and	urgent like '%${urgent}%'
+		   and	urgent like   concat(concat('%',#{urgent}),'%')
 		</if>
 	</select>
 	

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.productplan.mapper.EquipmentintegrityMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.productplan.pojo.Equipmentintegrity">
+    <id column="MPSNO" jdbcType="CHAR" property="mpsno" />
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="FSTARTTIME" jdbcType="CHAR" property="fstarttime" />
+    <result column="PRECOVERYTIME" jdbcType="CHAR" property="precoverytime" />
+    <result column="FENDTIME" jdbcType="CHAR" property="fendtime" />
+    <result column="FDESCRIPTION" jdbcType="CHAR" property="fdescription" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from EQUIPMENTINTEGRITY
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Equipmentintegrity">
+    insert into EQUIPMENTINTEGRITY (MPSNO, PROCESSNO, FSTARTTIME, 
+      PRECOVERYTIME, FENDTIME, FDESCRIPTION, 
+      STATUS)
+    values (#{mpsno,jdbcType=CHAR}, #{processno,jdbcType=CHAR}, #{fstarttime,jdbcType=CHAR}, 
+      #{precoverytime,jdbcType=CHAR}, #{fendtime,jdbcType=CHAR}, #{fdescription,jdbcType=CHAR}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Equipmentintegrity">
+    update EQUIPMENTINTEGRITY
+    set PRECOVERYTIME = #{precoverytime,jdbcType=CHAR},
+      FENDTIME = #{fendtime,jdbcType=CHAR},
+      FDESCRIPTION = #{fdescription,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR}
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select MPSNO, PROCESSNO, FSTARTTIME, PRECOVERYTIME, FENDTIME, FDESCRIPTION, STATUS
+    from EQUIPMENTINTEGRITY
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MPSNO, PROCESSNO, FSTARTTIME, PRECOVERYTIME, FENDTIME, FDESCRIPTION, STATUS
+    from EQUIPMENTINTEGRITY
+  </select>
+  <select id="selectEquiplistByPage" parameterType="cn.lastwhisper.productplan.pojo.Equipmentintegrity" resultType="java.util.Map">
+	 select p.mpsno,p.processno,fstarttime,precoverytime,
+	 fendtime,fdescription,e.status from EquipmentIntegrity e,Process p
+	  where e.MPSNo=p.MPSNo
+      and e.ProcessNo=p.SequenceNo
+		<if test="mpsno!=null and mpsno!=''">
+		   and rtrim(e.mpsno) like concat(concat('%',#{mpsno}),'%')
+		</if>
+		<if test="processno!=null and processno!=''">
+		   and	rtrim(p.processno) like  concat(concat('%',#{processno}),'%')
+		</if>
+	</select>
+  
+</mapper>
