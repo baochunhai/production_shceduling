@@ -28,7 +28,7 @@ import cn.lastwhisper.productplan.pojo.Mps;
  *
  */
 @Controller
-@RequestMapping("/proPlane")
+@RequestMapping("/apps/proPlane")
 public class ProcessController {
 
 	@Autowired

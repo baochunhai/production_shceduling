@@ -29,7 +29,7 @@ import cn.lastwhisper.productplan.service.NewsensordataService;
  *
  */
 @Controller
-@RequestMapping("/proPlane")
+@RequestMapping("/apps/proPlane")
 public class NewsensordataController {
 
 	@Autowired

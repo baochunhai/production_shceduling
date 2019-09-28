@@ -28,7 +28,7 @@ import cn.lastwhisper.productplan.service.MpsService;
  *
  */
 @Controller
-@RequestMapping("/proPlane")
+@RequestMapping("/apps/proPlane")
 public class MpsController {
 
 	@Autowired
