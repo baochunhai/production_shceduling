@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.productplan.mapper.MachineMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.productplan.pojo.Machine">
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="MACHINENAME" jdbcType="CHAR" property="machinename" />
+    <result column="COEFFICIENCY" jdbcType="CHAR" property="coefficiency" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.MACHINE
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Machine">
+    insert into WISDOM.MACHINE (MACHINENO, ID, MACHINENAME, 
+      COEFFICIENCY)
+    values (#{machineno,jdbcType=CHAR}, #{id,jdbcType=DECIMAL}, #{machinename,jdbcType=CHAR}, 
+      #{coefficiency,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Machine">
+    update WISDOM.MACHINE
+    set ID = #{id,jdbcType=DECIMAL},
+      MACHINENAME = #{machinename,jdbcType=CHAR},
+      COEFFICIENCY = #{coefficiency,jdbcType=CHAR}
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select MACHINENO, ID, MACHINENAME, COEFFICIENCY
+    from WISDOM.MACHINE
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MACHINENO, ID, MACHINENAME, COEFFICIENCY
+    from WISDOM.MACHINE
+  </select>
+  
+  <select id="selectMachinelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Machine" resultType="java.util.Map" >
+  	select m.machineNo,m.machineName,f.FStartTime,f.PRecoveryTime,f.FEndTime,f.Status from Machine m inner join
+  	FaultyMachine f on m.MachineNo=f.MachineNo 
+  	<if test="machineno!=null and machineno!=''">
+		  and m.MachineNo = #{machineno}
+	</if>
+	<if test="machinename!=null and machinename!=''">
+		    and MachineName= #{machinename}
+	</if>
+  </select>
+</mapper>

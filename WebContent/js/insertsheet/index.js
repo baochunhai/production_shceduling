@@ -8,7 +8,7 @@ var saveParam = "";
 $(function() {
 	// 加载表格数据
 	$('#grid').datagrid({
-		url : name + 'listByPage' + listParam,
+		url : name + 'listByPage',
 		idField : idField,//指明哪一个字段是标识字段。
 		title : title,
 		columns : columns,

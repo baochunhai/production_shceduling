@@ -1,4 +1,4 @@
-package cn.lastwhisper.modular.service;
+package cn.lastwhisper.productplan.service;
 
 /**
  * 插单管理相关

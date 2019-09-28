@@ -1,10 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>故障设备管理</title>
+<link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
+<script type="text/javascript" src="../../ui/jquery.min.js"></script>
+<script type="text/javascript" src="../../ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../../ui/date.js"></script>
+<script type="text/javascript" src="../../js/devicefault/index.js"></script>
+<script type="text/javascript" src="../../js/search.js"></script>
+<script type="text/javascript" src="../../js/download.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+	//用于search.js自动补全
+	var _url = '/';
+	var _value = '';
+	//用于crud.js的esayui初始参数
+	var name = "machine";
+	var title = '故障设备信息';
+	var idField = '';
+	var height = 300;
+	var width = 300;
+	var columns = [ [ {
+		field : 'MACHINENO',
+		title : '设备编号',
+		width : 100
+	}, {
+		field : 'MACHINENAME',
+		title : '设备名称',
+		width : 50
+	}, {
+		field : 'FSTARTTIME',
+		title : '故障开始时间',
+		width : 100,
+		formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd"); 
+		}
+	}, {
+		field : 'PRECOVERYTIME',
+		title : '故障预计修复工时',
+		width : 50,
+	}, {
+		field : 'FENDTIME',
+		title : '故障实际修复时间',
+		width : 50,
+		formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd"); 
+		}
+	}, {
+		field : 'STATUS',
+		title : '设备状态',
+		width : 100
+	}] ];
+</script>
 </head>
-<body>
-
+<body class="easyui-layout">
+	<!--搜索区  -->
+	<div data-options="region:'north',title:'生产计划-条件查询'"
+		style="padding: 4px; background-color: #eee; height: 80px">
+		<form id="searchForm">
+			<table cellpadding="5">
+				<tr>
+					<td>设备编号 ：</td>
+					<td><input name="machineno" class="easyui-textbox"
+						editable="false"
+						id="machineno"  /></td>
+					<td>设备名称 ：</td>
+					<td><input name="machinename" class="easyui-textbox"
+						editable="false" id="machinename"  /></td>
+					<!-- <td>是否紧急 ：</td>
+					<td>
+					<select id="status" class="easyui-combobox" name="urgent" style="width:200px;">
+						<option value="">请选择</option>
+					    <option value="Yes">紧急</option>
+					    <option value="No">不紧急</option>
+					</select></td> -->
+					<td><a class="easyui-linkbutton"
+						data-options="iconCls:'icon-search'" id="btnSearch">查询</a></td>
+					<td><a class="easyui-linkbutton"
+						data-options="iconCls:'icon-remove'" id="btnReset">重置</a></td>
+			</table>
+		</form>
+	</div>
+	<!-- 数据表格区 -->
+	<div data-options="region:'center',collapsible:true,split:true"
+		style="width: 600px;">
+		<table id="grid"></table>
+	</div>
 </body>
 </html>
