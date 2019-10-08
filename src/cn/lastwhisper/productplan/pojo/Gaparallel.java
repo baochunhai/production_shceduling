@@ -20,6 +20,7 @@ public class Gaparallel {
     private String status;
 
     public String getProcessno() {
+    	
         return processno;
     }
 
