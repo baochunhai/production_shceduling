@@ -14,6 +14,14 @@ public class Tree {
 	private Integer status;//是否已删除
 	private boolean checked;//是否为选中
 	private List<Menu> children;// 下级菜单
+	private String url;
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public Integer getStatus() {
 		return status;
 	}

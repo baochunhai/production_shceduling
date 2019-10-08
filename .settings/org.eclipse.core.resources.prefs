@@ -8,3 +8,4 @@ encoding//WebContent/user.html=UTF-8
 encoding//WebContent/userRoleSet.html=UTF-8
 encoding//resources/db.properties=UTF-8
 encoding/<project>=UTF-8
+separateDerivedEncodings=true

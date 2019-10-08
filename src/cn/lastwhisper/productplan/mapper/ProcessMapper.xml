@@ -63,4 +63,33 @@
 	<select id="selectMps" resultType="java.util.Map">
     select MPSNO from MPS order by MPSNO
   </select>
+  <!--显示工时预测相关内容  -->
+  <select id="selectPredictlistByPage"
+	parameterType="cn.lastwhisper.productplan.pojo.Mps"
+	resultType="java.util.Map">
+	select GA.mpsno, taskno, processfileno, p.processno, processname,
+	wm_concat(m.machineno)
+	machineno,wm_concat(round(ga.proctime/60,1)) proctime
+	from GA,MPS,Process p,CarbonKnowledge c,Machine m
+	where GA.MachineNo=m.ID and GA.mpsno=MPS.mpsno
+	and GA.mpsno=p.mpsno and p.sequenceno=GA.processno
+	and p.processno=c.processno and c.type=rtrim(mps.type)
+	<if test="mpsno!=null and mpsno!=''">
+		   and rtrim(ga.MPSNO) = #{mpsno}
+	</if>
+	group by ga.mpsno,taskno,processfileno, p.processno,processname
+	</select>
+	
+	<!--显示制造资源配置相关内容  -->
+  <select id="selectManuePlanelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
+	select mps.mpsno,taskno,processfileno,p.processno,processname,
+	wm_concat(c.machineno) machineno
+	 from MPS,CarbonKnowledge ck,CarbonMachineWorker c,Process p
+	  where mps.mpsno=p.mpsno and p.processno=c.processno 
+	  and ck.processno=c.processno  and c.type=rtrim(mps.type) and c.type=ck.type
+	 <if test="mpsno!=null and mpsno!=''">
+		   and rtrim(mps.MPSNO) = #{mpsno}
+	</if>
+	   group by mps.mpsno,taskno,processfileno,p.processno,processname
+	</select>
 </mapper>

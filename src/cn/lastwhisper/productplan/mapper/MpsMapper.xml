@@ -42,7 +42,7 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
-    STATUS, TYPE, URGENT
+    STATUS, (select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as type , URGENT
     from MPS
     where MPSNO = #{mpsno,jdbcType=CHAR}
   </select>
@@ -54,7 +54,7 @@
   
   <select id="selectPlanelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
 	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
-    STATUS, TYPE, URGENT
+    STATUS,  (select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as type, URGENT
     from MPS where 1=1
 		<if test="startdate!=null and startdate!=''">
 		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}

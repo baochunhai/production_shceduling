@@ -2,16 +2,14 @@
  * @Title:  MenuServiceImpl.java   
  * @Package cn.lastwhisper.service.impl   
  * @Description: TODO(用一句话描述该文件做什么)
- * @author: 鲍春海     
+ * @author: 最后的轻语_dd43     
  * @date:   2019年4月6日 下午5:10:31   
  * @version V1.0 
  */
-package cn.lastwhisper.modular.service.impl;
+package cn.lastwhisper.knowledge.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +19,13 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSON;
 
 import cn.lastwhisper.core.annotation.LogAnno;
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
-import cn.lastwhisper.modular.mapper.MenuMapper;
+import cn.lastwhisper.knowledge.mapper.Menu2Mapper;
+import cn.lastwhisper.knowledge.service.Menu2Service;
 import cn.lastwhisper.modular.pojo.Menu;
-import cn.lastwhisper.modular.service.MenuService;
 
 /**
  * @ClassName: MenuServiceImpl
@@ -38,27 +35,30 @@ import cn.lastwhisper.modular.service.MenuService;
  */
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 @Service
-public class MenuServiceImpl implements MenuService {
+public class Menu2ServiceImpl implements Menu2Service {
 
-	private static Logger logger = LoggerFactory.getLogger(MenuServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(Menu2ServiceImpl.class);
 
 	@Autowired
-	private MenuMapper menuMapper;
-
-//	@Autowired
-//	private Jedis jedis;
+	private Menu2Mapper menuMapper;
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Tree> findMenuList() {
-		List<Tree> tree = menuMapper.selectMenuList();
+	public List<Tree> findMenuList(String menuid) {
+		List<Tree> tree = menuMapper.selectMenuList(menuid);
 		return tree;
 	}
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Menu> findMenuById(String menuid) {
-		return menuMapper.selectMenuById(menuid);
+	public List<Menu> findMenuById(String menuid,String processno) {
+		return menuMapper.selectMenuById(menuid,processno);
+	}
+	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	@Override
+	public List findClob(String menuid,String processno) {
+		return menuMapper.selectKnowledge(menuid,processno);
 	}
 
 	@LogAnno(operateType = "添加权限菜单")
@@ -121,7 +121,7 @@ public class MenuServiceImpl implements MenuService {
 	 * 
 	 * @Title: cloneMenu
 	 * @Description: 复制menu
-	 * @author: 鲍春海
+	 * @author: 最后的轻语_dd43
 	 * @param src
 	 * @return
 	 */
