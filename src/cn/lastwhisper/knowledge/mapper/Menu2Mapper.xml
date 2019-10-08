@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.knowledge.mapper.Menu2Mapper">
+<!-- 初始化菜单树 -->
+    <resultMap type="cn.lastwhisper.core.util.Tree" id="menuTree">
+        <id column="menuid" property="id" javaType="java.lang.String" />
+        <result column="menuname" property="text" javaType="java.lang.String" />
+        <collection column="{menuid=menuid,type=type}" property="children" select="selectChild"/>
+    </resultMap>
+ <resultMap id="BaseResultMap" type="cn.lastwhisper.knowledge.pojo.Carbonknowledge">
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="PROCESSNAME" jdbcType="CHAR" property="processname" />
+    <result column="PROCESSTYPE" jdbcType="CHAR" property="processtype" />
+    <result column="STATIONNAME" jdbcType="CHAR" property="stationname" />
+    <result column="KNOWLEDGE" jdbcType="CLOB" property="knowledge" />
+  </resultMap>
+<!-- 查找一级菜单 -->
+	<!-- 先查询菜单根级目录 -->
+	<!-- 这里的返回结果必须为resultMap，并且值为上面构建的resultMap的id的值 -->
+	<select id="selectMenuList" parameterType="java.lang.String" resultMap="menuTree">
+		select * from menu2 where menuid='0' 
+			and type = #{_parameter}
+		order by menuid
+	</select>
+	
+<!-- 查询二级菜单 -->
+	<select id="selectChild" parameterType="java.util.Map" resultMap="menuTree">
+		select * from menu2 where pid = #{menuid}
+			and type = #{type}
+		 order by menuid
+	</select>
+	
+	<!-- 查询所有菜单的id、name -->
+	<select id="selectMenuIdName" parameterType="java.lang.String" resultType="menu">
+		SELECT menuid,menuname FROM menu2 where pid = #{pid}
+		<if test='type != null and type != ""'>
+			and type = #{type}
+		</if>
+		 order by menuid  
+	</select>
+	
+	<!-- 查询所有菜单的所有属性 -->
+	<select id="selectMenu" parameterType="java.lang.String" resultType="menu">
+		SELECT menuid,menuname,url,icon,pid FROM menu2 where pid = #{pid}
+		<if test='type != null and type != ""'>
+			and type = #{type}
+		</if>
+		  order by menuid 
+	</select>
+	
+	<!-- 根据userid加载对应菜单 -->
+	<select id="selectMenuByUserid" resultType="menu">
+		SELECT 
+			DISTINCT menu.menuid,menu.menuname,menu.url,menu.icon,menu.pid
+		FROM 
+			user_role,
+			role,
+			role_menu,
+			menu  
+		WHERE 
+			user_role.roleuuid = role.uuid  
+			AND role.uuid = role_menu.roleuuid  
+			AND role_menu.menuuuid = menu.menuid 
+			AND user_role.userid = #{userid}
+			order by menuid
+	</select>
+<!-- 查询菜单结束 -->
+
+<!-- 根据id查询菜单 -->
+	<select id="selectMenuById" parameterType="java.lang.String" resultType="java.util.Map">
+		select c.processno,processname,processtype,stationName,m.machineno,machinename,coefficiency
+		from CarbonKnowledge c,Machine m,CarbonMachineWorker cw
+		where c.ProcessNo=cw.ProcessNo and m.MachineNo=cw.MachineNo and c.type=cw.type
+		<if test='type != null and type != ""'>
+			and c.type = #{type}
+		</if>
+		<if test='processno != null and processno != ""'>
+			and rtrim(c.processno) = #{processno}
+		</if>
+		
+	</select>
+	
+	<select id="selectKnowledge" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select c.knowledge from CarbonKnowledge c where 1=1
+		<if test='type != null and type != ""'>
+			and c.type = #{type}
+		</if>
+		<if test='processno != null and processno != ""'>
+			and rtrim(c.processno) = #{processno}
+		</if>
+	</select>
+<!-- 插入数据 -->
+	<insert id="insertMenu" parameterType="menu">
+		insert into menu2 values(
+		<if test='menuid != null and menuid != ""'>
+			#{menuid}
+		</if>
+		<if test='menuid == null or menuid == ""'>
+			null
+		</if>
+		<if test='menuname != null and menuname != ""'>
+			,#{menuname}
+		</if>
+		<if test='menuname == null or menuname == ""'>
+			,null
+		</if>
+		<if test='url != null and url != "" '>
+			,#{url}
+		</if>
+		<if test='url == null or url == ""'>
+			,null
+		</if>
+		<if test='icon != null and icon != ""'>
+			,#{icon}
+		</if>
+		<if test='icon == null or icon == ""'>
+			,null
+		</if>
+		<if test='pid != null and pid != ""'>
+			,#{pid}
+		</if>
+		<if test='pid == null or pid == ""'>
+			,null
+		</if>
+		<if test='is_parent != null'>
+			,#{is_parent}
+		</if>
+		<if test='is_parent == null'>
+			,null
+		</if>
+		)
+	</insert>
+<!-- 	根据id删除数据-->
+	<update id="deleteMenuById">
+		delete from menu2 where menuid = #{0}
+	</update>
+<!-- 	根据id修改数据 -->
+	<update id="updateMenuById" parameterType="menu">
+		update menu2
+		<trim prefix="set" suffixOverrides="," suffix="where menuid = #{menuid}">
+			<if test='menuname != null and menuname != ""'>
+				menuname = #{menuname},
+			</if>
+			<if test='url != null and url != "" '>
+				url = #{url},
+			</if>
+			<if test='icon != null and icon != ""'>
+				icon = #{icon},
+			</if>
+			<if test='pid != null and pid != ""'>
+				pid = #{pid},
+			</if>
+			<if test='is_parent != null'>
+				is_parent = #{is_parent}
+			</if>
+		</trim>
+	</update>
+	
+	
+</mapper>

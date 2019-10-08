@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>员工管理</title>
+<link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
+<script type="text/javascript" src="../../ui/jquery.min.js"></script>
+<script type="text/javascript" src="../../ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../../ui/date.js"></script>
+<script type="text/javascript" src="../../js/predict/predict.js"></script>
+<!-- <script type="text/javascript" src="../../js/search.js"></script> -->
+<script type="text/javascript" src="../../js/download.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+	//用于search.js自动补全
+	var _url = '/';
+	var _value = '';
+	//用于crud.js的esayui初始参数
+	var name = "predict";
+	var title = '工时预测-工件列表';
+	var idField = '';
+	var height = 300;
+	var width = 300;
+	var columns = [ [ {
+		field : 'MPSNO',
+		title : '生产计划号',
+		width : 50
+	}, {
+		field : 'TASKNO',
+		title : '任务号',
+		width : 50
+	}, {
+		field : 'PROCESSNO',
+		title : '工艺文件号',
+		width : 50
+	}, {
+		field : 'PROCESSFILENO',
+		title : '工序编号',
+		width : 100
+	}, {
+		field : 'PROCESSNAME',
+		title : '工序名称',
+		width : 50,
+	}, {
+		field : 'MACHINENO',
+		title : '加工设备/人员编号',
+		width : 100
+	}, {
+		field : 'PROCTIME',
+		title : '工序工时(min)',
+		width : 100
+	}] ];
+</script>
+</head>
+<body class="easyui-layout">
+	<!--搜索区  -->
+<!-- 	<div data-options="region:'north',title:'生产计划-条件查询'"
+		style="padding: 4px; background-color: #eee; height: 80px">
+		<form id="searchForm">
+			<table cellpadding="5">
+				<tr>
+					<td>生产计划号 ：</td>
+					<td><input name="mpsno" class="easyui-textbox"
+						editable="true"
+						id="mpsno"  /></td>
+					<td><a class="easyui-linkbutton"
+						data-options="iconCls:'icon-search'" id="btnSearch">工时预测</a></td>
+					<td><a class="easyui-linkbutton"
+						data-options="iconCls:'icon-remove'" id="btnReset">重置</a></td>
+			</table>
+		</form>
+	</div> -->
+	<!-- 数据表格区 -->
+	<div data-options="region:'center',collapsible:true,split:true"
+		style="width: 600px;">
+		<table id="grid"></table>
+	</div>
+ 	<!-- 添加、修改 --><!--	
+<div id="editDlg" class="easyui-window" data-options="closed:true">
+		<form id="editForm">
+			<input name="user_id" type="hidden">
+			<table style="align-content: center;">
+				<tr>
+					<td>账号</td>
+					<td><input name="user_code" class="easyui-validatebox"
+						data-options="
+					required:true,missingMessage:'账号不能为空!'
+					">
+					</td>
+				</tr>
+				<tr>
+					<td>密码</td>
+					<td><input type="password" name="user_pwd"></td>
+				</tr>
+				<tr>
+					<td>真实姓名</td>
+					<td><input name="user_name"></td>
+				</tr>
+				<tr>
+					<td>注册日期</td>
+					<td><input name="user_birthday" class="easyui-datebox"
+						editable="false"></td>
+				</tr>
+			</table>
+			<button id="btnSave" type="button" >注册</button>
+		</form>
+	</div><!--	
+	导入窗口
+	<div id="importDlg" style="padding: 2px;">
+		<form id="importForm" enctype="multipart/form-data">
+			导入文件:<input type="file" name="file">
+		</form>
+	</div> -->
+</body>
+</html>

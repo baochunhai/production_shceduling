@@ -19,4 +19,7 @@ public interface ProcessMapper {
     public List<Process> selectProcesslistByPage(Process record);
     
    List<Mps> selectMps();
+   
+   public List<Process> selectPredictlistByPage(Mps record);
+   public List<Process> selectManuePlanelistByPage(Mps record);
 }
