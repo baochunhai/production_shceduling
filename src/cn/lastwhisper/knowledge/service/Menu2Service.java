@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
+import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.modular.pojo.Menu;
 
 public interface Menu2Service {
@@ -25,7 +26,7 @@ public interface Menu2Service {
 	 * @param menuid
 	 * @return
 	 */
-	List<Menu> findMenuById(String menuid,String processno);
+	List findMenuById(String menuid,String processno);
 
 	List findClob(String menuid,String processno);
 	/**
@@ -36,7 +37,7 @@ public interface Menu2Service {
 	 * @param Menu
 	 * @return
 	 */
-	GlobalResult addMenu(Menu Menu);
+	GlobalResult addMenu(Carbonknowledge menu,String machineno);
 	
 	/**
 	 * 
@@ -56,7 +57,7 @@ public interface Menu2Service {
 	 * @param Menu
 	 * @return
 	 */
-	GlobalResult updateMenuById(Menu Menu);
+	GlobalResult updateMenuById(Carbonknowledge Menu);
 	/**
 	 * 
 	* @Title: findMenuByUserid 

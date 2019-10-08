@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
 import cn.lastwhisper.core.util.UserUtils;
+import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.knowledge.service.Menu2Service;
 import cn.lastwhisper.modular.pojo.Menu;
 import cn.lastwhisper.modular.pojo.User;
@@ -55,7 +56,7 @@ public class Menu2Controller {
 	 */
 	@RequestMapping("/menu/menufindById")
 	@ResponseBody
-	public List<Menu> findById(String type,String processno) {
+	public List findById(String type,String processno) {
 		return menuService.findMenuById(type,processno);
 	}
 	
@@ -74,8 +75,8 @@ public class Menu2Controller {
 	 */
 	@RequestMapping(value="/menu/menuadd")
 	@ResponseBody
-	public GlobalResult insert(Menu menu) {
-		return menuService.addMenu(menu);
+	public GlobalResult insert(Carbonknowledge menu,String machineno) {
+		return menuService.addMenu(menu,machineno);
 	}
 	
 	/**
@@ -100,7 +101,9 @@ public class Menu2Controller {
 	 */
 	@RequestMapping(value="/menu/menuupdate")
 	@ResponseBody
-	public GlobalResult updateById(Menu menu) {
+	public GlobalResult updateById(Carbonknowledge menu) {
+		
+		
 		return menuService.updateMenuById(menu);
 	}
 	

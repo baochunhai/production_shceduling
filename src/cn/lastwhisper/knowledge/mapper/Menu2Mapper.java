@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.lastwhisper.core.util.Tree;
+import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.modular.pojo.Menu;
 
 /**   
@@ -50,7 +51,7 @@ public interface Menu2Mapper {
 	 * @param Menu
 	 * @return
 	 */
-	Integer insertMenu(Menu Menu);
+	Integer insertKnowledge(Carbonknowledge Menu);
 
 	/**
 	 * 
@@ -70,7 +71,7 @@ public interface Menu2Mapper {
 	 * @param Menu
 	 * @return
 	 */
-	Integer updateMenuById(Menu Menu);
+	Integer updateMenuById(Carbonknowledge Menu);
 	
 	/**
 	 * 

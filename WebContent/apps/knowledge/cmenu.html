@@ -32,38 +32,34 @@
 			<table style="width: 300px; text-align: center;">
 				<tr>
 					<td align="right">工序编号:</td>
-					<td align="left"><input type="text" name="PROCESSNO" /></td>
+					<td align="left"><input type="text" name="processno" /></td>
 				</tr>
 				<tr>
 					<td align="right">工序名称:</td>
-					<td align="left"><input name="PROCESSNAME" type="text" /></td>
+					<td align="left"><input name="processname" type="text" /></td>
 				</tr>
 				<tr>
 					<td align="right">工序类型:</td>
 					<td align="left">
-					<select id="PROCESSTYPE" class="easyui-combobox" 
-								data-options="panelHeight:'100',required:true" name="PROCESSTYPE">   
+					<select id="processtype" class="easyui-combobox" 
+								data-options="panelHeight:'100',required:true" name="processtype">   
 						    <option value="Machine">设备加工</option>   
-						    <option value="Manual">手工作业</option>   
 						</select> 
 					</td>
 				</tr>
 				<tr>
 					<td align="right">对应工位:</td>
 					<td align="left">
-						<input name="STATIONNAME" type="text" />
+						<input name="stationname" type="text" />
 					</td>
 				</tr>
 				<tr>
 					<td align="right">设备或工人编号</td>
 					<td align="left">
-						<select id="MACHINENO" class="easyui-combobox" 
-								data-options="panelHeight:'100',required:true" name="MACHINENO">   
-						    <!-- <option value="icon-log">icon-log</option>   
-						    <option value="icon-sys">icon-sys</option>   --> 
-						</select> 
+						<input name="machineno" type="text" />
 					</td>
 				</tr>
+				<input name="type" type="text"  hidden="hidden" value="C0001"/>
 			</table>
 		</form>
 	</div> 
@@ -73,17 +69,17 @@
 			<table style="width: 300px; text-align: center;">
 				<tr>
 					<td align="right">工序编号:</td>
-					<td align="left"><input type="text" name="PROCESSNO" /></td>
+					<td align="left"><input type="text" name="processno" /></td>
 				</tr>
 				<tr>
 					<td align="right">工序名称:</td>
-					<td align="left"><input name="PROCESSNAME" type="text" /></td>
+					<td align="left"><input name="processname" type="text" /></td>
 				</tr>
 				<tr>
 					<td align="right">工序类型:</td>
 					<td align="left">
-					<select id="PROCESSTYPE" class="easyui-combobox" 
-								data-options="panelHeight:'100',required:true" name="PROCESSTYPE">   
+					<select id="processtype" class="easyui-combobox" 
+								data-options="panelHeight:'100',required:true" name="processtype">   
 						    <option value="Machine">设备加工</option>   
 						    <option value="Manual">手工作业</option>   
 						</select> 
@@ -92,19 +88,16 @@
 				<tr>
 					<td align="right">对应工位:</td>
 					<td align="left">
-						<input name="STATIONNAME" type="text" />
+						<input name="stationname" type="text" />
 					</td>
 				</tr>
 				<tr>
 					<td align="right">设备或工人编号</td>
 					<td align="left">
-						<select id="MACHINENO" class="easyui-combobox" 
-								data-options="panelHeight:'100',required:true" name="MACHINENO">   
-						  <!--   <option value="icon-log">icon-log</option>   
-						    <option value="icon-sys">icon-sys</option>    -->
-						</select> 
+						<input name="machineno" type="text" />
 					</td>
 				</tr>
+				<input name="type" type="text" hidden="hidden" />
 			</table>
 		</form>
 	</div>

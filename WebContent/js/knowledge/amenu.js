@@ -212,34 +212,39 @@ function loadDataGrid(node) {
 		url : 'menu/menufindById?type='+type+"&processno="+valid(processno),
 		title : "工艺知识 "+valid(text),
 		columns : [ [ {
-			field : 'PROCESSNO',
+			field : 'processno',
 			title : '工序编号',
 			width : 100
 		}, {
-			field : 'PROCESSNAME',
+			field : 'processname',
 			title : '工序名称',
 			width : 100
 		}, {
-			field : 'PROCESSTYPE',
+			field : 'processtype',
 			title : '工序类型',
 			width : 100
 		}, {
-			field : 'STATIONNAME',
+			field : 'stationname',
 			title : '工位名称',
 			width : 150
 		}, {
-			field : 'MACHINENO',
+			field : 'machineno',
 			title : '机器（工人）编号',
 			width : 100,
 		}, {
-			field : 'MACHINENAME',
+			field : 'machinename',
 			title : '机器（工人）名称',
 			width : 100
 		},{
-			field : 'COEFFICIENCY',
+			field : 'coefficiency',
 			title : '加工效率',
 			width : 100
-		} ] ],
+		},{
+		field : 'type',
+		title : '',
+		width : 0,
+		hidden : true
+		}] ],
 		loading : true,
 		striped : true,
 		rownumbers : true,
@@ -310,7 +315,25 @@ function loadDataGrid(node) {
 	
 	});*/
 }
-
+function getPeople(){
+	$.ajax({
+		url : "query",
+		data : "",
+		dataType : 'json',
+		type : 'post',
+		success : function(rtn) {
+			// 成功的话，我们要关闭窗口
+			var data = [];
+			data.push({"text":"请选择","value":""});
+			$.each(rtn, function (i, item) {
+				//alert(item.mpsno)
+				data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
+			});
+			
+			$("#mpsno").combobox('loadData',data)
+		}
+	});
+}
 /**
  * 添加数据
  */

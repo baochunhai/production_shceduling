@@ -23,7 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.lastwhisper.core.annotation.LogAnno;
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
+import cn.lastwhisper.knowledge.mapper.CarbonmachineworkerMapper;
 import cn.lastwhisper.knowledge.mapper.Menu2Mapper;
+import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
+import cn.lastwhisper.knowledge.pojo.Carbonmachineworker;
 import cn.lastwhisper.knowledge.service.Menu2Service;
 import cn.lastwhisper.modular.pojo.Menu;
 
@@ -40,42 +43,44 @@ public class Menu2ServiceImpl implements Menu2Service {
 	private static Logger logger = LoggerFactory.getLogger(Menu2ServiceImpl.class);
 
 	@Autowired
-	private Menu2Mapper menuMapper;
+	private Menu2Mapper menu2Mapper;
+	
+	@Autowired
+	private CarbonmachineworkerMapper carbonmachineworkerMapper;
+
+	private Carbonmachineworker carbonMachineWorker;
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Tree> findMenuList(String menuid) {
-		List<Tree> tree = menuMapper.selectMenuList(menuid);
+		List<Tree> tree = menu2Mapper.selectMenuList(menuid);
 		return tree;
 	}
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Menu> findMenuById(String menuid,String processno) {
-		return menuMapper.selectMenuById(menuid,processno);
+	public List findMenuById(String menuid,String processno) {
+		return menu2Mapper.selectMenuById(menuid,processno);
 	}
 	
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
 	public List findClob(String menuid,String processno) {
-		return menuMapper.selectKnowledge(menuid,processno);
+		return menu2Mapper.selectKnowledge(menuid,processno);
 	}
 
-	@LogAnno(operateType = "添加权限菜单")
 	@Override
-	public GlobalResult addMenu(Menu menu) {
+	public GlobalResult addMenu(Carbonknowledge menu,String machineno) {
 		// 设置默认添加的菜单的状态为使用中
-		Integer insertCount = menuMapper.insertMenu(menu);
-		if (insertCount != null && insertCount > 0) {
-			// 更新标签为父标签
-			Menu m = new Menu();
-			m.setMenuid(menu.getPid());
-			m.setIs_parent(1);
-			if (200 == updateMenuById(m).getStatus()) {
-				return new GlobalResult(200, "数据添加成功", null);
-			} else {
-				return new GlobalResult(400, "数据添加失败", null);
-			}
+		Integer insertCount = menu2Mapper.insertKnowledge(menu);
+		
+		Carbonmachineworker record = new Carbonmachineworker();
+		record.setProcessno(menu.getProcessno());
+		record.setMachineno(machineno);
+		record.setType(menu.getType());
+		Integer insert = carbonmachineworkerMapper.insert(record);
+		if (insertCount != null && insertCount > 0&&insert!=null&&insert>0) {
+			return new GlobalResult(200, "数据添加成功", null);
 		} else {
 			return new GlobalResult(400, "数据添加失败", null);
 		}
@@ -89,10 +94,9 @@ public class Menu2ServiceImpl implements Menu2Service {
 	 * @param menuid 主键
 	 * @return
 	 */
-	@LogAnno(operateType = "删除权限菜单")
 	@Override
 	public GlobalResult deleteMenuById(String menuid) {
-		Integer deleteCount = menuMapper.deleteMenuById(menuid);
+		Integer deleteCount = menu2Mapper.deleteMenuById(menuid);
 		if (deleteCount != null && deleteCount > 0) {
 			return new GlobalResult(200, "数据删除成功", null);
 		} else {
@@ -106,10 +110,9 @@ public class Menu2ServiceImpl implements Menu2Service {
 	 * @param menu
 	 * @return
 	 */
-	@LogAnno(operateType = "更新权限菜单")
 	@Override
-	public GlobalResult updateMenuById(Menu menu) {
-		Integer updateCount = menuMapper.updateMenuById(menu);
+	public GlobalResult updateMenuById(Carbonknowledge menu) {
+		Integer updateCount = menu2Mapper.updateMenuById(menu);
 		if (updateCount != null && updateCount > 0) {
 			return new GlobalResult(200, "数据修改成功", null);
 		} else {
@@ -140,9 +143,9 @@ public class Menu2ServiceImpl implements Menu2Service {
 		// 从缓存中读取数据
 		Menu menu;
 		// 获取根菜单
-		List<Menu> root = menuMapper.selectMenu("-1");
+		List<Menu> root = menu2Mapper.selectMenu("-1");
 		// 用户下的菜单集合 找数据库
-		// List<Menu> userMenus = menuMapper.selectMenuByUserid(userid);
+		// List<Menu> userMenus = menu2Mapper.selectMenuByUserid(userid);
 		// 用户下的菜单集合 找缓存
 		List<Menu> userMenus = findMenuListByUserid(userid);
 		// 根菜单
@@ -152,12 +155,12 @@ public class Menu2ServiceImpl implements Menu2Service {
 		// 暂存二级菜单
 		Menu _m2 = null;
 		// 获取全部的一级菜单
-		List<Menu> parentMenus = menuMapper.selectMenu("0");
+		List<Menu> parentMenus = menu2Mapper.selectMenu("0");
 		// 循环一级菜单
 		for (Menu m1 : parentMenus) {
 			_m1 = cloneMenu(m1);
 			// 获取当前一级菜单的所有二级菜单
-			List<Menu> leafMenus = menuMapper.selectMenu(_m1.getMenuid());
+			List<Menu> leafMenus = menu2Mapper.selectMenu(_m1.getMenuid());
 			// 循环匹配二级菜单
 			for (Menu m2 : leafMenus) {
 				for (Menu userMenu : userMenus) {
@@ -184,7 +187,7 @@ public class Menu2ServiceImpl implements Menu2Service {
 		List<Menu> menuList;
 		menuList = null;
 		// 1.从数据库中查出来，放入缓存中
-		menuList = menuMapper.selectMenuByUserid(userid);
+		menuList = menu2Mapper.selectMenuByUserid(userid);
 		logger.debug("从数据库中查询menuList");
 		// 2.直接从缓存中拿
 		return menuList;
