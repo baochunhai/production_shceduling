@@ -15,4 +15,5 @@ public interface FaultymachineMapper {
 
 	int updateByPrimaryKey(Faultymachine record);
 
+	List<Faultymachine> selectFault();
 }

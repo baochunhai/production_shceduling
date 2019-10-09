@@ -37,4 +37,13 @@
     select MACHINENO, FSTARTTIME, PRECOVERYTIME, FENDTIME, STATUS
     from WISDOM.FAULTYMACHINE
   </select>
+   <select id="selectFault" resultType="java.util.Map">
+    select m.MachineNo as "machineno",
+    MachineName as "machinename",
+    FStartTime as "fstarttime",
+    PRecoveryTime as "precovertime",
+    FEndTime as "fendtime",
+    Status as "status"
+	from Machine m,FaultyMachine f where m.MachineNo=f.MachineNo
+  </select>
  </mapper>

@@ -1,6 +1,5 @@
 package cn.lastwhisper.productplan.mapper;
 
-import cn.lastwhisper.modular.pojo.User;
 import cn.lastwhisper.productplan.pojo.Mps;
 import java.util.List;
 
@@ -22,5 +21,10 @@ public interface MpsMapper {
 	 * @param user 查询条件
 	 * @return
 	 */
-	public List<User> selectPlanelistByPage(Mps mps);
+	public List<Mps> selectPlanelistByPage(Mps mps);
+	
+	public List<Mps> selectProductionlistByPage(Mps mps);
+	
+	public List<Mps> selectInsertlistByPage(Mps mps);
+	
 }

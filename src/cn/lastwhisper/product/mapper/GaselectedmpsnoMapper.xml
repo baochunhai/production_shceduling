@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.product.mapper.GaselectedmpsnoMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.product.pojo.Gaselectedmpsno">
+    <id column="MPSNO" jdbcType="VARCHAR" property="mpsno" />
+    <result column="C_DATE" jdbcType="TIMESTAMP" property="cDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WISDOM.GASELECTEDMPSNO
+    where MPSNO = #{mpsno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.lastwhisper.product.pojo.Gaselectedmpsno">
+    insert into WISDOM.GASELECTEDMPSNO (MPSNO, C_DATE)
+    values (#{mpsno,jdbcType=VARCHAR}, sysdate)
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.product.pojo.Gaselectedmpsno">
+    update WISDOM.GASELECTEDMPSNO
+    set C_DATE = #{cDate,jdbcType=TIMESTAMP}
+    where MPSNO = #{mpsno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select MPSNO, C_DATE
+    from WISDOM.GASELECTEDMPSNO
+    where MPSNO = #{mpsno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MPSNO, C_DATE
+    from WISDOM.GASELECTEDMPSNO
+  </select>
+   <delete id="deleteGA">
+    delete from WISDOM.GASELECTEDMPSNO
+  </delete>
+</mapper>

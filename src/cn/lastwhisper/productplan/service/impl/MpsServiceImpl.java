@@ -27,8 +27,8 @@ public class MpsServiceImpl implements MpsService{
 	@Override
 	public EasyUIDataGridResult findPlanelistByPage(Mps mps, Integer page, Integer rows) {
 		PageHelper.startPage(page, rows);
-		List<User> list = mpsMapper.selectPlanelistByPage(mps);
-		PageInfo<User> pageInfo = new PageInfo<>(list);
+		List<Mps> list = mpsMapper.selectPlanelistByPage(mps);
+		PageInfo<Mps> pageInfo = new PageInfo<>(list);
 		EasyUIDataGridResult result = new EasyUIDataGridResult();
 		result.setTotal((int) pageInfo.getTotal());
 		result.setRows(pageInfo.getList());
@@ -42,6 +42,7 @@ public class MpsServiceImpl implements MpsService{
 
 	@Override
 	public GlobalResult updatePlane(Mps msp) {
+		int count = mpsMapper.updateByPrimaryKey(msp);
 		return null;
 	}
 
@@ -56,5 +57,16 @@ public class MpsServiceImpl implements MpsService{
 		}
 		
 		
+	}
+
+	@Override
+	public EasyUIDataGridResult findInsertlistByPage(Mps mps, Integer page, Integer rows) {
+		PageHelper.startPage(page, rows);
+		List<Mps> list = mpsMapper.selectInsertlistByPage(mps);
+		PageInfo<Mps> pageInfo = new PageInfo<>(list);
+		EasyUIDataGridResult result = new EasyUIDataGridResult();
+		result.setTotal((int) pageInfo.getTotal());
+		result.setRows(pageInfo.getList());
+		return result;
 	}
 }

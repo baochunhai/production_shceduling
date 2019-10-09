@@ -29,16 +29,35 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Mps">
     update MPS
-    set TASKNO = #{taskno,jdbcType=CHAR},
-      PROCESSFILENO = #{processfileno,jdbcType=CHAR},
-      MANUNUMBER = #{manunumber,jdbcType=CHAR},
-      STARTDATE = #{startdate,jdbcType=CHAR},
-      ENDDATE = #{enddate,jdbcType=CHAR},
-      DEPARTMENT = #{department,jdbcType=CHAR},
-      STATUS = #{status,jdbcType=CHAR},
-      TYPE = #{type,jdbcType=CHAR},
-      URGENT = #{urgent,jdbcType=CHAR}
-    where MPSNO = #{mpsno,jdbcType=CHAR}
+    <trim prefix="set" suffixOverrides="," suffix="where MPSNO = #{mpsno,jdbcType=CHAR} ">
+			<if test='taskno != null and taskno != ""'>
+			TASKNO=#{taskno}, 
+			</if>
+			<if test='processfileno != null and processfileno != "" '>
+			processfileno=#{processfileno}, 
+			</if>
+			<if test='manunumber != null and manunumber != "" '>
+			manunumber=#{manunumber} 
+			</if>
+			<if test='startdate != null and startdate != ""'>
+			startdate=#{startdate}, 
+			</if>
+			<if test='enddate != null and enddate != "" '>
+			enddate=#{enddate}, 
+			</if>
+			<if test='department != null and department != "" '>
+			department=#{department} 
+			</if>
+			<if test='status != null and status != ""'>
+			status=#{status}, 
+			</if>
+			<if test='type != null and type != "" '>
+			type=#{type}, 
+			</if>
+			<if test='urgent != null and urgent != "" '>
+			urgent=#{urgent} 
+			</if>
+		</trim>
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
@@ -67,5 +86,19 @@
 		</if>
 	</select>
 	
+	 <select id="selectInsertlistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
+	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
+    STATUS,  (select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as type, URGENT
+    from MPS where 1=1 and mpsno not in(select mpsno from GASelectedMPSNo)
+		<if test="startdate!=null and startdate!=''">
+		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}
+		</if>
+		<if test="enddate!=null and enddate!=''">
+		   and	to_char(enddate,'yyyy-mm-dd') = #{enddate}
+		</if>
+		<if test="urgent!=null and urgent!=''">
+		   and	urgent like   concat(concat('%',#{urgent}),'%')
+		</if>
+	</select>
 	
 </mapper>
