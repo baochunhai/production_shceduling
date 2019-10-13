@@ -162,11 +162,10 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 			//5.热管准备--铝蒙皮才有这个工序
 			deleteData();
 			for (int i = 0; i < mps.size(); i++) {
-				if(!"铝蒙皮".equals(mps.get(i).getType())) {
-					continue;
+				if("铝蒙皮".equals(mps.get(i).getType())) {
+					mpsno = mps.get(i).getMpsno();
+					calculate(gaschedule, 1, 18, 22, mpsno);
 				}
-				mpsno = mps.get(i).getMpsno();
-				calculate(gaschedule, 1, 18, 22, mpsno);
 			}
 			Calc();
 			saveParallel();//获取SaveParallelDao实例
@@ -182,17 +181,17 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 					gaschedule.setPartno(partno);
 				}else {
 					gaschedule.setPartno(partno);
-				
-				if(!"铝蒙皮".equals(mps.get(i).getType())) {
 				}
-					gascheduleMapper.insertMpsPanel(mpsno,21,9999);
+				if(!"铝蒙皮".equals(mps.get(i).getType())) {
+				
+					gascheduleMapper.insertMpsQt(mpsno,21);
 					//补足M1之前工序的数据，因为MATLAB程序中，processno是从1开始以1为差连续递增的
 					gascheduleMapper.insertMps(mpsno,22);
 					gaschedule.setProcessno("22");
 					gascheduleMapper.updateProtime(gaschedule);
 				}
 				if(!"碳蒙皮".equals(mps.get(i).getType())) {
-					gascheduleMapper.insertMpsPanel(mpsno,18,9999);
+					gascheduleMapper.insertMpsQt(mpsno,18);
 					//补足M1之前工序的数据，因为MATLAB程序中，processno是从1开始以1为差连续递增的
 					gascheduleMapper.insertMps(mpsno,19);
 					gaschedule.setProcessno("19");

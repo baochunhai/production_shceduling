@@ -25,6 +25,6 @@ public interface GascheduleMapper {
     int insertMpsPanel(@Param("mpsno")String mpsno,@Param("start")int start,@Param("end")int end);
     int updateProtime(Gaschedule record);
     
-    int insertMpsHeart(@Param("mpsno")String mpsno);
-    
+    int insertMpsHeart(@Param("mpsno")String mpsno,@Param("start")int start);
+    int insertMpsQt(@Param("mpsno")String mpsno,@Param("start")int start);
 }

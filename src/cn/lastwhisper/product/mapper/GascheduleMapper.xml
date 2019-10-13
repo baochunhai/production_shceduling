@@ -74,19 +74,25 @@
     select max(partno) as "partno" from GASchedule
   </select>
   <!--面板的插入  -->
-  <insert id="insertMpsPanel" parameterType="java.lang.String">
+  <insert id="insertMpsPanel" parameterType="map">
 	insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
 		(select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
 	where cast(processno as integer) &lt; #{end} and cast(processno as integer) &gt; #{start}  
 	    	and trim(mpsno)=rtrim(#{mpsno}))
   </insert>
   <!--蜂窝芯  -->
-  <insert id="insertMpsHeart" parameterType="java.lang.String">
+  <insert id="insertMpsHeart" parameterType="map">
   insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
   (select mpsno,processno,machineno,proctime,starttime,endtime,status 
   from GA 
   where cast(processno as integer) &lt; 16 and cast(processno as integer) &gt; 10
 	    	and trim(mpsno)=rtrim(#{mpsno}))
   </insert>
-  
+  <insert id="insertMpsQt" parameterType="map">
+  insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
+  (select mpsno,processno,machineno,proctime,starttime,endtime,status 
+  from GA 
+  where cast(processno as integer) &lt;  #{start}  
+	    	and trim(mpsno)=rtrim(#{mpsno}))
+  </insert>
 </mapper>
