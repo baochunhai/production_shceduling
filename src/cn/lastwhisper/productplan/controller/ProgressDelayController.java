@@ -41,9 +41,9 @@ public class ProgressDelayController {
 
 	@RequestMapping(value = "/progressdelaylistByPage", method = RequestMethod.POST)
 	@ResponseBody
-	public EasyUIDataGridResult processlistByPage(Process process,
+	public EasyUIDataGridResult processlistByPage(String delaytime,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return processService.findProcesslistByPage(process, page, rows);
+		return processService.findProcessdelaylistByPage(delaytime, page, rows);
 	}
 }

@@ -65,4 +65,15 @@ public class ProcessServiceImpl implements ProcessService{
 		List<Mps> selectMps = processMapper.selectMps();
 		return selectMps;
 	}
+
+	@Override
+	public EasyUIDataGridResult findProcessdelaylistByPage(String delaytime, Integer page, Integer rows) {
+		PageHelper.startPage(page, rows);
+		List<Process> list = processMapper.selectProcessdelaylistByPage(delaytime);
+		PageInfo<Process> pageInfo = new PageInfo<>(list);
+		EasyUIDataGridResult result = new EasyUIDataGridResult();
+		result.setTotal((int) pageInfo.getTotal());
+		result.setRows(pageInfo.getList());
+		return result;
+	}
 }

@@ -6,27 +6,6 @@ var method = "";
 var listParam = "";
 var saveParam = "";
 $(function() {
-	//如果是process,查询mpsno
-/*	if(name=="process"){
-		$.ajax({
-			url : name + "AllMps",
-			data : "",
-			dataType : 'json',
-			type : 'post',
-			success : function(rtn) {
-				// 成功的话，我们要关闭窗口
-				var data = [];
-				data.push({"text":"请选择","value":""});
-				$.each(rtn, function (i, item) {
-					//alert(item.mpsno)
-					data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
-				});
-				
-				$("#mpsno").combobox('loadData',data)
-			}
-		});
-		
-	}*/
 	var idField = '';
 	var height = 300;
 	var width = 300;
@@ -184,23 +163,7 @@ $(function() {
 		pageNumber : 1,// 在设置分页属性的时候初始化页码。
 		pageSize : 10,// 在设置分页属性的时候初始化页面大小。
 		pageList : [ 10, 20, 30, 40, 50 ],//在设置分页属性的时候 初始化页面大小选择列表。
-		toolbar :$('#delSerch') /*[ {
-		text : '添加工件',
-		iconCls : 'icon-add',
-		handler : function() {
-			var rows = $('#grid').datagrid('getSelections');
-			console.log(rows);
-			var items=[];
-            for(i=0;i<rows.length;i++){  //遍历数组
-            	var item = new Object();
-            	item.mpsno=rows[i].mpsno;
-            	item.cdate=new Date();
-            	items.push(item);
-            }
-            console.log(items);
-			insertData(items);
-		}
-	}]*/,
+		toolbar :$('#delSerch') ,
 		onDblClickRow : function() {
 			edit();
 		},

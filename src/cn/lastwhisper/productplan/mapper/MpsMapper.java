@@ -13,6 +13,7 @@ public interface MpsMapper {
     List<Mps> selectAll();
 
     int updateByPrimaryKey(Mps record);
+    int updateStatusByPrimaryKey(Mps record);
     
     /**
 	 * 

@@ -12,21 +12,27 @@
     <result column="STATUS" jdbcType="CHAR" property="status" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from WISDOM.GAPARALLEL
+    delete from GAPARALLEL
     where PROCESSNO = #{processno,jdbcType=CHAR}
       and MACHINENO = #{machineno,jdbcType=CHAR}
       and MPSNO = #{mpsno,jdbcType=CHAR}
   </delete>
+  <delete id="deleteAll" parameterType="map">
+    delete from GAPARALLEL
+  </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Gaparallel">
-    insert into WISDOM.GAPARALLEL (PROCESSNO, MACHINENO, MPSNO, 
+    insert into GAPARALLEL (PROCESSNO, MACHINENO, MPSNO, 
       PARTNO, PROCTIME, STARTTIME, 
       ENDTIME, STATUS)
     values (#{processno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR}, #{mpsno,jdbcType=CHAR}, 
       #{partno,jdbcType=DECIMAL}, #{proctime,jdbcType=DECIMAL}, #{starttime,jdbcType=CHAR}, 
       #{endtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
   </insert>
+  <insert id="insertPall" parameterType="cn.lastwhisper.productplan.pojo.Gaparallel">
+    insert into GAParallel select * from GASchedule
+  </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Gaparallel">
-    update WISDOM.GAPARALLEL
+    update GAPARALLEL
     set PARTNO = #{partno,jdbcType=DECIMAL},
       PROCTIME = #{proctime,jdbcType=DECIMAL},
       STARTTIME = #{starttime,jdbcType=CHAR},
@@ -38,13 +44,25 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select PROCESSNO, MACHINENO, MPSNO, PARTNO, PROCTIME, STARTTIME, ENDTIME, STATUS
-    from WISDOM.GAPARALLEL
+    from GAPARALLEL
     where PROCESSNO = #{processno,jdbcType=CHAR}
       and MACHINENO = #{machineno,jdbcType=CHAR}
       and MPSNO = #{mpsno,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select PROCESSNO, MACHINENO, MPSNO, PARTNO, PROCTIME, STARTTIME, ENDTIME, STATUS
-    from WISDOM.GAPARALLEL
+    from GAPARALLEL
   </select>
+  <!--显示排产结果  -->
+  <select id="selectGASchedlelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
+	select GAParallel.MPSNo as "mpsno"
+		,Process.ProcessNo as "processno"
+		,Machine.MachineNo as "machineno"
+		,to_char(sysdate+starttime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "starttime"
+		,to_char(sysdate+endtime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "endtime"
+ 	from GAParallel,Process,Machine 
+	where GAParallel.MachineNo=Machine.ID and GAParallel.MPSNo=Process.MPSNo 
+		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null order by MPSNO,
+ 		cast(GAParallel.processno as integer)
+	</select>
 </mapper>

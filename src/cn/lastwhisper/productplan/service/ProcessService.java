@@ -19,4 +19,6 @@ public interface ProcessService {
 	
 	public List<Mps> selectMps();
 	
+	public EasyUIDataGridResult findProcessdelaylistByPage(String delaytime, Integer page, Integer rows);
+	
 }

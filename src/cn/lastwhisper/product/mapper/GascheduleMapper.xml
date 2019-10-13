@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.product.mapper.GascheduleMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.product.pojo.Gaschedule">
+    <id column="MPSNO" jdbcType="CHAR" property="mpsno" />
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <result column="PARTNO" jdbcType="DECIMAL" property="partno" />
+    <result column="PROCTIME" jdbcType="DECIMAL" property="proctime" />
+    <result column="STARTTIME" jdbcType="CHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="CHAR" property="endtime" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from GASCHEDULE
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteAll" parameterType="cn.lastwhisper.product.pojo.Gaschedule">
+    delete from GASCHEDULE
+  </delete>
+  <delete id="deleteZero" parameterType="cn.lastwhisper.product.pojo.Gaschedule">
+    delete from GASCHEDULE where  ProcTime=0
+  </delete>
+  <insert id="insert" parameterType="cn.lastwhisper.product.pojo.Gaschedule">
+    insert into GASCHEDULE (MPSNO, PROCESSNO, MACHINENO, 
+      PARTNO, PROCTIME, STARTTIME, 
+      ENDTIME, STATUS)
+    values (#{mpsno,jdbcType=CHAR}, #{processno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR}, 
+      #{partno,jdbcType=DECIMAL}, #{proctime,jdbcType=DECIMAL}, #{starttime,jdbcType=CHAR}, 
+      #{endtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.product.pojo.Gaschedule">
+    update GASCHEDULE
+    set PARTNO = #{partno,jdbcType=DECIMAL},
+      PROCTIME = #{proctime,jdbcType=DECIMAL},
+      STARTTIME = #{starttime,jdbcType=CHAR},
+      ENDTIME = #{endtime,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR}
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="cn.lastwhisper.product.pojo.Gaschedule" resultMap="BaseResultMap">
+    select MPSNO, PROCESSNO, MACHINENO, PARTNO, PROCTIME, STARTTIME, ENDTIME, STATUS
+    from GASCHEDULE
+    where MPSNO = #{mpsno,jdbcType=CHAR}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MPSNO, PROCESSNO, MACHINENO, PARTNO, PROCTIME, STARTTIME, ENDTIME, STATUS
+    from GASCHEDULE
+  </select>
+  
+   <insert id="insertMps" parameterType="java.lang.String">
+	   insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
+	     (select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
+	    where cast(processno as integer) &lt; ${pno}
+	    	and trim(mpsno)=#{mpsno})
+  </insert>
+  <update id="updateByMpsnoo" parameterType="cn.lastwhisper.product.pojo.Gaschedule" >
+   update GASchedule set partno=#{partno} where trim(mpsno)=#{mpsno}
+  </update>
+<update id="updateByMpsno" >
+    update GASchedule set starttime=starttime + #{maxendtime}, endtime=endtime + #{maxendtime}
+  </update>
+  <update id="updateProtime" parameterType="cn.lastwhisper.product.pojo.Gaschedule"  >
+    update GASchedule set proctime=0 where cast(processno as integer) &lt; cast(#{processno} as integer) and trim(mpsno)=#{mpsno}
+  </update>
+  
+  <select id="selectPartno" parameterType="map" resultType="java.lang.String">
+    select max(partno) as "partno" from GASchedule
+  </select>
+  <!--面板的插入  -->
+  <insert id="insertMpsPanel" parameterType="java.lang.String">
+	insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
+		select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
+	where cast(processno as integer) &lt; #{end} and cast(processno as integer) &gt; #{start}  
+	    	and trim(mpsno)=#{mpsno})
+  </insert>
+  <!--蜂窝芯  -->
+  <insert id="insertMpsHeart" parameterType="java.lang.String">
+  insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
+  select mpsno,processno,machineno,proctime,starttime,endtime,status 
+  from GA 
+  where cast(processno as integer) &lt; 16 and cast(processno as integer) &gt; 10
+	    	and trim(mpsno)=#{mpsno})
+  </insert>
+  
+</mapper>

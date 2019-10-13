@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选择工件</title>
+<link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
+<script type="text/javascript" src="../../ui/jquery.min.js"></script>
+<script type="text/javascript" src="../../ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../../ui/date.js"></script>
+<script type="text/javascript" src="../../js/product/insert.js"></script>
+<script type="text/javascript" src="../../js/search.js"></script>
+<script type="text/javascript" src="../../js/download.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+	//用于search.js自动补全
+	var _url = '/';
+	var _value = '';
+	var idField = '';
+	var title = '1插单';
+	var columns = [ [ {
+		field : 'mpsno',
+		title : '生产计划号',
+		width : 100
+	}, {
+		field : 'type',
+		title : '工件类型',
+		width : 50
+	}, {
+		field : 'taskno',
+		title : '任务号',
+		width : 50
+	}, {
+		field : 'processfileno',
+		title : '工艺文件号',
+		width : 100
+	}, {
+		field : 'manunumber',
+		title : '投产数量',
+		width : 50,
+	}, {
+		field : 'startdate',
+		title : '计划开始日期',
+		width : 100,
+		formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd"); 
+		}
+	}, {
+		field : 'enddate',
+		title : '计划完成日期',
+		width : 100,
+		formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd"); 
+		}
+	}, {
+		field : 'department',
+		title : '完成单位',
+		width : 100,
+	}, {
+		field : 'status',
+		title : '完成状态',
+		width : 100,
+	}] ];
+	//用于crud.js的esayui初始参数
+</script>
+</head>
+<body class="easyui-layout">
+	<!-- 数据表格区 -->
+	<div data-options="region:'center',collapsible:true,split:true"
+		style="width: 600px;">
+		<table id="insert"></table>
+	</div>
+</body>
+</html>

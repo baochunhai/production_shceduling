@@ -17,7 +17,7 @@ public interface ProcessMapper {
     int updateByPrimaryKey(Process record);
     
     public List<Process> selectProcesslistByPage(Process record);
-    
+    public List<Process> selectProcessdelaylistByPage(@Param("delaytime") String delaytime);//生产设备延期
    List<Mps> selectMps();
    
    public List<Process> selectPredictlistByPage(Mps record);

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选择工件</title>
+<link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
+<script type="text/javascript" src="../../ui/jquery.min.js"></script>
+<script type="text/javascript" src="../../ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../../ui/date.js"></script>
+<script type="text/javascript" src="../../js/product/complete.js"></script>
+<script type="text/javascript" src="../../js/search.js"></script>
+<script type="text/javascript" src="../../js/download.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+	//用于search.js自动补全
+	var _url = '/';
+	var _value = '';
+	var idField = '';
+	var title = '4齐套性问题';
+	var columns = [ [ {
+		field : 'MPSNO',
+		title : '生产计划号',
+		width : 50
+	}, {
+		field : 'PROCESSNO',
+		title : '工序名称',
+		width : 50
+	}, {
+		field : 'FSTARTTIME',
+		title : '齐套性问题开始时间',
+		width : 100
+		/* formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd"); 
+		} */
+		
+	}, {
+		field : 'PRECOVERYTIME',
+		title : '预计解决时长(H)',
+		width : 50
+	}, {
+		field : 'FENDTIME',
+		title : '齐套性问题实际解决时刻',
+		width : 100
+		/* formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd"); 
+		} */
+	}, {
+		field : 'FDESCRIPTION',
+		title : '齐套性问题描述',
+		width : 100
+	},{
+		field : 'STATUS',
+		title : '齐套性问题状态',
+		width : 50,
+		formatter : function(value) {
+			if($.trim(value)=="Solved"){
+				return "齐套";
+			}else{
+				return "未齐套";
+			}
+		}
+		
+	}] ];
+	//用于crud.js的esayui初始参数
+</script>
+</head>
+<body class="easyui-layout">
+	<!-- 数据表格区 -->
+	<div data-options="region:'center',collapsible:true,split:true"
+		style="width: 600px;">
+		<table id="complete"></table>
+	</div>
+	<div id="completeSerch">
+		<form id="completeForm">
+			<table>
+				<tr>
+					<td>生产计划号：</td>
+					<td><input name="mpsno" class="easyui-textbox"
+						editable="false"
+						id="mpsno"  /></td>
+					<td>工序编号：</td>
+					<td><input name="processno" class="easyui-textbox"
+						editable="false" id="processno"  /></td>
+					<td>修复时间：</td>
+					<td>
+						<input name="precoverytime" class="easyui-textbox"
+						editable="false" id="processno"  />	
+					<td>
+					<td><a class="easyui-linkbutton"
+						data-options="iconCls:'icon-search'" id="btnSearch">提交</a></td>
+					<td><a class="easyui-linkbutton"
+						data-options="iconCls:'icon-remove'" id="btnReset">重置</a></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

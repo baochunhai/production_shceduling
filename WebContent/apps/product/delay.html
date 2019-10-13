@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>生产进度延期管理</title>
+<title>选择工件</title>
 <link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
 <script type="text/javascript" src="../../ui/jquery.min.js"></script>
@@ -10,7 +10,7 @@
 <script type="text/javascript" src="../../ui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
 <script type="text/javascript" src="../../ui/date.js"></script>
-<script type="text/javascript" src="../../js/progressdelay/index.js"></script>
+<script type="text/javascript" src="../../js/product/delay.js"></script>
 <script type="text/javascript" src="../../js/search.js"></script>
 <script type="text/javascript" src="../../js/download.js"></script>
 <script type="text/javascript" src="../../js/utils.js"></script>
@@ -18,67 +18,65 @@
 	//用于search.js自动补全
 	var _url = '/';
 	var _value = '';
-	//用于crud.js的esayui初始参数
-	var name = "progressdelay";
-	var title = '生产进度延期情况';
 	var idField = '';
-	var height = 300;
-	var width = 300;
+	var title = '2生产进度延期';
 	var columns = [ [ {
+
 		field : 'mpsno',
 		title : '生产计划号',
-		width : 100
+		width : 50
 	}, {
 		field : 'taskno',
 		title : '任务号',
 		width : 50
 	}, {
-		field : 'processno',
+		field : 'processfileno',
 		title : '最新完工工序编号',
-		width : 100
+		width : 70
 	}, {
-		field : 'endtime',
+		field : 'manunumber',
 		title : '最新工序完工时间',
-		width : 50,
+		width : 70,
 	}, {
-		field : 'planendtime',
+		field : 'startdate',
 		title : '该工序的计划完工时间',
-		width : 50
+		width : 100,
+		formatter : function(value) {
+			 return formatterDate(value); 
+			 //DateTimeFormatter(value); 
+		}
 	}, {
-		field : 'status',
-		title : '完工状态',
-		width : 100
+		field : 'enddate',
+		title : '延期时间',
+		width : 100,
+		formatter : function(value) {
+			 return formatterDate(value); 
+			 //DateTimeFormatter(value); 
+		}
 	}] ];
+	//用于crud.js的esayui初始参数
 </script>
 </head>
 <body class="easyui-layout">
-	<!--搜索区  -->
-	<div data-options="region:'north',title:'工件最新工序完成时间'"
-		style="padding: 4px; background-color: #eee; height: 80px">
+	<!-- 数据表格区 -->
+	<div data-options="region:'center',collapsible:true,split:true"
+		style="width: 600px;">
+		<table id="delay"></table>
+	</div>
+	<div id="delSerch">
 		<form id="searchForm">
-			<table cellpadding="5">
+			<table>
 				<tr>
-					<td>生产进度延期时间大于（分钟）：</td>
-					<td><input name="delaytime" class="easyui-textbox"
-						editable="false" id="delaytime"  /></td>
-					<!-- <td>是否紧急 ：</td>
-					<td>
-					<select id="status" class="easyui-combobox" name="urgent" style="width:200px;">
-						<option value="">请选择</option>
-					    <option value="Yes">紧急</option>
-					    <option value="No">不紧急</option>
-					</select></td> -->
+					<td>生产进度延期时间大于（分钟） ：</td>
+					<td><input name="startdate" class="easyui-textbox"
+						editable="false" /></td>
 					<td><a class="easyui-linkbutton"
 						data-options="iconCls:'icon-search'" id="btnSearch">查询</a></td>
 					<td><a class="easyui-linkbutton"
 						data-options="iconCls:'icon-remove'" id="btnReset">重置</a></td>
+				</tr>
 			</table>
 		</form>
-	</div>
-	<!-- 数据表格区 -->
-	<div data-options="region:'center',collapsible:true,split:true"
-		style="width: 600px;">
-		<table id="grid"></table>
 	</div>
 </body>
 </html>

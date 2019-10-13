@@ -42,7 +42,7 @@ import cn.lastwhisper.productplan.service.ProcessService;
  */
 @Controller
 @RequestMapping("/apps/product")
-public class SelectController {
+public class ProductController {
 
 	@Autowired
 	private MpsService mpsService;
@@ -67,118 +67,32 @@ public class SelectController {
 	
 	
 	//wisdom/proPlane/mps/planelistByPage
-	@RequestMapping(value = "/selectlistByPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/schedulinglistByPage", method = RequestMethod.POST)
 	@ResponseBody
-	public EasyUIDataGridResult planelistByPage(Mps mps,
+	public EasyUIDataGridResult schedulinglistByPage(Mps mps,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return mpsService.findPlanelistByPage(mps, page, rows);
+		return gASelectedMPSNoService.findSchedulinglistByPage(mps, page, rows);
 	}
 	
-	/**
-	 * 
-	 * @Title: 
-	 * @Description: 根据user封装的条件删除用户
-	 * @param user 封装的条件
-	 * @return
-	 */
-	@RequestMapping(value = "/planedelete", method = RequestMethod.POST)
+	@RequestMapping(value="/calculate")
 	@ResponseBody
-	public GlobalResult planedelete(Mps mps) {
-		return mpsService.deletePlane(mps.getMpsno());
+	public GlobalResult calculate(@RequestBody List<Mps> list) {
+		
+		return gASelectedMPSNoService.calculate(list);
 	}
 	/**
-	 * 选择工件
-	 * @param menu
-	 * @param machineno
-	 * @return
-	 */
-	@RequestMapping(value="/addGA")
-	@ResponseBody
-	public GlobalResult insert(@RequestBody List<Gaselectedmpsno> list) {
-		return gASelectedMPSNoService.addGA(list);
-	}
-	/**
-	 * 1.插单列表
+	 * 排产后查询
 	 * @param mps
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
-	@RequestMapping(value = "/insertlistByPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/loadProductlistByPage", method = RequestMethod.POST)
 	@ResponseBody
-	public EasyUIDataGridResult insertlistByPage(Mps mps,
+	public EasyUIDataGridResult loadProductlistByPage(Mps mps,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return mpsService.findInsertlistByPage(mps, page, rows);
-	}
-	/**
-	 * 2.生产进度延期列表
-	 * @param mps
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping(value = "/delaylistByPage", method = RequestMethod.POST)
-	@ResponseBody
-	public EasyUIDataGridResult delaylistByPage(Process process,
-			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return processService.findProcesslistByPage(process, page, rows);
-	}
-	/**
-	 * 3.设备故障列表
-	 * @param mps
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	/*
-	 * @RequestMapping(value = "/faultlistByPage", method = RequestMethod.POST)
-	 * 
-	 * @ResponseBody public EasyUIDataGridResult faultlistByPage(Machine machine,
-	 * 
-	 * @RequestParam(value = "page", required = true, defaultValue = "1") Integer
-	 * page,
-	 * 
-	 * @RequestParam(value = "rows", required = true, defaultValue = "10") Integer
-	 * rows) { return deviceFaultService.findMachinelistByPage(machine, page, rows);
-	 * }
-	 */
-	/**
-	 * 4.齐套性问题列表
-	 * @param mps
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping(value = "/completelistByPage", method = RequestMethod.POST)
-	@ResponseBody
-	public EasyUIDataGridResult completelistByPage(Equipmentintegrity equipmentintegrity,
-			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return equipmentintegrityService.findEquiplistByPage(equipmentintegrity, page, rows);
-	}
-	/**
-	 * 插单
-	 * @param list
-	 * @return
-	 */
-	@RequestMapping(value="/insertGA")
-	@ResponseBody
-	public GlobalResult insertGA(@RequestBody List<Gaselectedmpsno> list) {
-		return gASelectedMPSNoService.insertGA(list);
-	}
-	
-	/**
-	 * 查找所有
-	 * @author Zoe
-	 * @date 2019年2月15日下午3:46:48
-	 * @return
-	 */
-	@RequestMapping(value="/menu/menulist")
-	@ResponseBody
-	public List<Tree> findAll(String type) {
-		return menuService.findMenuList(type); 
+		return gASelectedMPSNoService.findSchedulinglistByPage(mps, page, rows);
 	}
 }

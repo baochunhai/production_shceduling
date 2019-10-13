@@ -3,6 +3,7 @@ package cn.lastwhisper.product.mapper;
 import java.util.List;
 
 import cn.lastwhisper.product.pojo.Gaselectedmpsno;
+import cn.lastwhisper.productplan.pojo.Mps;
 
 public interface GaselectedmpsnoMapper {
     int deleteByPrimaryKey(String mpsno);
@@ -16,4 +17,6 @@ public interface GaselectedmpsnoMapper {
     int updateByPrimaryKey(Gaselectedmpsno record);
     
     int deleteGA();
+    
+    public List<Mps> selectSchedulinglistByPage(Mps mps);
 }

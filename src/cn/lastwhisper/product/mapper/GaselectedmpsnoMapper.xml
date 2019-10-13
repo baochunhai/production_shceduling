@@ -6,28 +6,43 @@
     <result column="C_DATE" jdbcType="TIMESTAMP" property="cDate" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from WISDOM.GASELECTEDMPSNO
+    delete from GASELECTEDMPSNO
     where MPSNO = #{mpsno,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.product.pojo.Gaselectedmpsno">
-    insert into WISDOM.GASELECTEDMPSNO (MPSNO, C_DATE)
+    insert into GASELECTEDMPSNO (MPSNO, C_DATE)
     values (#{mpsno,jdbcType=VARCHAR}, sysdate)
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.product.pojo.Gaselectedmpsno">
-    update WISDOM.GASELECTEDMPSNO
+    update GASELECTEDMPSNO
     set C_DATE = #{cDate,jdbcType=TIMESTAMP}
     where MPSNO = #{mpsno,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select MPSNO, C_DATE
-    from WISDOM.GASELECTEDMPSNO
+    from GASELECTEDMPSNO
     where MPSNO = #{mpsno,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select MPSNO, C_DATE
-    from WISDOM.GASELECTEDMPSNO
+    from GASELECTEDMPSNO
   </select>
    <delete id="deleteGA">
-    delete from WISDOM.GASELECTEDMPSNO
+    delete from GASELECTEDMPSNO
   </delete>
+  <!--查询待排产工件  -->
+   <select id="selectSchedulinglistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
+	select MPS.mpsno as "mpsno",
+	(select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as "type",
+	taskno as "taskno",
+	processfileno as "processfileno",
+	manunumber as "manunumber",
+	startdate as "startdate",
+	enddate as "enddate",
+	department as "department",
+	status  as "status"
+	from MPS,GASelectedMPSNo 
+	where MPS.mpsno=GASelectedMPSNo.mpsno 
+	order by enddate
+	</select>
 </mapper>

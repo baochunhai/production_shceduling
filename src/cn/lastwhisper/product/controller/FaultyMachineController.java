@@ -45,7 +45,13 @@ public class FaultyMachineController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 	
-	
+	 /**
+		 * 3.设备故障列表
+		 * @param mps
+		 * @param page
+		 * @param rows
+		 * @return
+		 */
 	//wisdom/proPlane/mps/planelistByPage
 	@RequestMapping(value = "/faultlistByPage", method = RequestMethod.POST)
 	@ResponseBody

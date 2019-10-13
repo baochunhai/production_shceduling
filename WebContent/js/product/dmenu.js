@@ -1,42 +1,7 @@
 ﻿var type = "D0001";
-var insert =[ [ {
-	field : 'mpsno',
-	title : '生产计划号',
-	width : 100
-}, {
-	field : 'type',
-	title : '工件类型',
-	width : 50
-}, {
-	field : 'taskno',
-	title : '任务号',
-	width : 50
-}, {
-	field : 'processfileno',
-	title : '工艺文件号',
-	width : 100
-}, {
-	field : 'manunumber',
-	title : '投产数量',
-	width : 50,
-}, {
-	field : 'startdate',
-	title : '计划开始日期',
-	width : 100
-}, {
-	field : 'enddate',
-	title : '计划完成日期',
-	width : 100
-}, {
-	field : 'department',
-	title : '完成单位',
-	width : 100,
-}, {
-	field : 'status',
-	title : '完成状态',
-	width : 100,
-}] ]
 
+	
+	
 $(function() {
 	loadTree();
 	//loadDataGrid("");
@@ -82,63 +47,6 @@ $(function() {
 			}
 		} ]
 	});
-	// 右键菜单
-	$('#mm').menu({
-		onClick : function(item) {
-			var rowData = $('#grid').datagrid('getData').rows[0];
-			switch (item.text) {
-			case '添加':
-				// 获取当前被选中的节点
-				var selected = $('#tt').tree('getSelected');
-				var children = selected.children;
-				if(children.length==0){
-					$.messager.alert("提示", "该菜单目录暂时不支持三级以上的菜单", 'warning');
-				}else{
-					$("#insertDlg").dialog('open');
-				}
-				break;
-			case '修改':
-				$("#updateDlg").dialog('open');
-				// 填充后台数据
-				if (rowData.is_parent == 1) {
-					rowData.is_parent = '是';
-				} else if (rowData.is_parent == 0) {
-					rowData.is_parent = '否';
-				}
-				$('#updateForm').form('load', rowData);
-				break;
-			case '重命名':
-				$("#renameDlg").dialog('open');
-				// 填充后台数据
-				$('#renameForm').form('load', rowData);
-				break;
-			case '删除':
-				deleteData(item.id);
-				break;
-			}
-		}
-	});
-	// 菜单重命名
-	$('#renameDlg').dialog({
-		title : '菜单重命名',
-		width : 250,
-		height : 100,
-		closed : true,
-		modal : true,
-		buttons : [ {
-			text : '保存',
-			handler : function() {
-				// 访问后台数据
-				renameMenu();
-			}
-		}, {
-			text : '关闭',
-			handler : function() {
-				// 关闭对话框
-				$("#renameDlg").dialog('close');
-			}
-		} ]
-	});
 });
 
 /**
@@ -167,51 +75,40 @@ function disposeTree(data) {
 			console.info(data);
 			return data;
 		},
-		//url : $('#grid').datagrid('getRows')[0].url,
-		/*onContextMenu : function(e, node) {
-			e.preventDefault();
-			var rowData = $('#grid').datagrid('getRows')[0];
-			if (rowData != null) {
-				// 找到菜单项
-				var item = $('#mm').menu('findItem', '删除');
-				if (1 == rowData.is_parent) {
-					if (item) {
-						// 移除菜单项
-						$('#mm').menu('removeItem', item.target);
-					}
-				} else {
-					if (item == null) {
-						// 追加一个顶部菜单
-						$('#mm').menu('appendItem', {
-							text : '删除',
-							iconCls : 'icon-cut',
-							onClick : function(item) {
-								deleteData(rowData.id);
-							}
-						});
-					}
-				}
-				// 显示快捷菜单
-				$('#mm').menu('show', {
-					left : e.pageX,
-					top : e.pageY
-				});
-			} else {
-				$.messager.alert("提示", "请选中后操作", 'warning');
-			}
-		},*/
-		
 		onClick : function(node) {
 			// 显示子菜单到datagrid
-			//loadDataGrid(node.id);
-//			console.info(node.url);
 			if(node.url!="#"){
-				/*var subtitle = node.text; 
-				var url = node.url;
-				var icon = $(this).find('.icon').attr('class');
-				addTab(subtitle, url, icon);*/
 				var processno = node.url;
-				loadDataGrid(node);
+				
+				if(processno.indexOf("insert")>0){
+					var subtitle = node.text; 
+					var url = node.url;
+					var icon = $(this).find('.icon').attr('class');
+					addTab(subtitle, url, icon);
+					
+					//loadDataGrid(node,insert,inserttoobar,$('#insert'));
+				}
+				if(processno.indexOf("delay")>0){
+					var subtitle = node.text; 
+					var url = node.url;
+					var icon = $(this).find('.icon').attr('class');
+					addTab(subtitle, url, icon);
+					//loadDataGrid(node,delay,$('#delSerch'),$('#delay'));
+				}
+				if(processno.indexOf("fault")>0){
+					var subtitle = node.text; 
+					var url = node.url;
+					var icon = $(this).find('.icon').attr('class');
+					addTab(subtitle, url, icon);
+					//loadDataGrid(node,fault,$('#faultSerch'),$('#fault'));
+				}
+				if(processno.indexOf("complete")>0){
+					var subtitle = node.text; 
+					var url = node.url;
+					var icon = $(this).find('.icon').attr('class');
+					addTab(subtitle, url, icon);
+					//loadDataGrid(node,complete,$('#completeSerch'),$('#complete'));
+				}
 			}
 			
 		}
@@ -221,23 +118,17 @@ function disposeTree(data) {
 /**
  * 加载表格数据 menuid：菜单id
  */
-function loadDataGrid(node) {
+function loadDataGrid(node,comlumns,toobar,tab1) {
 	var processno = node.url;
 	var text = node.text;
-		
-	$('#insert').datagrid({
+	tab1.datagrid({
 		url : processno+'listByPage',
 		title : valid(text),
 		frozenColumns : [ [ {
 			field : 'ck',
 			checkbox : true
-		}/*, {
-			title : '',
-			field : idField,
-			sortable : true,
-			width:0
-		} */] ],
-		columns : insert,
+		}] ],
+		columns : comlumns,
 		sortable : true,
 		fitColumns:true,
 		iconCls : 'icon-tip',
@@ -255,63 +146,14 @@ function loadDataGrid(node) {
 		pageNumber : 1,// 在设置分页属性的时候初始化页码。
 		pageSize : 10,// 在设置分页属性的时候初始化页面大小。
 		pageList : [ 10, 20, 30, 40, 50 ],//在设置分页属性的时候 初始化页面大小选择列表。
-		toolbar : [ {
-			text : '插入工件',
-			iconCls : 'icon-add',
-			handler : function() {
-				var rows = $('#insert').datagrid('getSelections');
-				console.log(rows);
-				var items=[];
-                for(i=0;i<rows.length;i++){  //遍历数组
-                	var item = new Object();
-                	item.mpsno=rows[i].mpsno;
-                	item.cdate=new Date();
-                	items.push(item);
-                }
-                console.log(items);
-				insertData(items);
-			}
-		}],
-		onDblClickRow : function(rowIndex, rowData) {
-			// 打开修改窗口
-			$('#updateDlg').dialog('open');
-			// 填充后台数据
-			if (rowData.is_parent == 1) {
-				rowData.is_parent = '是';
-			} else if (rowData.is_parent == 0){
-				rowData.is_parent = '否';
-			}
-			$('#updateForm').form('load', rowData);
-		}
+		toolbar : toobar
 	});
-	/*$('#grid').datagrid({
-		
-	});*/
 }
 
 /**
  * 添加数据
  */
-function insertData(data1) {
-	// 提交添加数据的表单
-	var formData = data1;
-	$.ajax({
-		type : 'POST',
-		url : 'insertGA',
-		data : JSON.stringify(data1),
-		dataType : 'json',
-		contentType : 'application/json; charset=UTF-8',
-		success : function(data) {
-			$.messager.alert("提示", data.msg, 'info', function() {
-				if (data.status == 200) {
-					// 刷新表格数据
-					$('#insert').datagrid('reload');
-					// 刷新树形菜单
-				}
-			});
-		}
-	});
-}
+
 
 /**
  * 删除数据
@@ -377,30 +219,6 @@ function updateData() {
 /**
  * 重命名菜单
  */
-function renameMenu() {
-	var formData = $('#renameForm').serializeJSON();
-	formData.menuid = $('#tt').tree('getSelected').id;
-	$.ajax({
-		type : 'POST',
-		url : 'menu/menuupdateById',
-		data : formData,
-		dataType : 'json',
-		success : function(data) {
-			$.messager.alert("提示", data.msg, 'info', function() {
-				if (data.status == 200) {
-					// 刷新表格数据
-					$('#grid').datagrid('reload');
-					// 刷新树形菜单
-					loadTree();
-					// 关闭对话框
-					$('#renameDlg').dialog('close');
-					// 清除表单数据
-					$('#renameForm').form('clear');
-				}
-			});
-		}
-	});
-}
 
 function addTab(subtitle, url, icon) {
 	var jq = top.jQuery;
@@ -540,4 +358,26 @@ function valid(data){
 	    	return data;
 	    }  
 	    
+}
+function formatterDate(date) {
+	//得到日期并转换
+	
+	var oDate = new Date(date), 
+	oYear = oDate.getFullYear(), 
+	oMonth = oDate.getMonth() + 1, 
+	oDay = oDate.getDate(), 
+	oHour = oDate.getHours(), 
+	oMin = oDate.getMinutes(), 
+	oSen = oDate.getSeconds(), 
+	oTime = oYear + '-'	+ getzf(oMonth) + '-' + getzf(oDay) + ' ' + getzf(oHour) + ':'
+			+ getzf(oMin) + ':' + getzf(oSen);// 最后拼接时间
+	
+	return oTime;
+};
+//补0操作
+function getzf(num) {
+	if (parseInt(num) < 10) {
+		num = '0' + num;
+	}
+	return num;
 }

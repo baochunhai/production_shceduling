@@ -100,5 +100,8 @@
 		   and	urgent like   concat(concat('%',#{urgent}),'%')
 		</if>
 	</select>
-	
+	<!--埋件准备时候的更新  -->
+	<update id="updateStatusByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Mps">
+    update MPS set status='待加工' where mpsno=#{mpsno}
+  </update>
 </mapper>
