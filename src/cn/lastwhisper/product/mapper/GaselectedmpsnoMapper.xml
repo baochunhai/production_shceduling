@@ -10,8 +10,8 @@
     where MPSNO = #{mpsno,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.product.pojo.Gaselectedmpsno">
-    insert into GASELECTEDMPSNO (MPSNO, C_DATE)
-    values (#{mpsno,jdbcType=VARCHAR}, sysdate)
+    insert into GASELECTEDMPSNO (MPSNO)
+    values (#{mpsno,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.product.pojo.Gaselectedmpsno">
     update GASELECTEDMPSNO
@@ -19,12 +19,12 @@
     where MPSNO = #{mpsno,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select MPSNO, C_DATE
+    select MPSNO
     from GASELECTEDMPSNO
     where MPSNO = #{mpsno,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select MPSNO, C_DATE
+    select MPSNO
     from GASELECTEDMPSNO
   </select>
    <delete id="deleteGA">
