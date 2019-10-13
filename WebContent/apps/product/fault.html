@@ -51,37 +51,18 @@
 <body class="easyui-layout">
 <!--搜索区  -->
 	<div data-options="region:'north',title:'查询工序-工位-设备信息'"
-		style="padding: 4px; background-color: #eee; height: 100px">
+		style="padding: 4px; background-color: #eee; height: 70px">
 		<form id="faultForm">
 			<table>
 				<tr>
-					<td>工件类型 ：</td>
-					<td>
-					<select id="type" class="easyui-combobox" name="type" style="width:200px;">
-						<option value="">请选择</option>
-					    <option value="A0001">铝蒙皮</option>
-					    <option value="C0001">碳蒙皮</option>
-					</select></td>
-					<td>工位 ：</td>
-					<td>
-						<input name="gongwei" class="easyui-textbox" editable="false" />
-					</td>
 					<td>设备编号 ：</td>
 					<td>
-					<select id="machineno" class="easyui-combobox" name="machineno" style="width:200px;">
-						<option value="">请选择</option>
-					    <option value="A0001">铝蒙皮</option>
-					    <option value="C0001">碳蒙皮</option>
-					</select></td>
-				</tr>
-				<tr>
-				<td>设备编号 ：</td>
+					<input name="machineno" class="easyui-textbox" editable="false" />
+					</td>
+				<td>设备名称 ：</td>
 					<td>
-					<select id="machinename" class="easyui-combobox" name="machinename" style="width:200px;">
-						<option value="">请选择</option>
-					    <option value="A0001">铝蒙皮</option>
-					    <option value="C0001">碳蒙皮</option>
-					</select></td>
+					<input name="machinename" class="easyui-textbox" editable="false" />
+					</td>
 					<td><a class="easyui-linkbutton"
 						data-options="iconCls:'icon-search'" id="btnfaultSearch">查询</a></td>
 					<td><a class="easyui-linkbutton"

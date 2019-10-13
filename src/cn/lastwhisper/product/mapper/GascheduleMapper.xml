@@ -76,14 +76,14 @@
   <!--面板的插入  -->
   <insert id="insertMpsPanel" parameterType="java.lang.String">
 	insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
-		select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
+		(select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
 	where cast(processno as integer) &lt; #{end} and cast(processno as integer) &gt; #{start}  
 	    	and trim(mpsno)=#{mpsno})
   </insert>
   <!--蜂窝芯  -->
   <insert id="insertMpsHeart" parameterType="java.lang.String">
   insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
-  select mpsno,processno,machineno,proctime,starttime,endtime,status 
+  (select mpsno,processno,machineno,proctime,starttime,endtime,status 
   from GA 
   where cast(processno as integer) &lt; 16 and cast(processno as integer) &gt; 10
 	    	and trim(mpsno)=#{mpsno})
