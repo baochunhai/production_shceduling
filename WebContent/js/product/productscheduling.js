@@ -161,6 +161,9 @@ function insertData(data1) {
 	            text: ''
 	        });
 	    },
+	    complete: function () {
+	        $.messager.progress('close');
+	    },
 		success : function(data) {
 			$.messager.alert("提示", data.msg, 'info', function() {
 				if (data.status == 200) {
