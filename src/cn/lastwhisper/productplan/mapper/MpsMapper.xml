@@ -73,7 +73,7 @@
   
   <select id="selectPlanelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
 	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
-    STATUS,  (select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as type, URGENT
+    STATUS,  type as type, URGENT
     from MPS where 1=1
 		<if test="startdate!=null and startdate!=''">
 		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}
@@ -88,7 +88,7 @@
 	
 	 <select id="selectInsertlistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
 	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
-    STATUS,  (select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as type, URGENT
+    STATUS, type as type, URGENT
     from MPS where 1=1 and mpsno not in(select mpsno from GASelectedMPSNo)
 		<if test="startdate!=null and startdate!=''">
 		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}
@@ -99,6 +99,15 @@
 		<if test="urgent!=null and urgent!=''">
 		   and	urgent like   concat(concat('%',#{urgent}),'%')
 		</if>
+	</select>
+	
+	<select id="selectInsertShowlistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
+	SELECT MPSNO as "mpsno", TASKNO as "taskno", PROCESSFILENO as "processfileno", MANUNUMBER as "manunumber",
+	 STARTDATE as "startdate", ENDDATE as "enddate", DEPARTMENT as "department", 
+    STATUS as "status", type as "type", URGENT as "urgent"
+    from MPS where 1=1 
+		   and	rtrim(urgent) ='Yes'
+		
 	</select>
 	<!--埋件准备时候的更新  -->
 	<update id="updateStatusByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Mps">

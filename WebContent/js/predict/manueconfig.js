@@ -56,10 +56,12 @@ $(function() {
 		onClickRow:function(){
 			var selected = $('#grid').datagrid('getSelected');
 			$('#mpsno').val($.trim(selected.mpsno));
+			$('#type').val($.trim(selected.type));
 		},
 		 onCheck:function(){
 			 var selected = $('#grid').datagrid('getSelected');
 				$('#mpsno').val($.trim(selected.mpsno));
+				$('#type').val($.trim(selected.type));
 		 }
 	});
 	}else{
@@ -106,10 +108,12 @@ $(function() {
 			onClickRow:function(){
 				var selected = $('#grid').datagrid('getSelected');
 				$('#mpsno').val($.trim(selected.mpsno));
+				$('#type').val($.trim(selected.type));
 			},
 			 onCheck:function(){
 				 var selected = $('#grid').datagrid('getSelected');
 					$('#mpsno').val($.trim(selected.mpsno));
+					$('#type').val($.trim(selected.type));
 			 }
 		});
 		
@@ -236,7 +240,7 @@ $(function() {
 		
 		var icon = $(this).find('.icon').attr('class');
 		var selected = $('#grid').datagrid('getSelected');
-		var url = "apps/dataanalyze/manue_plane.html?mpsno="+$.trim($("#mpsno").val());
+		var url = "apps/dataanalyze/manue_plane.html?mpsno="+$.trim($("#mpsno").val())+"&type="+$('#type').val();
 		if($.trim($("#mpsno").val())==""||$("#mpsno").val()==null){
 			$.messager.alert("Warning","请选择要计算的工件");
 			return;

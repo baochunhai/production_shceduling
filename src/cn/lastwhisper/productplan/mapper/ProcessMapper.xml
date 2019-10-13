@@ -56,7 +56,7 @@
 	where 1=1
 	<if test="mpsno!=null and mpsno!=''">
 		   and rtrim(MPSNO) = #{mpsno} 
-		   and rtrim(type) = (select rtrim(type) from mps where rtrim(MPSNO) = #{mpsno} )
+		   and rtrim(type) = (select case when rtrim(type)='碳蒙皮' then 'C0001' else 'A0001' end from mps where rtrim(MPSNO) = #{mpsno} )
 	</if>
 	and Process.ProcessNo=carbonknowledge.ProcessNo 
 	order by cast(sequenceno as integer)
@@ -123,8 +123,10 @@
 	machineno,wm_concat(round(ga.proctime/60,1)) proctime
 	from GA,MPS,Process p,CarbonKnowledge c,Machine m
 	where GA.MachineNo=m.ID and GA.mpsno=MPS.mpsno
-	and GA.mpsno=p.mpsno and p.sequenceno=GA.processno
-	and p.processno=c.processno and c.type=rtrim(mps.type)
+	and GA.mpsno=p.mpsno 
+	and p.sequenceno=GA.processno
+	and p.processno=c.processno 
+	and c.type=(select case when rtrim(type)='碳蒙皮' then 'C0001' else 'A0001' end from mps where rtrim(MPSNO)=#{mpsno})
 	<if test="mpsno!=null and mpsno!=''">
 		   and rtrim(ga.MPSNO) = #{mpsno}
 	</if>
@@ -133,14 +135,17 @@
 	
 	<!--显示制造资源配置相关内容  -->
   <select id="selectManuePlanelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
-	select mps.mpsno,taskno,processfileno,p.processno,processname,
+	select m.mpsno,taskno,processfileno,p.processno,processname,
 	wm_concat(c.machineno) machineno
-	 from MPS,CarbonKnowledge ck,CarbonMachineWorker c,Process p
-	  where mps.mpsno=p.mpsno and p.processno=c.processno 
-	  and ck.processno=c.processno  and c.type=rtrim(mps.type) and c.type=ck.type
+	 from mps m,CarbonKnowledge ck,CarbonMachineWorker c,Process p
+	  where m.mpsno=p.mpsno 
+	  and p.processno=c.processno 
+	  and ck.processno=c.processno  
+	  and c.type=(select case when rtrim(type)='碳蒙皮' then 'C0001' else 'A0001' end from mps where rtrim(MPSNO)=#{mpsno})
+	   and c.type=ck.type
 	 <if test="mpsno!=null and mpsno!=''">
-		   and rtrim(mps.MPSNO) = #{mpsno}
+		   and trim(m.mpsno) = #{mpsno}
 	</if>
-	   group by mps.mpsno,taskno,processfileno,p.processno,processname
+	   group by m.mpsno,taskno,processfileno,p.processno,processname
 	</select>
 </mapper>

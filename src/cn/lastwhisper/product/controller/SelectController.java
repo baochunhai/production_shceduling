@@ -128,7 +128,8 @@ public class SelectController {
 	public EasyUIDataGridResult delaylistByPage(Process process,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return processService.findProcesslistByPage(process, page, rows);
+		String delaytime = process.getActualstarttime();
+		return processService.findProcessdelaylistByPage(delaytime, page, rows);
 	}
 	/**
 	 * 3.设备故障列表

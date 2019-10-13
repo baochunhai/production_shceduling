@@ -46,4 +46,12 @@ public class InsertSheetController {
 		//List<Mps> list = (List<Mps>)mpsService.findPlanelistByPage(mps, page, rows).getRows();
 		return mpsService.findPlanelistByPage(mps, page, rows);
 	}
+	
+	@RequestMapping(value = "/insertlistByPage", method = RequestMethod.POST)
+	@ResponseBody
+	public EasyUIDataGridResult insertlistByPage(Mps mps,
+			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
+		return mpsService.selectInsertShowlistByPage(mps, page, rows);
+	}
 }

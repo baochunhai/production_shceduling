@@ -69,4 +69,15 @@ public class MpsServiceImpl implements MpsService{
 		result.setRows(pageInfo.getList());
 		return result;
 	}
+
+	@Override
+	public EasyUIDataGridResult selectInsertShowlistByPage(Mps mps, Integer page, Integer rows) {
+		PageHelper.startPage(page, rows);
+		List<Mps> list = mpsMapper.selectInsertShowlistByPage(mps);
+		PageInfo<Mps> pageInfo = new PageInfo<>(list);
+		EasyUIDataGridResult result = new EasyUIDataGridResult();
+		result.setTotal((int) pageInfo.getTotal());
+		result.setRows(pageInfo.getList());
+		return result;
+	}
 }

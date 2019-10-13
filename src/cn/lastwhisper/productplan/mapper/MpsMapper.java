@@ -27,5 +27,6 @@ public interface MpsMapper {
 	public List<Mps> selectProductionlistByPage(Mps mps);
 	
 	public List<Mps> selectInsertlistByPage(Mps mps);
+	public List<Mps> selectInsertShowlistByPage(Mps mps);
 	
 }

@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		processtype as "processtype",stationName as "stationname",m.machineno as "machineno",
 		machinename as "machinename",coefficiency as "coefficiency",c.type as "type"
 		from CarbonKnowledge c,Machine m,CarbonMachineWorker cw
-		where c.ProcessNo=cw.ProcessNo and m.MachineNo=cw.MachineNo and c.type=cw.type
+		where c.ProcessNo=cw.ProcessNo and rtrim(m.MachineNo) = rtrim(cw.MachineNo) and c.type=cw.type
 		<if test='type != null and type != ""'>
 			and c.type = #{type}
 		</if>

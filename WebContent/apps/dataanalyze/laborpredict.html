@@ -11,7 +11,7 @@
 <script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
 <script type="text/javascript" src="../../ui/date.js"></script>
 <script type="text/javascript" src="../../js/predict/predict.js"></script>
-<!-- <script type="text/javascript" src="../../js/search.js"></script> -->
+<script type="text/javascript" src="../../js/search.js"></script>
 <script type="text/javascript" src="../../js/download.js"></script>
 <script type="text/javascript" src="../../js/utils.js"></script>
 <script type="text/javascript">
@@ -47,17 +47,11 @@
 	}, {
 		field : 'startdate',
 		title : '计划开始日期',
-		width : 100,
-		formatter : function(value) {
-			 return new Date(value).Format("yyyy-MM-dd"); 
-		}
+		width : 100
 	}, {
 		field : 'enddate',
 		title : '计划完成日期',
-		width : 100,
-		formatter : function(value) {
-			 return new Date(value).Format("yyyy-MM-dd"); 
-		}
+		width : 100
 	}, {
 		field : 'department',
 		title : '完成单位',
