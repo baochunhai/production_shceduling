@@ -62,7 +62,7 @@
 		,to_char(sysdate+endtime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "endtime"
  	from GAParallel,Process,Machine 
 	where GAParallel.MachineNo=Machine.ID and GAParallel.MPSNo=Process.MPSNo 
-		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null order by MPSNO,
+		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null order by GAParallel.MPSNO,
  		cast(GAParallel.processno as integer)
 	</select>
 </mapper>
