@@ -154,16 +154,23 @@ function insertData(data1) {
 		data : JSON.stringify(data1),
 		dataType : 'json',
 		contentType : 'application/json; charset=UTF-8',
+		beforeSend: function () {
+	        $.messager.progress({
+	            title: '提示',
+	            msg: '排产中，请稍候……',
+	            text: ''
+	        });
+	    },
 		success : function(data) {
 			$.messager.alert("提示", data.msg, 'info', function() {
 				if (data.status == 200) {
 					// 刷新表格数据
 					$('#product').datagrid('reload');
 					// 刷新树形菜单
-					// 关闭对话框
+					/*// 关闭对话框
 					$('#insertDlg').dialog('close');
 					// 清除表单数据
-					$('#insertForm').form('clear');
+					$('#insertForm').form('clear');*/
 					
 					loadProduct();
 					

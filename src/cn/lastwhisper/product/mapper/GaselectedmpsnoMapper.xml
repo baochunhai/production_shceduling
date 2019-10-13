@@ -32,17 +32,19 @@
   </delete>
   <!--查询待排产工件  -->
    <select id="selectSchedulinglistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
-	select MPS.mpsno as "mpsno",
-	(select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as "type",
-	taskno as "taskno",
-	processfileno as "processfileno",
-	manunumber as "manunumber",
-	startdate as "startdate",
-	enddate as "enddate",
-	department as "department",
-	status  as "status"
-	from MPS,GASelectedMPSNo 
-	where MPS.mpsno=GASelectedMPSNo.mpsno 
-	order by enddate
+	select GAParallel.MPSNo as "mpsno",
+       Process.ProcessNo as "processno",
+       Machine.MachineNo as "machineno",
+       to_char(sysdate + starttime / 24 / 60 / 60, 'yyyy-mm-dd hh24:mi:ss') as "starttime",
+       to_char(sysdate + endtime / 24 / 60 / 60, 'yyyy-mm-dd hh24:mi:ss') as "endtime"
+  from GAParallel, Process, Machine
+ where GAParallel.MachineNo = Machine.ID
+   and GAParallel.MPSNo = Process.MPSNo
+   and GAParallel.ProcessNo = Process.SequenceNo
+   and starttime is not null
+ order by MPSNO, cast(GAParallel.processno as integer)
+	
+	
+	
 	</select>
 </mapper>
