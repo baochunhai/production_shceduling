@@ -7,20 +7,20 @@ var listParam = "";
 var saveParam = "";
 $(function() {
 	// 加载表格数据
-	$('#fault').datagrid({
+	$('#grid').datagrid({
 		url : 'faultlistByPage',
 		idField : idField,//指明哪一个字段是标识字段。
 		title : title,
 		columns : columns,
-		frozenColumns : [ [ {
+		/*frozenColumns : [ [ {
 			field : 'ck',
 			checkbox : true
-		}/*, {
+		}, {
 			title : '',
 			field : idField,
 			sortable : true,
 			width:0
-		} */] ],
+		} ] ],*/
 		sortable : true,
 		fitColumns:true,
 		iconCls : 'icon-tip',
@@ -42,21 +42,22 @@ $(function() {
 			text : '设备故障修复',
 			iconCls : 'icon-add',
 			handler : function() {
-				var rows = $('#fault').datagrid('getSelections');
+				/*var rows = $('#fault').datagrid('getSelections');
 				if(rows.length<1){
 					$.messager.alert("提示", "请选中要修复的工件", 'info', function() {
 					});
 				}else{
-					/*var items=[];
+					var items=[];
 			        for(i=0;i<rows.length;i++){  //遍历数组
 			        	var item = new Object();
 			        	item.mpsno=rows[i].mpsno;
 			        	item.cdate=new Date();
 			        	items.push(item);
 			        }
-					insertData(items);*/
-					edit();
-				}
+					insertData(items);
+					
+				}*/
+				edit();
 			}
 		}],
 		onDblClickRow : function() {
@@ -193,13 +194,13 @@ function edit() {
 	// 清空表单内容
 	$('#editForm').form('clear');
 	// 设置保存按钮提交的方法为update
-	method = "update";
+	method = "insertFault";
 	// 弹出窗口
 	$('#editDlg').dialog('open');
 	// 获取被选中行的数据
-	var selected = $('#grid').datagrid('getSelected');
+	//var selected = $('#fault').datagrid('getSelected');
 	// 加载数据
-	$('#editForm').form('load', selected);
+	//$('#editForm').form('load', selected);
 }
 function formatterDate(date) {
 	//得到日期并转换

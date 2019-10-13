@@ -23,7 +23,10 @@ import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.product.pojo.Gaselectedmpsno;
 import cn.lastwhisper.product.service.FaultyMachineService;
 import cn.lastwhisper.product.service.GASelectedMPSNoService;
+import cn.lastwhisper.productplan.pojo.Faultymachine;
+import cn.lastwhisper.productplan.pojo.Machine;
 import cn.lastwhisper.productplan.pojo.Mps;
+import cn.lastwhisper.productplan.service.DeviceFaultService;
 import cn.lastwhisper.productplan.service.MpsService;
 
 /**
@@ -38,6 +41,8 @@ public class FaultyMachineController {
 	@Autowired
 	private FaultyMachineService faultyMachineService;
 	
+	@Autowired
+	public DeviceFaultService deviceFaultService;
 	 @InitBinder
     protected void init(HttpServletRequest request, ServletRequestDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -55,10 +60,10 @@ public class FaultyMachineController {
 	//wisdom/proPlane/mps/planelistByPage
 	@RequestMapping(value = "/faultlistByPage", method = RequestMethod.POST)
 	@ResponseBody
-	public EasyUIDataGridResult planelistByPage(
+	public EasyUIDataGridResult planelistByPage(Machine machine,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return faultyMachineService.findFaultlistByPage(page, rows);
+		return deviceFaultService.findMachinelistByPage(machine, page, rows);
 	}
 	
 }

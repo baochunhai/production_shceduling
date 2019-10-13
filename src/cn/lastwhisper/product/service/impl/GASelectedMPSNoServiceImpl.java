@@ -1,5 +1,7 @@
 package cn.lastwhisper.product.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +15,21 @@ import com.github.pagehelper.PageInfo;
 import Main0622.Class1;
 import cn.lastwhisper.core.util.EasyUIDataGridResult;
 import cn.lastwhisper.core.util.GlobalResult;
+import cn.lastwhisper.product.mapper.GaMapper;
 import cn.lastwhisper.product.mapper.GamaxendtimeMapper;
 import cn.lastwhisper.product.mapper.GascheduleMapper;
 import cn.lastwhisper.product.mapper.GaselectedmpsnoMapper;
+import cn.lastwhisper.product.pojo.Ga;
 import cn.lastwhisper.product.pojo.Gamaxendtime;
 import cn.lastwhisper.product.pojo.Gaschedule;
 import cn.lastwhisper.product.pojo.Gaselectedmpsno;
 import cn.lastwhisper.product.service.GASelectedMPSNoService;
+import cn.lastwhisper.productplan.mapper.EquipmentintegrityMapper;
+import cn.lastwhisper.productplan.mapper.FaultymachineMapper;
 import cn.lastwhisper.productplan.mapper.GaparallelMapper;
 import cn.lastwhisper.productplan.mapper.MpsMapper;
+import cn.lastwhisper.productplan.pojo.Equipmentintegrity;
+import cn.lastwhisper.productplan.pojo.Faultymachine;
 import cn.lastwhisper.productplan.pojo.Mps;
 import cn.lastwhisper.productplan.service.MpsService;
 
@@ -40,7 +48,12 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 	private GamaxendtimeMapper gamaxendtimeMapper;
 	@Autowired
 	private MpsMapper mpsMapper;
-	
+	@Autowired
+	private EquipmentintegrityMapper equipmentintegrityMapper;
+	@Autowired
+	private GaMapper gaMppper;
+	@Autowired
+	private FaultymachineMapper faultymachineMapper;
 	@Override
 	public GlobalResult addGA(List<Gaselectedmpsno> mps) {
 		try {
@@ -106,7 +119,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 			
 			Gaschedule gaschedule = new Gaschedule();
 			Mps mps1= new Mps();
-			
+			String flag = "";
 			String mpsno = "";
 			List<Gaselectedmpsno> selectAll = gaselectedmpsnoMapper.selectAll();
 			for (int i = 0; i < mps.size(); i++) {
@@ -133,7 +146,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mps1.setStatus("待加工");
 				mpsMapper.updateByPrimaryKey(mps1);
 			}
-			Calc();
+			flag=Calc();
+			if("Great".equals(flag))
+				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//2.面板准备
 			deleteData();
@@ -141,7 +156,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mpsno = mps.get(i).getMpsno();
 				calculate(gaschedule, 1, 5, 11, mpsno);
 			}
-			Calc();
+			flag=Calc();
+			if("Great".equals(flag))
+				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//3.蜂窝芯准备
 			deleteData();
@@ -149,7 +166,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mpsno = mps.get(i).getMpsno();
 				calculate(gaschedule, 1, 10, 16, mpsno);
 			}
-			Calc();
+			flag=Calc();
+			if("Great".equals(flag))
+				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//4.工装准备
 			deleteData();
@@ -157,7 +176,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mpsno = mps.get(i).getMpsno();
 				calculate(gaschedule, 1, 15, 19, mpsno);
 			}
-			Calc();
+			flag=Calc();
+			if("Great".equals(flag))
+				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//5.热管准备--铝蒙皮才有这个工序
 			deleteData();
@@ -167,7 +188,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 					calculate(gaschedule, 1, 18, 22, mpsno);
 				}
 			}
-			Calc();
+			flag=Calc();
+			if("Great".equals(flag))
+				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//6.其他工序
 			deleteData();
@@ -201,7 +224,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				gascheduleMapper.updateByMpsnoo(gaschedule);
 				
 			}
-			Calc();
+			flag=Calc();
+			if("Great".equals(flag))
+				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			return new GlobalResult(200, "排产成功", null);
 		}catch(Exception e){
@@ -211,23 +236,23 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 		}
 	}
 
-	public void Calc() {
+	public String Calc() {
 		Class1 testGAClass = null;
+		String flag="";
 		try {
 			testGAClass = new Class1();
 
 			testGAClass.Main0622();
 			testGAClass.waitForFigures();
 			System.out.println("Great!");
-
+			flag= "Great";
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.toString());
-		}
-
-		finally {
+		}finally {
 			if (testGAClass != null)
 				testGAClass.dispose();
 		}
+		return flag;
 	}
 	public void saveParallel() {
 		List<Gamaxendtime> selectAll = gamaxendtimeMapper.selectAll();
@@ -284,6 +309,34 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 		result.setTotal((int) pageInfo.getTotal());
 		result.setRows(pageInfo.getList());
 		return result;
+	}
+
+	@Override
+	public GlobalResult insertFault(String machineno,String precovertime) {
+		try {
+			Ga ga = new Ga();
+			ga.setMachineno(machineno);
+			ga.setProctime(Integer.parseInt(precovertime));
+			gaMppper.updateProctime(ga);
+			
+			Faultymachine faultymachine = new Faultymachine();
+			faultymachine.setMachineno(machineno);
+			faultymachine.setPrecoverytime(precovertime);
+			faultymachine.setStatus("Faulty");
+			Date date = new Date(); //获取当前的系统时间。
+			 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss") ; //使用了默认的格式创建了一个日期格式化对象。
+			 String time = dateFormat.format(date); //可以把日期转换转指定格式的字符串
+			faultymachine.setFstarttime(time);
+			faultymachine.setFendtime("");
+			
+			faultymachineMapper.insert(faultymachine);
+			
+			return new GlobalResult(200, "故障设备添加成功", null);
+		}catch(Exception e){
+			e.getMessage();
+			e.printStackTrace();
+			return new GlobalResult(200, "故障设备添加失败", null);
+		}
 	}
 	
 }

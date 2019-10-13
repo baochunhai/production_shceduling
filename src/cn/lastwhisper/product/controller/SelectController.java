@@ -58,6 +58,10 @@ public class SelectController {
 	private EquipmentintegrityService equipmentintegrityService;
 	@Autowired
 	private ProcessService processService;
+	
+	
+	
+	
 	 @InitBinder
     protected void init(HttpServletRequest request, ServletRequestDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -168,6 +172,16 @@ public class SelectController {
 	@ResponseBody
 	public GlobalResult insertGA(@RequestBody List<Gaselectedmpsno> list) {
 		return gASelectedMPSNoService.insertGA(list);
+	}
+	/**
+	 * 设备故障录入
+	 * @param list
+	 * @return
+	 */
+	@RequestMapping(value="/insertFault")
+	@ResponseBody
+	public GlobalResult insertFault(@RequestParam String machineno,@RequestParam String precovertime) {
+		return gASelectedMPSNoService.insertFault(machineno,precovertime);
 	}
 	
 	/**

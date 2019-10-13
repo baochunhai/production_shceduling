@@ -95,4 +95,18 @@ public class ProductController {
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
 		return gASelectedMPSNoService.loadProductlistByPage(mps, page, rows);
 	}
+	
+	/**
+	 * 排产后查询
+	 * @param mps
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping(value = "/savecomplete", method = RequestMethod.POST)
+	@ResponseBody
+	public GlobalResult savecomplete(@RequestParam String mpsno,@RequestParam String processno,@RequestParam 
+			String precoverytime) {
+		return equipmentintegrityService.addEquipComplete(mpsno,processno,precoverytime);
+	}
 }

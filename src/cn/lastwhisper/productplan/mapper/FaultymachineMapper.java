@@ -8,6 +8,7 @@ public interface FaultymachineMapper {
     int deleteByPrimaryKey(@Param("machineno") String machineno, @Param("fstarttime") String fstarttime);
 
 	int insert(Faultymachine record);
+	int insertFaultMachine(Faultymachine record);
 
 	Faultymachine selectByPrimaryKey(@Param("machineno") String machineno, @Param("fstarttime") String fstarttime);
 
@@ -15,5 +16,5 @@ public interface FaultymachineMapper {
 
 	int updateByPrimaryKey(Faultymachine record);
 
-	List<Faultymachine> selectFault();
+	List<Faultymachine> selectFault(Faultymachine record);
 }

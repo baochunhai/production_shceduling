@@ -20,9 +20,9 @@ public class FaultyMachineServiceImpl implements FaultyMachineService {
 	private FaultymachineMapper faultyMachineMapper;
 	
 	@Override
-	public EasyUIDataGridResult findFaultlistByPage(Integer page, Integer rows) {
+	public EasyUIDataGridResult findFaultlistByPage(Faultymachine fault,Integer page, Integer rows) {
 		PageHelper.startPage(page, rows);
-		List<Faultymachine> list =faultyMachineMapper.selectFault();
+		List<Faultymachine> list =faultyMachineMapper.selectFault(fault);
 		PageInfo<Faultymachine> pageInfo = new PageInfo<>(list);
 		EasyUIDataGridResult result = new EasyUIDataGridResult();
 		result.setTotal((int) pageInfo.getTotal());

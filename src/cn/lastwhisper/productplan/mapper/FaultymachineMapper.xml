@@ -9,18 +9,24 @@
     <result column="STATUS" jdbcType="CHAR" property="status" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from WISDOM.FAULTYMACHINE
+    delete from FAULTYMACHINE
     where MACHINENO = #{machineno,jdbcType=CHAR}
       and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Faultymachine">
-    insert into WISDOM.FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 
+    insert into FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 
+      FENDTIME, STATUS)
+    values (#{machineno,jdbcType=CHAR}, #{fstarttime,jdbcType=CHAR}, #{precoverytime,jdbcType=CHAR}, 
+      #{fendtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertFaultMachine" parameterType="cn.lastwhisper.productplan.pojo.Faultymachine">
+    insert into FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 
       FENDTIME, STATUS)
     values (#{machineno,jdbcType=CHAR}, #{fstarttime,jdbcType=CHAR}, #{precoverytime,jdbcType=CHAR}, 
       #{fendtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Faultymachine">
-    update WISDOM.FAULTYMACHINE
+    update FAULTYMACHINE
     set PRECOVERYTIME = #{precoverytime,jdbcType=CHAR},
       FENDTIME = #{fendtime,jdbcType=CHAR},
       STATUS = #{status,jdbcType=CHAR}
@@ -29,13 +35,13 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select MACHINENO, FSTARTTIME, PRECOVERYTIME, FENDTIME, STATUS
-    from WISDOM.FAULTYMACHINE
+    from FAULTYMACHINE
     where MACHINENO = #{machineno,jdbcType=CHAR}
       and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select MACHINENO, FSTARTTIME, PRECOVERYTIME, FENDTIME, STATUS
-    from WISDOM.FAULTYMACHINE
+    from FAULTYMACHINE
   </select>
    <select id="selectFault" resultType="java.util.Map">
     select m.MachineNo as "machineno",
@@ -45,5 +51,11 @@
     FEndTime as "fendtime",
     Status as "status"
 	from Machine m,FaultyMachine f where m.MachineNo=f.MachineNo
+		<if test="machineno!=null and machineno!=''">
+		   and machineno = #{machineno}
+		</if>
+		<if test="machinename!=null and machinename!=''">
+		   and machinename = #{machinename}
+		</if>
   </select>
  </mapper>

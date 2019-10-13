@@ -88,6 +88,31 @@ $(function() {
 		});
 
 	});
+	// 点击保存按钮
+	$('#btncomSearch').bind('click', function() {
+		// 做表单字段验证，当所有字段都有效的时候返回true。该方法使用validatebox(验证框)插件。
+		var isValid = $('#completeForm').form('validate');
+		if (isValid == false) {
+			return;
+		}
+		var formData = $('#completeForm').serializeJSON();
+		$.ajax({
+			url : "savecomplete",
+			data : formData,
+			dataType : 'json',
+			type : 'post',
+			success : function(rtn) {
+				$.messager.alert("提示", rtn.msg, 'info', function() {
+					if (rtn.status == 200) {
+						// 刷新表格数据
+						$('#complete').datagrid('reload');
+					}
+				});
+			}
+		});
+
+	});	
+	
 	function insertData(data1) {
 		// 提交添加数据的表单
 		var formData = data1;

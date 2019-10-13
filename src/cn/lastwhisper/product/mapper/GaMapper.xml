@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.product.mapper.GaMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.product.pojo.Ga">
+    <id column="PARTNO" jdbcType="DECIMAL" property="partno" />
+    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="MACHINENO" jdbcType="CHAR" property="machineno" />
+    <result column="PROCTIME" jdbcType="DECIMAL" property="proctime" />
+    <result column="STARTTIME" jdbcType="CHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="CHAR" property="endtime" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="MPSNO" jdbcType="VARCHAR" property="mpsno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from GA
+    where PARTNO = #{partno,jdbcType=DECIMAL}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.lastwhisper.product.pojo.Ga">
+    insert into GA (PARTNO, PROCESSNO, MACHINENO, 
+      PROCTIME, STARTTIME, ENDTIME, 
+      STATUS, MPSNO)
+    values (#{partno,jdbcType=DECIMAL}, #{processno,jdbcType=CHAR}, #{machineno,jdbcType=CHAR}, 
+      #{proctime,jdbcType=DECIMAL}, #{starttime,jdbcType=CHAR}, #{endtime,jdbcType=CHAR}, 
+      #{status,jdbcType=CHAR}, #{mpsno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertggA" parameterType="cn.lastwhisper.product.pojo.Ga">
+    insert into GA (MACHINENO, 
+      PROCTIME)
+    values ( #{machineno,jdbcType=CHAR}, 
+      #{proctime})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.product.pojo.Ga">
+    update GA
+    set PROCTIME = #{proctime,jdbcType=DECIMAL},
+      STARTTIME = #{starttime,jdbcType=CHAR},
+      ENDTIME = #{endtime,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      MPSNO = #{mpsno,jdbcType=VARCHAR}
+    where PARTNO = #{partno,jdbcType=DECIMAL}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </update>
+  <update id="updateProctime" parameterType="cn.lastwhisper.product.pojo.Ga">
+    update GA
+    set PROCTIME = #{proctime,jdbcType=DECIMAL}
+    where MACHINENO = #{machineno,jdbcType=CHAR}
+  </update>
+  
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select PARTNO, PROCESSNO, MACHINENO, PROCTIME, STARTTIME, ENDTIME, STATUS, MPSNO
+    from GA
+    where PARTNO = #{partno,jdbcType=DECIMAL}
+      and PROCESSNO = #{processno,jdbcType=CHAR}
+      and MACHINENO = #{machineno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select PARTNO, PROCESSNO, MACHINENO, PROCTIME, STARTTIME, ENDTIME, STATUS, MPSNO
+    from GA
+  </select>
+</mapper>

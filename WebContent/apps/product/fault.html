@@ -21,27 +21,27 @@
 	var idField = '';
 	var title = '2设备故障';
 	var columns = [ [ {
-		field : 'machineno',
+		field : 'MACHINENO',
 		title : '设备编号',
 		width : 100
 	}, {
-		field : 'machinename',
-		title : '设备名称	',
+		field : 'MACHINENAME',
+		title : '设备名称',
 		width : 50
 	}, {
-		field : 'fstarttime',
+		field : 'FSTARTTIME',
 		title : '故障开始时间',
 		width : 100
 	}, {
-		field : 'precovertime',
+		field : 'PRECOVERYTIME',
 		title : '故障预计修复工时',
 		width : 50,
 	}, {
-		field : 'fendtime',
+		field : 'FENDTIME',
 		title : '故障实际修复时间',
-		width : 100
+		width : 50
 	}, {
-		field : 'status',
+		field : 'STATUS',
 		title : '设备状态',
 		width : 100
 	}] ];
@@ -52,7 +52,7 @@
 <!--搜索区  -->
 	<div data-options="region:'north',title:'查询工序-工位-设备信息'"
 		style="padding: 4px; background-color: #eee; height: 70px">
-		<form id="faultForm">
+		<form id="searchForm">
 			<table>
 				<tr>
 					<td>设备编号 ：</td>
@@ -64,9 +64,9 @@
 					<input name="machinename" class="easyui-textbox" editable="false" />
 					</td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'" id="btnfaultSearch">查询</a></td>
+						data-options="iconCls:'icon-search'" id="btnSearch">查询</a></td>
 					<td><a class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove'" id="btnfaultReset">重置</a></td>
+						data-options="iconCls:'icon-remove'" id="btnReset">重置</a></td>
 				</tr>
 				</table>
 		</form>
@@ -74,7 +74,7 @@
 	<!-- 数据表格区 -->
 	<div data-options="region:'center',collapsible:true,split:true"
 		style="width: 600px;">
-		<table id="fault"></table>
+		<table id="grid"></table>
 		
 	</div>
 	<div id="editDlg" class="easyui-window" data-options="closed:true">
@@ -90,7 +90,7 @@
 				</tr>
 				<tr>
 					<td>预计修复工时</td>
-					<td><input type="password" name="user_pwd"></td>
+					<td><input  name="precovertime"></td>
 				</tr>
 				<tr>
 			</table>

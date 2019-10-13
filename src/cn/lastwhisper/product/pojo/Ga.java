@@ -2,22 +2,30 @@ package cn.lastwhisper.product.pojo;
 
 import java.math.BigDecimal;
 
-public class Gaparallel {
+public class Ga {
+    private BigDecimal partno;
+
     private String processno;
 
     private String machineno;
 
-    private String mpsno;
-
-    private BigDecimal partno;
-
-    private BigDecimal proctime;
+    private int proctime;
 
     private String starttime;
 
     private String endtime;
 
     private String status;
+
+    private String mpsno;
+
+    public BigDecimal getPartno() {
+        return partno;
+    }
+
+    public void setPartno(BigDecimal partno) {
+        this.partno = partno;
+    }
 
     public String getProcessno() {
         return processno;
@@ -35,27 +43,11 @@ public class Gaparallel {
         this.machineno = machineno;
     }
 
-    public String getMpsno() {
-        return mpsno;
-    }
-
-    public void setMpsno(String mpsno) {
-        this.mpsno = mpsno;
-    }
-
-    public BigDecimal getPartno() {
-        return partno;
-    }
-
-    public void setPartno(BigDecimal partno) {
-        this.partno = partno;
-    }
-
-    public BigDecimal getProctime() {
+    public int getProctime() {
         return proctime;
     }
 
-    public void setProctime(BigDecimal proctime) {
+    public void setProctime(int proctime) {
         this.proctime = proctime;
     }
 
@@ -81,5 +73,13 @@ public class Gaparallel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getMpsno() {
+        return mpsno;
+    }
+
+    public void setMpsno(String mpsno) {
+        this.mpsno = mpsno;
     }
 }
