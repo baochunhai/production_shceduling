@@ -93,6 +93,6 @@ public class ProductController {
 	public EasyUIDataGridResult loadProductlistByPage(Mps mps,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
-		return gASelectedMPSNoService.findSchedulinglistByPage(mps, page, rows);
+		return gASelectedMPSNoService.loadProductlistByPage(mps, page, rows);
 	}
 }
