@@ -182,7 +182,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				}else {
 					gaschedule.setPartno(partno);
 				}
-				if(!"铝蒙皮".equals(mps.get(i).getType())) {
+				if("铝蒙皮".equals(mps.get(i).getType())) {
 				
 					gascheduleMapper.insertMpsQt(mpsno,21);
 					//补足M1之前工序的数据，因为MATLAB程序中，processno是从1开始以1为差连续递增的
@@ -190,7 +190,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 					gaschedule.setProcessno("22");
 					gascheduleMapper.updateProtime(gaschedule);
 				}
-				if(!"碳蒙皮".equals(mps.get(i).getType())) {
+				if("碳蒙皮".equals(mps.get(i).getType())) {
 					gascheduleMapper.insertMpsQt(mpsno,18);
 					//补足M1之前工序的数据，因为MATLAB程序中，processno是从1开始以1为差连续递增的
 					gascheduleMapper.insertMps(mpsno,19);
