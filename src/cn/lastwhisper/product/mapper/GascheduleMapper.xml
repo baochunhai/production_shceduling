@@ -58,16 +58,16 @@
 	   insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
 	     (select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
 	    where cast(processno as integer) &lt; ${pno}
-	    	and trim(mpsno)=#{mpsno})
+	    	and trim(mpsno)=rtrim(#{mpsno}))
   </insert>
   <update id="updateByMpsnoo" parameterType="cn.lastwhisper.product.pojo.Gaschedule" >
-   update GASchedule set partno=#{partno} where trim(mpsno)=#{mpsno}
+   update GASchedule set partno=#{partno} where trim(mpsno)=rtrim(#{mpsno})
   </update>
 <update id="updateByMpsno" >
     update GASchedule set starttime=starttime + #{maxendtime}, endtime=endtime + #{maxendtime}
   </update>
   <update id="updateProtime" parameterType="cn.lastwhisper.product.pojo.Gaschedule"  >
-    update GASchedule set proctime=0 where cast(processno as integer) &lt; cast(#{processno} as integer) and trim(mpsno)=#{mpsno}
+    update GASchedule set proctime=0 where cast(processno as integer) &lt; cast(#{processno} as integer) and trim(mpsno)=rtrim(#{mpsno})
   </update>
   
   <select id="selectPartno" parameterType="map" resultType="java.lang.String">
@@ -78,7 +78,7 @@
 	insert into GASchedule(mpsno,processno,machineno,proctime,starttime,endtime,status) 
 		(select mpsno,processno,machineno,proctime,starttime,endtime,status from GA 
 	where cast(processno as integer) &lt; #{end} and cast(processno as integer) &gt; #{start}  
-	    	and trim(mpsno)=#{mpsno})
+	    	and trim(mpsno)=rtrim(#{mpsno}))
   </insert>
   <!--蜂窝芯  -->
   <insert id="insertMpsHeart" parameterType="java.lang.String">
@@ -86,7 +86,7 @@
   (select mpsno,processno,machineno,proctime,starttime,endtime,status 
   from GA 
   where cast(processno as integer) &lt; 16 and cast(processno as integer) &gt; 10
-	    	and trim(mpsno)=#{mpsno})
+	    	and trim(mpsno)=rtrim(#{mpsno}))
   </insert>
   
 </mapper>
