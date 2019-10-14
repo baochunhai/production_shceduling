@@ -18,6 +18,8 @@ public interface ProcessService {
 	public GlobalResult deleteProcess(String mpsno,String processno);
 	
 	public List<Mps> selectMps();
+	public List<Mps> processCompleteMps();
+	public List<Process> getProcessNo(String mpsno);
 	
 	public EasyUIDataGridResult findProcessdelaylistByPage(String delaytime, Integer page, Integer rows);
 	

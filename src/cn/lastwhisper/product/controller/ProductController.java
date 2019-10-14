@@ -109,4 +109,10 @@ public class ProductController {
 			String precoverytime) {
 		return equipmentintegrityService.addEquipComplete(mpsno,processno,precoverytime);
 	}
+	
+	@RequestMapping(value = "/getProcessno", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Process> getProcessno(@RequestParam String mpsno) {
+		return processService.getProcessNo(mpsno) ;
+	}
 }

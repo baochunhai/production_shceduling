@@ -107,13 +107,19 @@ $(function() {
 			},
 			onClickRow:function(){
 				var selected = $('#grid').datagrid('getSelected');
+				console.info(selected)
 				$('#mpsno').val($.trim(selected.mpsno));
+				console.info($('#mpsno').val())
 				$('#type').val($.trim(selected.type));
+				console.info($('#type').val())
 			},
 			 onCheck:function(){
 				 var selected = $('#grid').datagrid('getSelected');
+				 	console.info(selected)
 					$('#mpsno').val($.trim(selected.mpsno));
+					console.info($('#mpsno').val())
 					$('#type').val($.trim(selected.type));
+					console.info($('#type').val())
 			 }
 		});
 		
@@ -240,7 +246,7 @@ $(function() {
 		
 		var icon = $(this).find('.icon').attr('class');
 		var selected = $('#grid').datagrid('getSelected');
-		var url = "apps/dataanalyze/manue_plane.html?mpsno="+$.trim($("#mpsno").val())+"&type="+$('#type').val();
+		var url = "apps/dataanalyze/manue_plane.html?mpsno="+$.trim($("#mpsno").val())/*+"&type="+decodeURIComponent($("#type").val())*/;
 		if($.trim($("#mpsno").val())==""||$("#mpsno").val()==null){
 			$.messager.alert("Warning","请选择要计算的工件");
 			return;

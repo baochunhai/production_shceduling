@@ -78,12 +78,16 @@
 			<table>
 				<tr>
 					<td>生产计划号：</td>
-					<td><input name="mpsno" class="easyui-textbox"
-						editable="false"
-						id="mpsno"  /></td>
+					<td><select id="mpsno" class="easyui-combobox" name="mpsno" style="width:200px;">
+						
+					</select></td>
 					<td>工序编号：</td>
-					<td><input name="processno" class="easyui-textbox"
-						editable="false" id="processno"  /></td>
+					<td>
+					<select id="processno" class="easyui-combobox" name="processno" style="width:200px;">
+						<option>请选择</option>
+					</select>
+					<!--  <input name="processno" class="easyui-textbox"
+						editable="false" id="processno"  /> --> </td>
 					<td>修复时间：</td>
 					<td>
 						<input name="precoverytime" class="easyui-textbox"

@@ -1,5 +1,8 @@
 package cn.lastwhisper.dataAyalyes.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,11 @@ public class ManueResourceConfigController {
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows, HttpServletRequest req) {
 
+//		try {
+//			mps.setType(URLDecoder.decode(mps.getType(),"UTF-8"));
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
 		String header = req.getHeader("Referer");
 		String string = header.substring(header.indexOf("=") + 1);
 		mps.setMpsno(string);

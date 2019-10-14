@@ -6,6 +6,75 @@ var method = "";
 var listParam = "";
 var saveParam = "";
 $(function() {
+	//如果是process,查询mpsno
+	
+		$.ajax({
+			url : "../proPlane/processCompleteMps",
+			data : "",
+			dataType : 'json',
+			type : 'post',
+			success : function(rtn) {
+				// 成功的话，我们要关闭窗口
+				var data = [];
+				data.push({"text":"请选择","value":""});
+				$.each(rtn, function (i, item) {
+					//alert(item.mpsno)
+					data.push({"text":$.trim(item.mpsno),"value":$.trim(item.mpsno)});
+				});
+				
+				$("#mpsno").combobox('loadData',data)
+			}
+		});
+		
+		$("#mpsno").combobox({
+			
+			onChange:function(mpsno){
+				$.ajax({
+					url : "getProcessno",
+					data : {"mpsno":mpsno},
+					dataType : 'json',
+					type : 'post',
+					success : function(rtn) {
+						// 成功的话，我们要关闭窗口
+						var data = [];
+						data.push({"text":"请选择","value":""});
+						$.each(rtn, function (i, item) {
+							//alert(item.mpsno)
+							data.push({"text":$.trim(item.sequenceno),"value":$.trim(item.sequenceno)});
+						});
+						
+						$("#processno").combobox('loadData',data)
+					}
+				});
+			}
+		})
+		
+		/*$("#processno").combobox({
+	        onSelect: function () {
+	        	if($("mpsno").val()==undefined||$("mpsno").val()=="请选择"){
+					$.messager.alert("提示", "请选择生产计划号", 'info', function() {})
+				}
+				$.ajax({
+					url : "getProcessno",
+					data : {"processno":$("mpsno").val()},
+					dataType : 'json',
+					type : 'post',
+					success : function(rtn) {
+						// 成功的话，我们要关闭窗口
+						var data = [];
+						data.push({"text":"请选择","value":""});
+						$.each(rtn, function (i, item) {
+							//alert(item.mpsno)
+							data.push({"text":$.trim(item.mpsno),"value":$.trim(item.mpsno)});
+						});
+						
+						$("#processno").combobox('loadData',data)
+					}
+				});
+	        }
+	    })*/
+		
+	
 	// 加载表格数据
 	$('#complete').datagrid({
 		url : 'completelistByPage',
@@ -69,6 +138,10 @@ $(function() {
 		if (isValid == false) {
 			return;
 		}
+		
+		
+		
+		
 		var formData = $('#editForm').serializeJSON();
 		$.ajax({
 			url : name + method + saveParam,

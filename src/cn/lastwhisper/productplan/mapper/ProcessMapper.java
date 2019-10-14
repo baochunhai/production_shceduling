@@ -19,6 +19,8 @@ public interface ProcessMapper {
     public List<Process> selectProcesslistByPage(Process record);
     public List<Process> selectProcessdelaylistByPage(@Param("delaytime") String delaytime);//生产设备延期
    List<Mps> selectMps();
+   List<Mps> processCompleteMps();
+   List<Process> getProcessNo(@Param("mpsno") String mpsno);
    
    public List<Process> selectPredictlistByPage(Mps record);
    public List<Process> selectManuePlanelistByPage(Mps record);

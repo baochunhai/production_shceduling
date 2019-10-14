@@ -76,4 +76,15 @@ public class ProcessServiceImpl implements ProcessService{
 		result.setRows(pageInfo.getList());
 		return result;
 	}
+
+	@Override
+	public List<Mps> processCompleteMps() {
+		List<Mps> selectMps = processMapper.processCompleteMps();
+		return selectMps;
+	}
+	@Override
+	public List<Process> getProcessNo(String mpsno) {
+		List<Process> selectMps = processMapper.getProcessNo(mpsno);
+		return selectMps;
+	}
 }

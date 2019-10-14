@@ -13,12 +13,12 @@
     <result column="STATUS" jdbcType="CHAR" property="status" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from WISDOM.PROCESS
+    delete from PROCESS
     where MPSNO = #{mpsno,jdbcType=CHAR}
       and PROCESSNO = #{processno,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Process">
-    insert into WISDOM.PROCESS (MPSNO, PROCESSNO, SEQUENCENO, 
+    insert into PROCESS (MPSNO, PROCESSNO, SEQUENCENO, 
       MACHINENO, SCHEDULEDSTARTTIME, SCHEDULEDENDTIME, 
       ACTUALSTARTTIME, ACTUALENDTIME, STATUS
       )
@@ -28,7 +28,7 @@
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Process">
-    update WISDOM.PROCESS
+    update PROCESS
     set SEQUENCENO = #{sequenceno,jdbcType=CHAR},
       MACHINENO = #{machineno,jdbcType=CHAR},
       SCHEDULEDSTARTTIME = #{scheduledstarttime,jdbcType=CHAR},
@@ -42,14 +42,20 @@
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select MPSNO, PROCESSNO, SEQUENCENO, MACHINENO, SCHEDULEDSTARTTIME, SCHEDULEDENDTIME, 
     ACTUALSTARTTIME, ACTUALENDTIME, STATUS
-    from WISDOM.PROCESS
+    from PROCESS
     where MPSNO = #{mpsno,jdbcType=CHAR}
       and PROCESSNO = #{processno,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select MPSNO, PROCESSNO, SEQUENCENO, MACHINENO, SCHEDULEDSTARTTIME, SCHEDULEDENDTIME, 
     ACTUALSTARTTIME, ACTUALENDTIME, STATUS
-    from WISDOM.PROCESS
+    from PROCESS
+  </select>
+  <select id="processCompleteMps" resultMap="BaseResultMap">
+    select MPSNo from MPS where Status = '在加工' or Status = '待加工'
+  </select>
+  <select id="getProcessNo" resultMap="BaseResultMap">
+    select SequenceNo from process where trim(mpsno)=#{mpsno}
   </select>
    <select id="selectProcesslistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
 	select MPSNo as "mpsno",SequenceNo as "sequenceno",Process.ProcessNo as "processno",ProcessName as "processname" from Process,carbonknowledge  

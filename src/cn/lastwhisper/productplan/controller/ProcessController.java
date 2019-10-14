@@ -70,5 +70,9 @@ public class ProcessController {
 	public List<Mps> processAllMps() {
 		return processService.selectMps();
 	}
-	
+	@RequestMapping(value = "/processCompleteMps", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Mps> processCompleteMps() {
+		return processService.processCompleteMps();
+	}
 }
