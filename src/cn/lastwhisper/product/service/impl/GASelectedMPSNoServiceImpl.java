@@ -190,7 +190,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				if(i==mps.size()-1&&"铝蒙皮".equals(mps.get(i).getType())) {
 					flag=Calc();
 					if(!"Great".equals(flag))
-						return new GlobalResult(200, "排产失败,调用热管准备遗传算法出错", null);
+						//return new GlobalResult(200, "排产失败,调用热管准备遗传算法出错", null);
 					saveParallel();//获取SaveParallelDao实例
 				}
 			}
@@ -231,7 +231,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 			}
 			flag=Calc();
 			if(!"Great".equals(flag))
-				return new GlobalResult(200, "排产失败,调用其他工序遗传算法出错", null);
+				//return new GlobalResult(200, "排产失败,调用其他工序遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			return new GlobalResult(200, "排产成功", null);
 		}catch(Exception e){
