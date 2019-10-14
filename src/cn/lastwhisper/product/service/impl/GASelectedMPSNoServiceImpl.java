@@ -187,11 +187,15 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 					mpsno = mps.get(i).getMpsno();
 					calculate(gaschedule, 1, 18, 22, mpsno);
 				}
+				if(i==mps.size()-1&&"铝蒙皮".equals(mps.get(i).getType())) {
+					flag=Calc();
+					if(!"Great".equals(flag))
+						return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
+					saveParallel();//获取SaveParallelDao实例
+				}
 			}
-			flag=Calc();
-			if(!"Great".equals(flag))
-				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
-			saveParallel();//获取SaveParallelDao实例
+			
+			
 			//6.其他工序
 			deleteData();
 			for (int i = 0; i < mps.size(); i++) {
