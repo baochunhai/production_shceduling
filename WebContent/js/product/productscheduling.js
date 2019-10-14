@@ -6,6 +6,7 @@ var method = "";
 var listParam = "";
 var saveParam = "";
 $(function() {
+	loadProduct();
 	// 加载表格数据
 	$('#product').datagrid({
 		url : name + 'listByPage' + listParam,
