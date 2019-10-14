@@ -33,7 +33,7 @@
   <!--查询待排产工件  -->
    <select id="selectSchedulinglistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
 	select MPS.mpsno as "mpsno",
-	(select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as "type",
+	type as "type",
 	taskno as "taskno",
 	processfileno as "processfileno",
 	manunumber as "manunumber",

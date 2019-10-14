@@ -19,7 +19,7 @@ public interface GascheduleMapper {
     int updateByMpsnoo(Gaschedule record);
     int updateByMpsno(@Param("maxendtime")Double record);
     int deleteAll();
-    Object selectPartno();
+    String selectPartno();
     int deleteZero();
     
     int insertMpsPanel(@Param("mpsno")String mpsno,@Param("start")int start,@Param("end")int end);

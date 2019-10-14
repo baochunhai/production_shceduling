@@ -61,9 +61,9 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
-    STATUS, (select codename from ldcode where codetype='knowledge' and code=rtrim(TYPE)) as type , URGENT
+    STATUS, type as type , URGENT
     from MPS
-    where MPSNO = #{mpsno,jdbcType=CHAR}
+    where rtrim(MPSNO) =rtrim( #{mpsno,jdbcType=CHAR})
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 

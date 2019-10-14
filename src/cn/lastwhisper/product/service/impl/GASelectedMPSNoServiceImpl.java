@@ -129,10 +129,10 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				int partno=1;
 				gaschedule.setMpsno(mpsno);
 				//获取partno的最大值
-				Object count = gascheduleMapper.selectPartno();
+				String count = gascheduleMapper.selectPartno();
 				
 				if(count!=null) {
-					partno = (int) count + 1;
+					partno = Integer.parseInt(count) + 1;
 					gaschedule.setPartno(partno);
 				}else {
 					gaschedule.setPartno(partno);
@@ -147,7 +147,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mpsMapper.updateByPrimaryKey(mps1);
 			}
 			flag=Calc();
-			if("Great".equals(flag))
+			if(!"Great".equals(flag))
 				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//2.面板准备
@@ -157,7 +157,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				calculate(gaschedule, 1, 5, 11, mpsno);
 			}
 			flag=Calc();
-			if("Great".equals(flag))
+			if(!"Great".equals(flag))
 				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//3.蜂窝芯准备
@@ -167,7 +167,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				calculate(gaschedule, 1, 10, 16, mpsno);
 			}
 			flag=Calc();
-			if("Great".equals(flag))
+			if(!"Great".equals(flag))
 				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//4.工装准备
@@ -177,7 +177,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				calculate(gaschedule, 1, 15, 19, mpsno);
 			}
 			flag=Calc();
-			if("Great".equals(flag))
+			if(!"Great".equals(flag))
 				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//5.热管准备--铝蒙皮才有这个工序
@@ -189,7 +189,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				}
 			}
 			flag=Calc();
-			if("Great".equals(flag))
+			if(!"Great".equals(flag))
 				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			//6.其他工序
@@ -198,9 +198,10 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mpsno = mps.get(i).getMpsno();
 				int partno = 0;
 				//查询
-				Object count = gascheduleMapper.selectPartno();
+				String count = gascheduleMapper.selectPartno();
+				
 				if(count!=null) {
-					partno = (int)count+1;
+					partno = Integer.parseInt(count) + 1;
 					gaschedule.setPartno(partno);
 				}else {
 					gaschedule.setPartno(partno);
@@ -225,7 +226,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				
 			}
 			flag=Calc();
-			if("Great".equals(flag))
+			if(!"Great".equals(flag))
 				return new GlobalResult(200, "排产失败,调用遗传算法出错", null);
 			saveParallel();//获取SaveParallelDao实例
 			return new GlobalResult(200, "排产成功", null);
@@ -278,9 +279,10 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 		gaschedule.setMpsno(mpsno);
 		
 		//查询
-		Object count = gascheduleMapper.selectPartno();
+		String count = gascheduleMapper.selectPartno();
+		
 		if(count!=null) {
-			partno = (int)count+1;
+			partno = Integer.parseInt(count) + 1;
 			gaschedule.setPartno(partno);
 		}else {
 			gaschedule.setPartno(partno);
