@@ -6,6 +6,24 @@ var method = "";
 var listParam = "";
 var saveParam = "";
 $(function() {
+	$.ajax({
+		url : "machinenoAllMps",
+		data : "",
+		dataType : 'json',
+		type : 'post',
+		success : function(rtn) {
+			// 成功的话，我们要关闭窗口
+			var data = [];
+			data.push({"text":"请选择","value":""});
+			$.each(rtn, function (i, item) {
+				//alert(item.mpsno)
+				data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
+			});
+			
+			$("#machineno").combobox('loadData',data)
+		}
+	});
+	
 	// 加载表格数据
 	$('#grid').datagrid({
 		url : name + 'listByPage',
