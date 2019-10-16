@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,12 @@ public class InsertSheetController {
 	public EasyUIDataGridResult insertlistByPage(Mps mps,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
+		if(StringUtils.isNotEmpty(mps.getStartdate())) {
+			mps.setStartdate(mps.getStartdate().replaceAll("-", ""));
+		}
+		if(StringUtils.isNotEmpty(mps.getEnddate())) {
+			mps.setEnddate(mps.getEnddate().replaceAll("-", ""));
+		}
 		return mpsService.selectInsertShowlistByPage(mps, page, rows);
 	}
 }

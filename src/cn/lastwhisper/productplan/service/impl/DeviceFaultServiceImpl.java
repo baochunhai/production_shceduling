@@ -31,4 +31,9 @@ public class DeviceFaultServiceImpl implements DeviceFaultService{
 		return result;
 	}
 
+	@Override
+	public List<Machine> findMachine() {
+		return machineMapper.selectAll();
+	}
+
 }

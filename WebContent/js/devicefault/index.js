@@ -16,8 +16,8 @@ $(function() {
 			var data = [];
 			data.push({"text":"请选择","value":""});
 			$.each(rtn, function (i, item) {
-				//alert(item.mpsno)
-				data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
+				//alert(item.MACHINENO)
+				data.push({"text":$.trim(item.machineno),"value":$.trim(item.machineno)});
 			});
 			
 			$("#machineno").combobox('loadData',data)

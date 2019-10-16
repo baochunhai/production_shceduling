@@ -2,6 +2,7 @@ package cn.lastwhisper.productplan.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,4 +47,10 @@ public class DeviceFaultController {
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
 		return deviceFaultService.findMachinelistByPage(machine, page, rows);
 	}
+	@RequestMapping(value = "/machinenoAllMps", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Machine> machinenoAllMps() {
+		return deviceFaultService.findMachine();
+	}
+	
 }

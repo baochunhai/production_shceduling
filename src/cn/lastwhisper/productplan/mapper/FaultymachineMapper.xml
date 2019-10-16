@@ -10,8 +10,8 @@
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from FAULTYMACHINE
-    where MACHINENO = #{machineno,jdbcType=CHAR}
-      and FSTARTTIME = #{fstarttime,jdbcType=CHAR}
+    where trim(MACHINENO) = trim(#{machineno,jdbcType=CHAR})
+      and trim(FSTARTTIME) = rtrim(#{fstarttime,jdbcType=CHAR})
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Faultymachine">
     insert into FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 

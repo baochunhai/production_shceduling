@@ -2,6 +2,7 @@ package cn.lastwhisper.productplan.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.lastwhisper.core.util.EasyUIDataGridResult;
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.productplan.pojo.Equipmentintegrity;
+import cn.lastwhisper.productplan.pojo.Mps;
 import cn.lastwhisper.productplan.service.EquipmentintegrityService;
+import cn.lastwhisper.productplan.service.ProcessService;
 
 @Controller
 @RequestMapping("/apps/disturb")
@@ -26,6 +29,8 @@ public class EquipmentintegrityController {
 
 	@Autowired
 	private EquipmentintegrityService equipmentintegrityService;
+	@Autowired
+	private ProcessService processService;
 	
 	
 	 @InitBinder
@@ -44,7 +49,11 @@ public class EquipmentintegrityController {
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
 		return equipmentintegrityService.findEquiplistByPage(equipmentintegrity, page, rows);
 	}
-	
+	@RequestMapping(value = "/processAllMps", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Mps> processAllMps() {
+		return processService.selectMps();
+	}
 	/**
 	 * 
 	 * @Title: 

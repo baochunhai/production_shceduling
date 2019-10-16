@@ -16,8 +16,10 @@ import cn.lastwhisper.modular.pojo.User;
 import cn.lastwhisper.product.mapper.GaMapper;
 import cn.lastwhisper.product.pojo.Ga;
 import cn.lastwhisper.productplan.mapper.EquipmentintegrityMapper;
+import cn.lastwhisper.productplan.mapper.FaultymachineMapper;
 import cn.lastwhisper.productplan.pojo.Equipmentintegrity;
 import cn.lastwhisper.productplan.pojo.Faultymachine;
+import cn.lastwhisper.productplan.pojo.Machine;
 import cn.lastwhisper.productplan.service.EquipmentintegrityService;
 
 @Service
@@ -27,6 +29,9 @@ public class EquipmentintegrityServiceImpl implements EquipmentintegrityService 
 	private EquipmentintegrityMapper equipMapper;
 	@Autowired
 	private GaMapper gaMppper;
+	@Autowired
+	private FaultymachineMapper faultymachine;
+	
 	@Override
 	public EasyUIDataGridResult findEquiplistByPage(Equipmentintegrity equipmentintegrity, Integer page, Integer rows) {
 		// TODO Auto-generated method stub
@@ -84,6 +89,18 @@ public class EquipmentintegrityServiceImpl implements EquipmentintegrityService 
 			e.getMessage();
 			e.printStackTrace();
 			return new GlobalResult(200, "故障设备添加失败", null);
+		}
+	}
+
+	@Override
+	public GlobalResult deleteEquipt(String machineno,String fstarttime) {
+		// TODO Auto-generated method stub
+		
+		int deleteByPrimaryKey = faultymachine.deleteByPrimaryKey(machineno,fstarttime);
+		if(deleteByPrimaryKey==0) {
+			return new GlobalResult(200, "删除失败", null);
+		}else {
+			return new GlobalResult(200, "删除成功", null);
 		}
 	}
 

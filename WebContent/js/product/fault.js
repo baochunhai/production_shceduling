@@ -6,6 +6,23 @@ var method = "";
 var listParam = "";
 var saveParam = "";
 $(function() {
+	$.ajax({
+		url : "../devicefault/machinenoAllMps",
+		data : "",
+		dataType : 'json',
+		type : 'post',
+		success : function(rtn) {
+			// 成功的话，我们要关闭窗口
+			var data = [];
+			data.push({"text":"请选择","value":""});
+			$.each(rtn, function (i, item) {
+				//alert(item.MACHINENO)
+				data.push({"text":$.trim(item.machineno),"value":$.trim(item.machineno)});
+			});
+			
+			$("#machineno").combobox('loadData',data)
+		}
+	});
 	// 加载表格数据
 	$('#grid').datagrid({
 		url : 'faultlistByPage',
@@ -39,7 +56,7 @@ $(function() {
 		pageSize : 50,// 在设置分页属性的时候初始化页面大小。
 		pageList : [ 10, 20, 30, 40, 50 ],//在设置分页属性的时候 初始化页面大小选择列表。
 		toolbar : [ {
-			text : '设备故障修复',
+			text : '添加故障设备',
 			iconCls : 'icon-add',
 			handler : function() {
 				/*var rows = $('#fault').datagrid('getSelections');
@@ -58,6 +75,14 @@ $(function() {
 					
 				}*/
 				edit();
+			}
+		},{
+			text:'删除故障设备',
+			iconCls : 'icon-cut',
+			handler : function() {
+				// 获取被选中行的数据
+				var selected = $('#grid').datagrid('getSelected');
+				del(selected);
 			}
 		}],
 		onDblClickRow : function() {
@@ -173,7 +198,6 @@ $(function() {
 function del(selected) {
 	$.messager.confirm("确认", "确认要删除吗？", function(yes) {
 		if (yes) {
-			alert(selected)
 			$.ajax({
 				url : name + 'delete',
 				data : selected,

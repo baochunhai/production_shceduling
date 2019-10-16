@@ -74,7 +74,12 @@ public class ProductController {
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
 		return gASelectedMPSNoService.findSchedulinglistByPage(mps, page, rows);
 	}
-	
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public GlobalResult delete(String machineno,String fstarttime) {
+		
+		return equipmentintegrityService.deleteEquipt(machineno,fstarttime);
+	}
 	@RequestMapping(value="/calculate")
 	@ResponseBody
 	public GlobalResult calculate(@RequestBody List<Mps> list) {

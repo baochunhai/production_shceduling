@@ -76,10 +76,10 @@
     STATUS,  type as type, URGENT
     from MPS where 1=1
 		<if test="startdate!=null and startdate!=''">
-		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}
+		   and trim(startdate) = #{startdate}
 		</if>
 		<if test="enddate!=null and enddate!=''">
-		   and	to_char(enddate,'yyyy-mm-dd') = #{enddate}
+		   and	trim(enddate) = #{enddate}
 		</if>
 		<if test="urgent!=null and urgent!=''">
 		   and	urgent like   concat(concat('%',#{urgent}),'%')
@@ -91,10 +91,10 @@
     STATUS, type as type, URGENT
     from MPS where 1=1 and mpsno not in(select mpsno from GASelectedMPSNo)
 		<if test="startdate!=null and startdate!=''">
-		   and to_char(startdate,'yyyy-mm-dd') = #{startdate}
+		   and trim(startdate) = #{startdate}
 		</if>
 		<if test="enddate!=null and enddate!=''">
-		   and	to_char(enddate,'yyyy-mm-dd') = #{enddate}
+		   and	trim(enddate) = #{enddate}
 		</if>
 		<if test="urgent!=null and urgent!=''">
 		   and	urgent like   concat(concat('%',#{urgent}),'%')
@@ -107,7 +107,12 @@
     STATUS as "status", type as "type", URGENT as "urgent"
     from MPS where 1=1 
 		   and	rtrim(urgent) ='Yes'
-		
+		<if test="startdate!=null and startdate!=''">
+		   and trim(startdate) = #{startdate}
+		</if>
+		<if test="enddate!=null and enddate!=''">
+		   and	trim(enddate) = #{enddate}
+		</if>
 	</select>
 	<!--埋件准备时候的更新  -->
 	<update id="updateStatusByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Mps">

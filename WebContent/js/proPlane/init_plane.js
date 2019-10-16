@@ -7,7 +7,7 @@ var listParam = "";
 var saveParam = "";
 $(function() {
 	//如果是process,查询mpsno
-	if(name=="process"||name=="sensordata"){
+	if(name=="process"||name=="sensordata"||name=="completeness"){
 		$.ajax({
 			url : "processAllMps",
 			data : "",
