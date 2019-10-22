@@ -25,33 +25,27 @@
 	var height = 300;
 	var width = 300;
 	var columns = [ [ {
-		field : 'MACHINENO',
+		field : 'machineno',
 		title : '设备编号',
 		width : 100
 	}, {
-		field : 'MACHINENAME',
+		field : 'machinename',
 		title : '设备名称',
 		width : 50
 	}, {
-		field : 'FSTARTTIME',
+		field : 'fstarttime',
 		title : '故障开始时间',
-		width : 100,
-		formatter : function(value) {
-			 return new Date(value).Format("yyyy-MM-dd"); 
-		}
+		width : 100
 	}, {
-		field : 'PRECOVERYTIME',
+		field : 'precoverytime',
 		title : '故障预计修复工时',
 		width : 50,
 	}, {
-		field : 'FENDTIME',
+		field : 'fendtime',
 		title : '故障实际修复时间',
-		width : 50,
-		formatter : function(value) {
-			 return new Date(value).Format("yyyy-MM-dd"); 
-		}
+		width : 50
 	}, {
-		field : 'STATUS',
+		field : 'status',
 		title : '设备状态',
 		width : 100
 	}] ];
