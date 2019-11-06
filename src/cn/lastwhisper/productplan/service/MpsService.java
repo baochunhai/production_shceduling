@@ -7,6 +7,7 @@ import cn.lastwhisper.productplan.pojo.Mps;
 public interface MpsService {
 
 	public EasyUIDataGridResult findPlanelistByPage(Mps mps, Integer page, Integer rows);
+	public EasyUIDataGridResult findPlanelistByPageSolved(Mps mps, Integer page, Integer rows);
 	
 	public GlobalResult addPlane(Mps mps);
 	

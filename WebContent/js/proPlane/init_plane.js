@@ -19,7 +19,11 @@ $(function() {
 				data.push({"text":"请选择","value":""});
 				$.each(rtn, function (i, item) {
 					//alert(item.mpsno)
-					data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
+					if(i==0)
+						data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO),"selected":"selected"});
+					else{
+						data.push({"text":$.trim(item.MPSNO),"value":$.trim(item.MPSNO)});
+					}
 				});
 				
 				$("#mpsno").combobox('loadData',data)
@@ -33,15 +37,15 @@ $(function() {
 		idField : idField,//指明哪一个字段是标识字段。
 		title : title,
 		columns : columns,
-		frozenColumns : [ [ {
+		/*frozenColumns : [ [ {
 			field : 'ck',
-			checkbox : true
-		}/*, {
+			checkbox : false
+		}, {
 			title : '',
 			field : idField,
 			sortable : true,
 			width:0
-		} */] ],
+		} ] ],*/
 		sortable : true,
 		fitColumns:true,
 		iconCls : 'icon-tip',

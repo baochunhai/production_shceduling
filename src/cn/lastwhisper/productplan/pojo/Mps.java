@@ -20,8 +20,18 @@ public class Mps {
     private String type;
 
     private String urgent;
+    
+    private String resolve;
 
-    public String getMpsno() {
+    public String getResolve() {
+		return resolve;
+	}
+
+	public void setResolve(String resolve) {
+		this.resolve = resolve;
+	}
+
+	public String getMpsno() {
         return mpsno;
     }
 

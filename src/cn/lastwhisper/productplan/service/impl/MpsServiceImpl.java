@@ -34,7 +34,20 @@ public class MpsServiceImpl implements MpsService{
 		result.setRows(pageInfo.getList());
 		return result;
 	}
-
+	/**
+	 * 工件排产选择的工件
+	 */
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	@Override
+	public EasyUIDataGridResult findPlanelistByPageSolved(Mps mps, Integer page, Integer rows) {
+		PageHelper.startPage(page, rows);
+		List<Mps> list = mpsMapper.selectPlanelistByPageSolved(mps);
+		PageInfo<Mps> pageInfo = new PageInfo<>(list);
+		EasyUIDataGridResult result = new EasyUIDataGridResult();
+		result.setTotal((int) pageInfo.getTotal());
+		result.setRows(pageInfo.getList());
+		return result;
+	}
 	@Override
 	public GlobalResult addPlane(Mps mps) {
 		return null;

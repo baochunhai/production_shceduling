@@ -79,6 +79,14 @@ public class SelectController {
 		return mpsService.findPlanelistByPage(mps, page, rows);
 	}
 	
+	//wisdom/proPlane/mps/planelistByPage
+		@RequestMapping(value = "/selectlistByPageSolved", method = RequestMethod.POST)
+		@ResponseBody
+		public EasyUIDataGridResult planelistByPageSolved(Mps mps,
+				@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+				@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
+			return mpsService.findPlanelistByPageSolved(mps, page, rows);
+		}
 	/**
 	 * 
 	 * @Title: 

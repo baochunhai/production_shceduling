@@ -72,9 +72,24 @@
   </select>
   
   <select id="selectPlanelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
-	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
-    STATUS,  type as type, URGENT
-    from MPS where 1=1
+	SELECT m.MPSNO, m.TASKNO, m.PROCESSFILENO, m.MANUNUMBER, m.STARTDATE, m.ENDDATE, m.DEPARTMENT, 
+    m.STATUS,  m.type as type, m.URGENT,(case when trim(e.status)='Unsolved' then e.status else 'Solved' end) as resolve
+    from MPS m left join equipmentintegrity e on m.mpsno=e.mpsno
+		<if test="startdate!=null and startdate!=''">
+		   and trim(startdate) = #{startdate}
+		</if>
+		<if test="enddate!=null and enddate!=''">
+		   and	trim(enddate) = #{enddate}
+		</if>
+		<if test="urgent!=null and urgent!=''">
+		   and	urgent like   concat(concat('%',#{urgent}),'%')
+		</if>
+		order by m.mpsno asc
+	</select>
+	<select id="selectPlanelistByPageSolved" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
+	SELECT m.MPSNO, m.TASKNO, m.PROCESSFILENO, m.MANUNUMBER, m.STARTDATE, m.ENDDATE, m.DEPARTMENT, 
+    m.STATUS,  m.type as type, m.URGENT
+    from MPS m where m.mpsno not in(select e.mpsno from equipmentintegrity e where rtrim(e.status)='Unsolved')
 		<if test="startdate!=null and startdate!=''">
 		   and trim(startdate) = #{startdate}
 		</if>
@@ -85,7 +100,6 @@
 		   and	urgent like   concat(concat('%',#{urgent}),'%')
 		</if>
 	</select>
-	
 	 <select id="selectInsertlistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultMap="BaseResultMap">
 	SELECT MPSNO, TASKNO, PROCESSFILENO, MANUNUMBER, STARTDATE, ENDDATE, DEPARTMENT, 
     STATUS, type as type, URGENT

@@ -62,10 +62,10 @@
 	where 1=1
 	<if test="mpsno!=null and mpsno!=''">
 		   and rtrim(MPSNO) = #{mpsno} 
-		   and rtrim(type) = (select case when rtrim(type)='碳蒙皮' then 'C0001' else 'A0001' end from mps where rtrim(MPSNO) = #{mpsno} )
 	</if>
 	and Process.ProcessNo=carbonknowledge.ProcessNo 
-	order by cast(sequenceno as integer)
+	 and rtrim(type) = (select case when rtrim(type)='碳蒙皮' then 'C0001' else 'A0001' end from mps where rtrim(MPSNO) =rtrim(Process.mpsno) )
+	order by mpsno,cast(sequenceno as integer)
 	</select>
 	 <select id="selectProcessdelaylistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
 	
@@ -118,7 +118,7 @@
 	</select>
 	
 	<select id="selectMps" resultType="java.util.Map">
-    select MPSNO from MPS order by MPSNO
+    select distinct MPSNO from MPS order by MPSNO
   </select>
   <!--显示工时预测相关内容  -->
   <select id="selectPredictlistByPage"

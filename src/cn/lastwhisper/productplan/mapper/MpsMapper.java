@@ -23,6 +23,7 @@ public interface MpsMapper {
 	 * @return
 	 */
 	public List<Mps> selectPlanelistByPage(Mps mps);
+	public List<Mps> selectPlanelistByPageSolved(Mps mps);
 	
 	public List<Mps> selectProductionlistByPage(Mps mps);
 	

@@ -103,6 +103,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateMenuById" parameterType="menu">
 		update menu
 		<trim prefix="set" suffixOverrides="," suffix="where menuid = #{menuid}">
+			<if test='menuid != null and menuid != "" '>
+				menuid = #{menuid},
+			</if>
 			<if test='menuname != null and menuname != ""'>
 				menuname = #{menuname},
 			</if>
