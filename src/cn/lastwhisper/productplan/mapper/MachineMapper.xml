@@ -49,5 +49,6 @@
 	<if test="machinename!=null and machinename!=''">
 		    and trim(MachineName)= #{machinename}
 	</if>
+	order by fstarttime
   </select>
 </mapper>

@@ -31,7 +31,10 @@
 	}, {
 		field : 'fstarttime',
 		title : '故障开始时间',
-		width : 100
+		width : 100,
+		formatter : function(value) {
+			 return new Date(value).Format("yyyy-MM-dd hh:mm:ss"); 
+		} 
 	}, {
 		field : 'precoverytime',
 		title : '故障预计修复工时',
@@ -50,7 +53,7 @@
 </head>
 <body class="easyui-layout">
 <!--搜索区  -->
-	<div data-options="region:'north',title:'查询工序-工位-设备信息'"
+	<!-- <div data-options="region:'north',title:'查询工序-工位-设备信息'"
 		style="padding: 4px; background-color: #eee; height: 70px">
 		<form id="searchForm">
 			<table>
@@ -58,7 +61,7 @@
 					<td>设备编号 ：</td>
 					<td>
 					<select id="machineno" class="easyui-combobox" name="machineno" style="width:200px;"></select>
-					<!-- <input name="machineno" class="easyui-textbox" editable="false" /> -->
+					<input name="machineno" class="easyui-textbox" editable="false" />
 					</td>
 				<td>设备名称 ：</td>
 					<td>
@@ -71,7 +74,7 @@
 				</tr>
 				</table>
 		</form>
-	</div>
+	</div> -->
 	<!-- 数据表格区 -->
 	<div data-options="region:'center',collapsible:true,split:true"
 		style="width: 600px;">
