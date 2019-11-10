@@ -49,7 +49,7 @@
   </select>
 
   <select id="selectSensordatalistByPage" parameterType="cn.lastwhisper.productplan.pojo.Newsensordata" resultMap="BaseResultMap">
-	select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, INTEGRITY, STATUS
+	select RECORDDATE, MPSNO, PROCESSNO, TASKNO, STARTTIME, ENDTIME, STATUS
     from NEWSENSORDATA where 1=1
 		<if test=" mpsno!=null and mpsno!=''">
 		   and mpsno like  concat(concat('%',#{mpsno}),'%')
