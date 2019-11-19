@@ -20,6 +20,8 @@ public interface GaparallelMapper {
     int deleteAll();
     
     int insertPall();
+    
+    int inserScheduling();
     //显示排产结果
     public List selectGASchedlelistByPage(Mps mps);
     

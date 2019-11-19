@@ -70,19 +70,21 @@
 	 <select id="selectProcessdelaylistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
 	
 	<if test="delaytime==null or delaytime==''">
-		   select NewSensorData.mpsno as "mpsno"
-		,taskno as "taskno"
-		,NewSensorData.processno as "processno"
-		, NewSensorData.endtime as "endtime"
-		, to_char(to_date('8:00:00','hh24:mi:ss')+GAParallel.endtime/24/60/60,'hh24:mi:ss') as  "planendtime"
-		,NewSensorData.status as "status"
-		 from NewSensorData
-		,GAParallel 
-		where NewSensorData.processno in (select max(cast(processno as int)) 
-		from NewSensorData group by mpsno) and NewSensorData.mpsno=GAParallel.mpsno 
-		and NewSensorData.processno=GAParallel.processno 
-		and GAParallel.starttime is not null 
-		order by NewSensorData.mpsno
+	select NewSensorData.mpsno as "mpsno"
+	,taskno as "taskno"
+	,NewSensorData.processno as "processno"
+	, NewSensorData.endtime as "endtime"
+	,
+	to_char(to_date('8:00:00','hh24:mi:ss')+GAParallel.endtime/24/60/60,'hh24:mi:ss')
+	as "planendtime"
+	,NewSensorData.status as "status"
+	from NewSensorData
+	,GAParallel
+	where NewSensorData.processno in (select max(cast(processno as int))
+	from NewSensorData group by mpsno) and NewSensorData.mpsno=GAParallel.mpsno
+	and NewSensorData.processno=GAParallel.processno
+	and GAParallel.starttime is not null
+	order by NewSensorData.mpsno
 	</if>
 	
 	<if test="delaytime!=null and delaytime!=''">

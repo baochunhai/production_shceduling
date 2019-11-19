@@ -193,6 +193,13 @@ function addTab(subtitle, url, icon) {
 	} else {
 		$('#tabs').tabs('select', subtitle);
 		$('#mm-tabupdate').click();
+        var tab = $('#tabs').tabs('getSelected');  // 获取选择的面板
+       	$('#tabs').tabs('update',{
+       		tab,
+      	     options : {
+      	          content : createFrame(url)
+      	     }
+       	});
 	}
 	tabClose();
 }

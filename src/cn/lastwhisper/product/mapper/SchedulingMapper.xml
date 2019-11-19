@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.product.mapper.SchedulingMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.product.pojo.Scheduling">
+    <result column="MPSNO" jdbcType="VARCHAR" property="mpsno" />
+    <result column="PROCESSNO" jdbcType="VARCHAR" property="processno" />
+    <result column="MACHINENO" jdbcType="VARCHAR" property="machineno" />
+    <result column="STARTTIME" jdbcType="VARCHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="VARCHAR" property="endtime" />
+    <result column="FIRSTFLAG" jdbcType="VARCHAR" property="firstflag" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.lastwhisper.product.pojo.Scheduling">
+    insert into SCHEDULING (MPSNO, PROCESSNO, MACHINENO, 
+      STARTTIME, ENDTIME, FIRSTFLAG
+      )
+    values (#{mpsno,jdbcType=VARCHAR}, #{processno,jdbcType=VARCHAR}, #{machineno,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, #{firstflag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select MPSNO, PROCESSNO, MACHINENO, STARTTIME, ENDTIME, FIRSTFLAG
+    from SCHEDULING
+  </select>
+  <select id="showScheduling" resultType="int">
+    select count(*)
+    from newsensordata
+  </select>
+</mapper>
