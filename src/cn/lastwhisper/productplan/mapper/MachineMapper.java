@@ -20,4 +20,6 @@ public interface MachineMapper {
      * @return
      */
     public List<Machine> selectMachinelistByPage(Machine machine);
+    
+    List queryPercentage();
 }

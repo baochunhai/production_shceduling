@@ -4,8 +4,8 @@ import java.util.List;
 
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
-import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.modular.pojo.Menu;
+import cn.lastwhisper.productplan.pojo.Carbonknowledge;
 
 public interface Menu2Service {
 

@@ -15,9 +15,9 @@
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Faultymachine">
     insert into FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 
-      FENDTIME, STATUS)
+      FENDTIME, STATUS,createdate)
     values (#{machineno,jdbcType=CHAR}, #{fstarttime,jdbcType=CHAR}, #{precoverytime,jdbcType=CHAR}, 
-      #{fendtime,jdbcType=CHAR}, #{status,jdbcType=CHAR})
+      #{fendtime,jdbcType=CHAR}, #{status,jdbcType=CHAR},sysdate)
   </insert>
   <insert id="insertFaultMachine" parameterType="cn.lastwhisper.productplan.pojo.Faultymachine">
     insert into FAULTYMACHINE (MACHINENO, FSTARTTIME, PRECOVERYTIME, 

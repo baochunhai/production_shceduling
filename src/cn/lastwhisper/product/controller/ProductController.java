@@ -100,7 +100,13 @@ public class ProductController {
 			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
 		return gASelectedMPSNoService.loadProductlistByPage(mps, page, rows);
 	}
-	
+	@RequestMapping(value = "/lastProductlistByPage", method = RequestMethod.POST)
+	@ResponseBody
+	public EasyUIDataGridResult lastProductlistByPage(Mps mps,
+			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+			@RequestParam(value = "rows", required = true, defaultValue = "10") Integer rows) {
+		return gASelectedMPSNoService.lastProductlistByPage(mps, page, rows);
+	}
 	/**
 	 * 排产后查询
 	 * @param mps

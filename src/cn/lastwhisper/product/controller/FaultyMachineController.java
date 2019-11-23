@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.lastwhisper.core.util.EasyUIDataGridResult;
 import cn.lastwhisper.core.util.GlobalResult;
-import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.product.pojo.Gaselectedmpsno;
 import cn.lastwhisper.product.service.FaultyMachineService;
 import cn.lastwhisper.product.service.GASelectedMPSNoService;

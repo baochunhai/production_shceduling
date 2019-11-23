@@ -20,40 +20,44 @@
 	var _value = '';
 	//用于crud.js的esayui初始参数
 	var name = "progressdelay";
-	var title = '生产进度延期情况';
+	var title = '生产进度延期列表';
 	var idField = '';
 	var height = 300;
 	var width = 300;
 	var columns = [ [ {
 		field : 'mpsno',
 		title : '生产计划号',
-		width : 100
+		width : 50
 	}, {
 		field : 'taskno',
 		title : '任务号',
 		width : 50
 	}, {
 		field : 'processno',
-		title : '最新完工工序编号',
-		width : 100
-	}, {
-		field : 'endtime',
-		title : '最新工序完工时间',
-		width : 50,
-	}, {
-		field : 'planendtime',
-		title : '该工序的计划完工时间',
+		title : '工序编号',
 		width : 50
 	}, {
-		field : 'status',
-		title : '完工状态',
+		field : 'processname',
+		title : '工序名称',
+		width : 50
+	}, {
+		field : 'endtime',
+		title : '实际完工时间',
+		width : 100,
+	}, {
+		field : 'planendtime',
+		title : '计划完工时间',
 		width : 100
+	}, {
+		field : 'status',
+		title : '延期时间',
+		width : 50
 	}] ];
 </script>
 </head>
 <body class="easyui-layout">
 	<!--搜索区  -->
-	<div data-options="region:'north',title:'工件最新工序完成时间'"
+	<div data-options="region:'north',title:'车间生产进度延期'"
 		style="padding: 4px; background-color: #eee; height: 80px">
 		<form id="searchForm">
 			<table cellpadding="5">

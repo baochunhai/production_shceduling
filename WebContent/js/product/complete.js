@@ -107,12 +107,56 @@ $(function() {
 		pageNumber : 1,// 在设置分页属性的时候初始化页码。
 		pageSize : 50,// 在设置分页属性的时候初始化页面大小。
 		pageList : [ 10, 20, 30, 40, 50 ],//在设置分页属性的时候 初始化页面大小选择列表。
-		toolbar : $('#completeSerch'),
+		//toolbar : $('#completeSerch'),
+		toolbar :[ {
+			text : '插入工件',
+			iconCls : 'icon-add',
+			handler : function() {
+				var rows = $('#complete').datagrid('getSelections');
+				if(rows.length<1){
+					$.messager.alert("提示", "请选中要插入的工件", 'info', function() {
+					});
+				}else{
+					var items=[];
+			        for(i=0;i<rows.length;i++){  //遍历数组
+			        	var item = new Object();
+			        	item.mpsno=rows[i].MPSNO;
+			        	item.cdate=new Date();
+			        	items.push(item);
+			        }
+					insertData(items);
+				}
+			}
+		}],
 		onDblClickRow : function() {
 			edit();
 		},
 	});
-
+function insertData(data1) {
+	// 提交添加数据的表单
+	var formData = data1;
+	$.ajax({
+		type : 'POST',
+		url : 'insertGA',
+		data : JSON.stringify(data1),
+		dataType : 'json',
+		contentType : 'application/json; charset=UTF-8',
+		success : function(data) {
+			console.info(data);
+			$.messager.alert("提示", data.msg, 'info', function() {
+				if (data.status == 200) {
+					// 刷新表格数据
+					$('#complete').datagrid('reload');
+					// 刷新树形菜单
+					// 关闭对话框
+					//$('#completeDlg').dialog('close');
+					// 清除表单数据
+					//$('#completeForm').form('clear');
+				}
+			});
+		}
+	});
+}
 	var h = 300;
 	var w = 400;
 	if (typeof (height) != "undefined") {
@@ -199,7 +243,7 @@ $(function() {
 				$.messager.alert("提示", data.msg, 'info', function() {
 					if (data.status == 200) {
 						// 刷新表格数据
-						$('#insert').datagrid('reload');
+						$('#complete').datagrid('reload');
 						// 刷新树形菜单
 					}
 				});

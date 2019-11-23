@@ -49,6 +49,11 @@
 	<if test="machinename!=null and machinename!=''">
 		    and trim(MachineName)= #{machinename}
 	</if>
-	order by fstarttime
+	order by fstarttime desc
+  </select>
+  
+   <select id="queryPercentage" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select MACHINENO as "machineno", ID, MACHINENAME as "machinename", COEFFICIENCY
+    from MACHINE
   </select>
 </mapper>

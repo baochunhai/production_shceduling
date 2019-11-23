@@ -232,8 +232,14 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 			if (!"Great".equals(flag))
 				// return new GlobalResult(200, "排产失败,调用其他工序遗传算法出错", null);
 				saveParallel();// 获取SaveParallelDao实例
-			//将排产数据存入排产表
-			gAParallelMapper.inserScheduling();
+			//查询排查计划表是否有数据
+			int i = gAParallelMapper.queryScheduling(mpsno);
+			
+			if(i==0) {//将排产数据存入排产表
+				gAParallelMapper.inserScheduling();
+			}else {//更新排产计划表
+				gAParallelMapper.updateScheduling();
+			}
 			
 			return new GlobalResult(200, "排产成功", null);
 		} catch (Exception e) {
@@ -321,7 +327,16 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 		result.setRows(pageInfo.getList());
 		return result;
 	}
-
+	@Override
+	public EasyUIDataGridResult lastProductlistByPage(Mps mps, Integer page, Integer rows) {
+		PageHelper.startPage(page, rows);
+		List list = gAParallelMapper.selectGASchedlelistByPage(mps);
+		PageInfo pageInfo = new PageInfo<>(list);
+		EasyUIDataGridResult result = new EasyUIDataGridResult();
+		result.setTotal((int) pageInfo.getTotal());
+		result.setRows(pageInfo.getList());
+		return result;
+	}
 	@Override
 	public GlobalResult insertFault(String machineno, String precovertime) {
 		try {
@@ -335,8 +350,9 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 			faultymachine.setPrecoverytime(precovertime);
 			faultymachine.setStatus("Faulty");
 			Date date = new Date(); // 获取当前的系统时间。
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss"); // 使用了默认的格式创建了一个日期格式化对象。
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 使用了默认的格式创建了一个日期格式化对象。
 			String time = dateFormat.format(date); // 可以把日期转换转指定格式的字符串
+			System.out.println(time);
 			faultymachine.setFstarttime(time);
 			faultymachine.setFendtime("");
 

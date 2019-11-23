@@ -46,7 +46,7 @@ public class UserController {
 	 * @param user_pwd
 	 * @return
 	 */
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
+	@RequestMapping(value = "user/login", method = RequestMethod.POST)
 	@ResponseBody
 	public GlobalResult login(String user_code, String user_pwd) {
 			// 1.创建令牌

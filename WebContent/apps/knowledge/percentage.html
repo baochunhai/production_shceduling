@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设备工时及故障率</title>
+<link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
+<script type="text/javascript" src="../../ui/jquery.min.js"></script>
+<script type="text/javascript" src="../../ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../../ui/date.js"></script>
+<script type="text/javascript" src="../../js/knowledge/percentage.js"></script>
+<script type="text/javascript" src="../../js/search.js"></script>
+<script type="text/javascript" src="../../js/download.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+	//用于search.js自动补全
+	var _url = '/';
+	var _value = '';
+	//用于crud.js的esayui初始参数
+	var name = "percentage";
+	var title = '设备工时及故障率列表';
+	var idField = '';
+	var height = 300;
+	var width = 300;
+	var columns = [ [ {
+		field : 'machineno',
+		title : '设备编号',
+		width : 100
+	}, {
+		field : 'machinename',
+		title : '设备名称',
+		width : 50
+	}, {
+		field : 'taskno',
+		title : '设备调整工时',
+		width : 50
+	}, {
+		field : 'manunumber',
+		title : '设备故障率',
+		width : 50,
+	}] ];
+</script>
+</head>
+<body class="easyui-layout">
+<!-- 数据表格区 -->
+	<div data-options="region:'center',collapsible:true,split:true"
+		style="width: 600px;">
+		<table id="grid"></table>
+	</div>
+	
+</body>
+</html>

@@ -22,7 +22,11 @@ public interface GaparallelMapper {
     int insertPall();
     
     int inserScheduling();
+    int queryScheduling(String mpsno);
+    int updateScheduling();
     //显示排产结果
     public List selectGASchedlelistByPage(Mps mps);
+    //显示上次排产结果
+    public List selectGASchedlastlistByPage(Mps mps);
     
 }

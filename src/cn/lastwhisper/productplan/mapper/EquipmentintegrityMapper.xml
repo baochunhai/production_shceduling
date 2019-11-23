@@ -56,6 +56,8 @@
 		<if test="processno!=null and processno!=''">
 		   and	rtrim(p.processno) like  concat(concat('%',#{processno}),'%')
 		</if>
+		and rtrim(e.status)='Unsolved'
+		and rtrim(e.mpsno) not in (select trim(mpsno) from GASELECTEDMPSNO)
 	</select>
   
 </mapper>

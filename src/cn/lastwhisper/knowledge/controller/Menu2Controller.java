@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
 import cn.lastwhisper.core.util.UserUtils;
-import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.knowledge.service.Menu2Service;
 import cn.lastwhisper.modular.pojo.Menu;
 import cn.lastwhisper.modular.pojo.User;
+import cn.lastwhisper.productplan.pojo.Carbonknowledge;
 
 /**   
  * @ClassName:  MenuController   

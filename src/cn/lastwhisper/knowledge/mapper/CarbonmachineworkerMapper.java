@@ -10,4 +10,6 @@ public interface CarbonmachineworkerMapper {
     int insert(Carbonmachineworker record);
 
     List<Carbonmachineworker> selectAll();
+    
+   
 }

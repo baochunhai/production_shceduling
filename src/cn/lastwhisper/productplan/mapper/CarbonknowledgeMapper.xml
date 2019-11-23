@@ -3,22 +3,24 @@
 <mapper namespace="cn.lastwhisper.productplan.mapper.CarbonknowledgeMapper">
   <resultMap id="BaseResultMap" type="cn.lastwhisper.productplan.pojo.Carbonknowledge">
     <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
+    <id column="TYPE" jdbcType="VARCHAR" property="type" />
     <result column="PROCESSNAME" jdbcType="CHAR" property="processname" />
     <result column="PROCESSTYPE" jdbcType="CHAR" property="processtype" />
     <result column="STATIONNAME" jdbcType="CHAR" property="stationname" />
+    <result column="KNOWLEDGE" jdbcType="CLOB" property="knowledge" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from WISDOM.CARBONKNOWLEDGE
+    delete from CARBONKNOWLEDGE
     where PROCESSNO = #{processno,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="cn.lastwhisper.productplan.pojo.Carbonknowledge">
-    insert into WISDOM.CARBONKNOWLEDGE (PROCESSNO, PROCESSNAME, PROCESSTYPE, 
+    insert into CARBONKNOWLEDGE (PROCESSNO, PROCESSNAME, PROCESSTYPE, 
       STATIONNAME)
     values (#{processno,jdbcType=CHAR}, #{processname,jdbcType=CHAR}, #{processtype,jdbcType=CHAR}, 
       #{stationname,jdbcType=CHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Carbonknowledge">
-    update WISDOM.CARBONKNOWLEDGE
+    update CARBONKNOWLEDGE
     set PROCESSNAME = #{processname,jdbcType=CHAR},
       PROCESSTYPE = #{processtype,jdbcType=CHAR},
       STATIONNAME = #{stationname,jdbcType=CHAR}
@@ -26,11 +28,82 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select PROCESSNO, PROCESSNAME, PROCESSTYPE, STATIONNAME
-    from WISDOM.CARBONKNOWLEDGE
+    from CARBONKNOWLEDGE
     where PROCESSNO = #{processno,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select PROCESSNO, PROCESSNAME, PROCESSTYPE, STATIONNAME
-    from WISDOM.CARBONKNOWLEDGE
+    from CARBONKNOWLEDGE
   </select>
+  <select id="selectCave" resultMap="BaseResultMap">
+    select PROCESSNO as "processno", PROCESSNAME as "processname", PROCESSTYPE as "processtype", STATIONNAME
+    from CARBONKNOWLEDGE where type='C0001'
+  </select>
+  <select id="selectAave" resultMap="BaseResultMap">
+    select PROCESSNO as "processno", PROCESSNAME as "processname", PROCESSTYPE as "processtype", STATIONNAME
+    from CARBONKNOWLEDGE where type='A0001'
+  </select>
+  <select id="selectKnowledge" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select c.knowledge from CarbonKnowledge c where 1=1
+		<if test='type != null and type != ""'>
+			and c.type = #{type}
+		</if>
+		<if test='processno != null and processno != ""'>
+			and rtrim(c.processno) = #{processno}
+		</if>
+	</select>
+<!-- 插入数据 -->
+	<insert id="insertKnowledge" parameterType="menu">
+		insert into CarbonKnowledge 
+		(processno,processname,processtype,stationname,type)
+		 values(
+		<if test='processno != null and processno != ""'>
+			#{processno}
+		</if>
+		<if test='processname != null or processname != ""'>
+			,#{processname}
+		</if>
+		<if test='processtype != null and processtype != ""'>
+			,#{processtype}
+		</if>
+		<if test='stationname != null or stationname != ""'>
+			,#{stationname}
+		</if>
+		<if test='type != null and type != "" '>
+			,#{type}
+		</if>
+		)
+	</insert>
+		<insert id="insertWorker" parameterType="cn.lastwhisper.productplan.pojo.Carbonknowledge">
+		insert into CarbonMachineWorker values(
+		<if test='processno != null and processno != ""'>
+			#{processno}
+		</if>
+		<if test='machineno == null or machineno == ""'>
+			#{machineno}
+		</if>
+		<if test='type != null and type != ""'>
+			,#{type}
+		</if>
+		)
+	</insert>
+<!-- 	根据id删除数据-->
+	<update id="deleteMenuById">
+		delete from menu2 where menuid = #{0}
+	</update>
+<!-- 	根据id修改数据 -->
+	<update id="updateMenuById" parameterType="cn.lastwhisper.productplan.pojo.Carbonknowledge">
+	update Carbonknowledge 
+		<trim prefix="set" suffixOverrides="," suffix="where processno = #{processno} and type=#{type} ">
+			<if test='processname != null and processname != ""'>
+			processname=#{processname}, 
+			</if>
+			<if test='processtype != null and processtype != "" '>
+			processtype=#{processtype}, 
+			</if>
+			<if test='stationname != null and stationname != "" '>
+			stationname=#{stationname} 
+			</if>
+		</trim>
+	</update>
 </mapper>

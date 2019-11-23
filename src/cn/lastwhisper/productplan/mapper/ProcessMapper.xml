@@ -73,6 +73,8 @@
 	select NewSensorData.mpsno as "mpsno"
 	,taskno as "taskno"
 	,NewSensorData.processno as "processno"
+	,(select processname from carbonknowledge c where rtrim(c.processno)=rtrim(NewSensorData.processno) and 
+	c.type='A0001') as "processname"
 	, NewSensorData.endtime as "endtime"
 	,
 	to_char(to_date('8:00:00','hh24:mi:ss')+GAParallel.endtime/24/60/60,'hh24:mi:ss')
@@ -91,6 +93,8 @@
 		   select NewSensorData.mpsno,
        taskno,
        NewSensorData.processno,
+       (select processname from carbonknowledge c where rtrim(c.processno)=rtrim(NewSensorData.processno) and 
+	c.type='A0001') as "processname",
        NewSensorData.endtime,
        to_char(to_date('8:00:00', 'hh24:mi:ss') +
                GAParallel.endtime / 24 / 60 / 60,

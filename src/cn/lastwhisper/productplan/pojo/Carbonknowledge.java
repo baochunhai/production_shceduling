@@ -5,7 +5,12 @@ import java.io.Serializable;
 import oracle.sql.CLOB;
 
 public class Carbonknowledge implements Serializable{
-    private String processno;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String processno;
 
     private String processname;
 
@@ -13,13 +18,24 @@ public class Carbonknowledge implements Serializable{
 
     private String stationname;
     
-    private CLOB knowledge;
+    private String knowledge;
+    
+    private String type;
+    
 
-    public CLOB getKnowledge() {
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getKnowledge() {
 		return knowledge;
 	}
 
-	public void setKnowledge(CLOB knowledge) {
+	public void setKnowledge(String knowledge) {
 		this.knowledge = knowledge;
 	}
 

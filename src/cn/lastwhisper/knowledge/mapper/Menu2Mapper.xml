@@ -9,14 +9,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result column="menuname" property="text" javaType="java.lang.String" />
         <collection column="{menuid=menuid,type=type}" property="children" select="selectChild"/>
     </resultMap>
- <resultMap id="BaseResultMap" type="cn.lastwhisper.knowledge.pojo.Carbonknowledge">
-    <id column="PROCESSNO" jdbcType="CHAR" property="processno" />
-    <id column="TYPE" jdbcType="VARCHAR" property="type" />
-    <result column="PROCESSNAME" jdbcType="CHAR" property="processname" />
-    <result column="PROCESSTYPE" jdbcType="CHAR" property="processtype" />
-    <result column="STATIONNAME" jdbcType="CHAR" property="stationname" />
-    <result column="KNOWLEDGE" jdbcType="CLOB" property="knowledge" />
-  </resultMap>
 <!-- 查找一级菜单 -->
 	<!-- 先查询菜单根级目录 -->
 	<!-- 这里的返回结果必须为resultMap，并且值为上面构建的resultMap的id的值 -->
@@ -84,70 +76,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		
 	</select>
-	
-	<select id="selectKnowledge" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select c.knowledge from CarbonKnowledge c where 1=1
-		<if test='type != null and type != ""'>
-			and c.type = #{type}
-		</if>
-		<if test='processno != null and processno != ""'>
-			and rtrim(c.processno) = #{processno}
-		</if>
-	</select>
-<!-- 插入数据 -->
-	<insert id="insertKnowledge" parameterType="menu">
-		insert into CarbonKnowledge 
-		(processno,processname,processtype,stationname,type)
-		 values(
-		<if test='processno != null and processno != ""'>
-			#{processno}
-		</if>
-		<if test='processname != null or processname != ""'>
-			,#{processname}
-		</if>
-		<if test='processtype != null and processtype != ""'>
-			,#{processtype}
-		</if>
-		<if test='stationname != null or stationname != ""'>
-			,#{stationname}
-		</if>
-		<if test='type != null and type != "" '>
-			,#{type}
-		</if>
-		)
-	</insert>
-		<insert id="insertWorker" parameterType="cn.lastwhisper.knowledge.pojo.Carbonknowledge">
-		insert into CarbonMachineWorker values(
-		<if test='processno != null and processno != ""'>
-			#{processno}
-		</if>
-		<if test='machineno == null or machineno == ""'>
-			#{machineno}
-		</if>
-		<if test='type != null and type != ""'>
-			,#{type}
-		</if>
-		)
-	</insert>
-<!-- 	根据id删除数据-->
-	<update id="deleteMenuById">
-		delete from menu2 where menuid = #{0}
-	</update>
-<!-- 	根据id修改数据 -->
-	<update id="updateMenuById" parameterType="cn.lastwhisper.knowledge.pojo.Carbonknowledge">
-	update Carbonknowledge 
-		<trim prefix="set" suffixOverrides="," suffix="where processno = #{processno} and type=#{type} ">
-			<if test='processname != null and processname != ""'>
-			processname=#{processname}, 
-			</if>
-			<if test='processtype != null and processtype != "" '>
-			processtype=#{processtype}, 
-			</if>
-			<if test='stationname != null and stationname != "" '>
-			stationname=#{stationname} 
-			</if>
-		</trim>
-	</update>
-	
 	
 </mapper>

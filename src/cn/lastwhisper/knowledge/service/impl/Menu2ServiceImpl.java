@@ -25,10 +25,11 @@ import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.core.util.Tree;
 import cn.lastwhisper.knowledge.mapper.CarbonmachineworkerMapper;
 import cn.lastwhisper.knowledge.mapper.Menu2Mapper;
-import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.knowledge.pojo.Carbonmachineworker;
 import cn.lastwhisper.knowledge.service.Menu2Service;
 import cn.lastwhisper.modular.pojo.Menu;
+import cn.lastwhisper.productplan.mapper.CarbonknowledgeMapper;
+import cn.lastwhisper.productplan.pojo.Carbonknowledge;
 
 /**
  * @ClassName: MenuServiceImpl
@@ -47,8 +48,8 @@ public class Menu2ServiceImpl implements Menu2Service {
 	
 	@Autowired
 	private CarbonmachineworkerMapper carbonmachineworkerMapper;
-
-	private Carbonmachineworker carbonMachineWorker;
+	@Autowired
+	private CarbonknowledgeMapper carbonknowledge;
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
@@ -66,13 +67,13 @@ public class Menu2ServiceImpl implements Menu2Service {
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	@Override
 	public List findClob(String menuid,String processno) {
-		return menu2Mapper.selectKnowledge(menuid,processno);
+		return carbonknowledge.selectKnowledge(menuid,processno);
 	}
 
 	@Override
 	public GlobalResult addMenu(Carbonknowledge menu,String machineno) {
 		// 设置默认添加的菜单的状态为使用中
-		Integer insertCount = menu2Mapper.insertKnowledge(menu);
+		Integer insertCount = carbonknowledge.insertKnowledge(menu);
 		
 		Carbonmachineworker record = new Carbonmachineworker();
 		record.setProcessno(menu.getProcessno());

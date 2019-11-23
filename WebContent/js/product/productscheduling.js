@@ -7,6 +7,7 @@ var listParam = "";
 var saveParam = "";
 $(function() {
 	loadProduct();
+	lastProduct();
 	// 加载表格数据
 	$('#product').datagrid({
 		url : name + 'listByPage' + listParam,
@@ -235,7 +236,56 @@ function loadProduct(){
 		},
 	});
 }
-
+function lastProduct(){
+	$('#lastcal').datagrid({
+		url : 'lastProductlistByPage',
+		idField : idField,//指明哪一个字段是标识字段。
+		title : "上次排产结果",
+		columns : [ [ {
+			field : 'mpsno',
+			title : '生产计划号',
+			width : 70
+		}, {
+			field : 'processno',
+			title : '工序编号',
+			width : 70
+		}, {
+			field : 'machineno',
+			title : '机器（人员）编号',
+			width : 70
+		}, {
+			field : 'starttime',
+			title : '工序开始时间',
+			width : 70
+		}, {
+			field : 'endtime',
+			title : '工序结束时间',
+			width : 70,
+		}] ],
+		/*frozenColumns : [ [ {
+			field : 'ck',
+			checkbox : true
+		}] ],*/
+		sortable : true,
+		fitColumns:true,
+		iconCls : 'icon-tip',
+		singleSelect : false,// 如果为true，则只允许选择一行。
+		pagination : true,// 如果为true，则在DataGrid控件底部显示分页工具栏。
+		striped : true,// 是否显示斑马线效果。
+		collapsible : true,	//定义是否显示可折叠按钮。
+		rownumbers : true,//如果为true，则显示一个行号列。
+		nowrap : true,//如果为true，则在同一行中显示数据。设置为true可以提高加载性能。
+		remoteSort : false,//定义从服务器对数据进行排序。
+		loading : true,//显示载入状态。
+		loadMsg : '数据加载中...',// 在从远程站点加载数据的时候显示提示消息。
+		pageNumber : 1,// 在设置分页属性的时候初始化页码。
+		pageSize : 10,// 在设置分页属性的时候初始化页面大小。
+		pageList : [ 10, 20, 30, 40, 50 ],//在设置分页属性的时候 初始化页面大小选择列表。
+		onDblClickRow : function() {
+			edit();
+		},
+	});
+}
 
 /**
  * 删除

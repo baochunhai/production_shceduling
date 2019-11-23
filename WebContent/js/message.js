@@ -1,8 +1,23 @@
 $(function() {
-
-	timerID = setInterval("longPolling()",60000);
-
+	init();
 });
+function init(){
+	$.ajax({
+		url : "showscheduling",
+		data : {
+			"count" : $("#hiddens").val()
+		},
+		type : 'post',
+		dataType : 'json',
+		success : function(rtn) {
+			if (rtn.msg == "success") { // 请求成功
+				$("#hiddens").val(rtn.data);
+				timerID = setInterval("longPolling()",60000);
+			}
+		}
+	});
+}
+
 function longPolling() {
 	$.ajax({
 		url : "showscheduling",

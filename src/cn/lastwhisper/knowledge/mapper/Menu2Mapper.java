@@ -13,8 +13,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.lastwhisper.core.util.Tree;
-import cn.lastwhisper.knowledge.pojo.Carbonknowledge;
 import cn.lastwhisper.modular.pojo.Menu;
+import cn.lastwhisper.productplan.pojo.Carbonknowledge;
 
 /**   
  * @ClassName:  MenuMapper   
@@ -42,16 +42,8 @@ public interface Menu2Mapper {
 	 */
 	List<Menu> selectMenuById(@Param("type") String type,@Param("processno") String processno);
 
-	List selectKnowledge(@Param("type") String type,@Param("processno") String processno);
-	/**
-	 * 
-	 * @Title: insertMenu   
-	 * @Description: 添加数据
-	 * @author: 鲍春海    
-	 * @param Menu
-	 * @return
-	 */
-	Integer insertKnowledge(Carbonknowledge Menu);
+	
+	
 
 	/**
 	 * 

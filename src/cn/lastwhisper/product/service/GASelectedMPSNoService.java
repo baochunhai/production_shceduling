@@ -20,4 +20,5 @@ public interface GASelectedMPSNoService {
 	public  GlobalResult calculate(List<Mps> mps);
 	
 	public EasyUIDataGridResult loadProductlistByPage(Mps mps, Integer page, Integer rows);
+	public EasyUIDataGridResult lastProductlistByPage(Mps mps, Integer page, Integer rows);
 }
