@@ -30,7 +30,25 @@ $(function() {
 			}
 		});
 		
+	}else{
+		
 	}
+	$.ajax({
+		url : "countMps",
+		data : "",
+		dataType : 'json',
+		type : 'post',
+		success : function(rtn) {
+			// 成功的话，我们要关闭窗口
+			if(rtn.status=200){
+				$.each(rtn.data, function (i, item) {
+					//console.info(item);
+					i++;
+					$("#td"+i).text(item);
+				});
+			}
+		}
+	});
 	// 加载表格数据
 	$('#grid').datagrid({
 		url : name + 'listByPage' + listParam,

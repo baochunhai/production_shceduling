@@ -12,13 +12,13 @@ import cn.lastwhisper.product.service.SchedulingService;
 @Controller
 public class UrlController {
 
-	@Autowired    
-	private SchedulingService schedulingService;
 	
-	@RequestMapping(value = "showscheduling", method = RequestMethod.POST)
-	@ResponseBody
-	public GlobalResult show(String count) {
-		
-		return schedulingService.show(Integer.parseInt(count));
-	}
+	 @Autowired private SchedulingService schedulingService;
+	  
+	  @RequestMapping(value = "showscheduling", method = RequestMethod.POST)
+	 
+	  @ResponseBody public GlobalResult show(String count) {
+	 
+	  return schedulingService.show(Integer.parseInt(count)); }
+	 
 }

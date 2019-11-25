@@ -14,6 +14,7 @@ public interface MpsService {
 	public GlobalResult updatePlane(Mps msp);
 	
 	public GlobalResult deletePlane(String mpsno);
+	public GlobalResult countMps();
 	
 	public EasyUIDataGridResult findInsertlistByPage(Mps mps, Integer page, Integer rows);
 	public EasyUIDataGridResult selectInsertShowlistByPage(Mps mps, Integer page, Integer rows);

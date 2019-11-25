@@ -1,6 +1,7 @@
 package cn.lastwhisper.productplan.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,6 +92,27 @@ public class MpsServiceImpl implements MpsService{
 		EasyUIDataGridResult result = new EasyUIDataGridResult();
 		result.setTotal((int) pageInfo.getTotal());
 		result.setRows(pageInfo.getList());
+		return result;
+	}
+	@Override
+	public GlobalResult countMps() {
+		GlobalResult result = new GlobalResult();
+		try {
+			List<Map<String, Integer>> countMps = mpsMapper.countMps();
+			if (countMps != null && countMps.size() > 0) {
+				result.setStatus(200);
+				result.setData(countMps);
+				result.setMsg("success");
+			} else {
+				result.setStatus(400);
+				result.setMsg("error");
+				result.setData(null);
+			}
+		} catch (Exception e) {
+			result.setStatus(400);
+			result.setData(e.getStackTrace());
+			result.setMsg("error");
+		}
 		return result;
 	}
 }

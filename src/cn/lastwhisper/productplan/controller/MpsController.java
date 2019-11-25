@@ -74,4 +74,10 @@ public class MpsController {
 		return mpsService.deletePlane(mps.getMpsno());
 	}
 	
+	@RequestMapping(value = "/countMps", method = RequestMethod.POST)
+	@ResponseBody
+	public GlobalResult countMps(Mps mps) {
+		return mpsService.countMps();
+	}
+	
 }

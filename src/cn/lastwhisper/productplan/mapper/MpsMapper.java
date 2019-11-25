@@ -2,6 +2,7 @@ package cn.lastwhisper.productplan.mapper;
 
 import cn.lastwhisper.productplan.pojo.Mps;
 import java.util.List;
+import java.util.Map;
 
 public interface MpsMapper {
     int deleteByPrimaryKey(String mpsno);
@@ -29,5 +30,6 @@ public interface MpsMapper {
 	
 	public List<Mps> selectInsertlistByPage(Mps mps);
 	public List<Mps> selectInsertShowlistByPage(Mps mps);
+	public List<Map<String,Integer>> countMps();
 	
 }

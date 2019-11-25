@@ -132,4 +132,35 @@
 	<update id="updateStatusByPrimaryKey" parameterType="cn.lastwhisper.productplan.pojo.Mps">
     update MPS set status='待加工' where mpsno=#{mpsno}
   </update>
+  <select id="countMps" resultType="int">
+  	select count(1) as td1 from mps
+  	
+  	union all
+  	select count(1) as td2 from mps where rtrim(status) in ('待加工','未排产','已排产') 
+  	union all
+  	select count(1) as td3 from mps where rtrim(status)='加工中'
+  	union all
+  	select count(1) as td4 from mps where rtrim(status)='已完成'
+  	
+  	union all
+  	select count(1) as td9 from mps where rtrim(type)='碳蒙皮'
+  	
+  	union all
+  	select count(1) as td11 from mps where rtrim(type)='碳蒙皮'  and rtrim(status) in ('待加工','未排产','已排产') 
+  	union all
+  	select count(1) as td12 from mps where rtrim(type)='碳蒙皮'  and rtrim(status)='加工中'
+  	union all
+  	select count(1) as td10 from mps where rtrim(type)='碳蒙皮'  and rtrim(status)='已完成'
+  	
+  	union all
+  	select count(1) as td5 from mps where rtrim(type)='铝蒙皮'
+  	
+  	union all
+  	select count(1) as td7 from mps where rtrim(type)='铝蒙皮'  and rtrim(status) in ('待加工','未排产','已排产') 
+  	union all
+  	select count(1) as td8 from mps where rtrim(type)='铝蒙皮'  and rtrim(status)='加工中'
+  	union all
+  	select count(1) as td6 from mps where rtrim(type)='铝蒙皮'  and rtrim(status)='已完成'
+  	
+  </select>
 </mapper>

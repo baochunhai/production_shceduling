@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>员工管理</title>
+<title>生产计划信息</title>
 <link rel="stylesheet" type="text/css" href="../../ui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../../ui/themes/icon.css">
 <script type="text/javascript" src="../../ui/jquery.min.js"></script>
@@ -64,7 +64,6 @@
 		field : 'resolve',
 		title : '是否齐套',
 		formatter : function(value) {
-			
 			if($.trim(value)=="Solved"){
 				return "齐套";
 			}else{
@@ -74,12 +73,49 @@
 		width : 100,
 	}] ];
 </script>
+
+<style>
+table#tt{
+border-collapse:collapse;
+align-content: center;
+}
+#tt tr td
+{border:1px solid grey;}
+#tt td
+ {width:100px}
+</style>
 </head>
 <body class="easyui-layout">
+	
 	<!--搜索区  -->
 	<div data-options="region:'north',title:'生产计划信息'"
-		style="padding: 4px; background-color: #eee; height: 80px">
-		<form id="searchForm">
+		style=" height: 170%">
+		<table id="tt" style="text-align: center;">
+		<tr>
+			<td colspan="2">当前生产计划统计</th>
+			<td colspan="6">当前生产计划执行情况</th>
+		</tr>
+		<tr>
+			<td>总生产计划数量 </td><td id="td1"></td>
+			<td>待投入生产计划</td><td id="td2"></td>
+			<td>在加工生产计划</td><td id="td3"></td>
+			<td>已完成产计划</td><td id="td4"></td>
+		</tr>
+		<tr>
+			<td>铝蒙皮工件生产计划数量 </td><td id="td5"></td>
+			<td>铝蒙皮工件</td><td id="td6"></td>
+			<td>铝蒙皮工件</td><td id="td7"></td>
+			<td>铝蒙皮工件</td><td id="td8"></td>
+			</tr>
+		<tr>
+			<td>碳蒙皮工件生产计划数量 </td><td id="td9"></td>
+			<td>碳蒙皮工件</td><td id="td10"></td>
+			<td>碳蒙皮工件</td><td id="td11"></td>
+			<td>碳蒙皮工件</td><td id="td12"></td>
+			</tr>
+		
+		</table>
+		<form id="searchForm" style="background-color: #eee;">
 			<table cellpadding="5">
 				<tr>
 					<td>计划开始日期 ：</td>
