@@ -22,8 +22,20 @@ public class Carbonknowledge implements Serializable{
     
     private String type;
     
+    private int avgtime;
+    
+    
+    
 
-    public String getType() {
+    public int getAvgtime() {
+		return avgtime;
+	}
+
+	public void setAvgtime(int avgtime) {
+		this.avgtime = avgtime;
+	}
+
+	public String getType() {
 		return type;
 	}
 

@@ -33,13 +33,16 @@
 		title : '设备名称',
 		width : 50
 	}, {
-		field : 'taskno',
+		field : 'adjusttime',
 		title : '设备调整工时',
 		width : 50
 	}, {
-		field : 'manunumber',
+		field : 'faultrate',
 		title : '设备故障率',
 		width : 50,
+		formatter : function(value) {
+			return value+"%"
+		},
 	}] ];
 </script>
 </head>
@@ -49,6 +52,25 @@
 		style="width: 600px;">
 		<table id="grid"></table>
 	</div>
-	
+	<!-- 添加、修改 -->
+	<div id="editDlg" class="easyui-window" data-options="closed:true">
+		<form id="editForm">
+			<table>
+			<tr>
+					<td>设备编号</td>
+					<td><input name="machineno"></td>
+				</tr>
+				<tr>
+					<td>设备调整工时</td>
+					<td><input name="adjusttime"></td>
+				</tr>
+				<tr>
+					<td>设备故障率</td>
+					<td><input name="faultrate"></td>
+				</tr>
+			</table>
+			<button id="btnSave" type="button">保存</button>
+		</form>
+	</div>
 </body>
 </html>

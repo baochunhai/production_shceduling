@@ -22,4 +22,6 @@ public interface MachineMapper {
     public List<Machine> selectMachinelistByPage(Machine machine);
     
     List queryPercentage();
+    
+    int percentageupdate(Machine machine);
 }

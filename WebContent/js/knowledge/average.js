@@ -53,42 +53,6 @@ $(function() {
 		});
 
 	});
-
-	// 判断是否有导入的功能
-	var importForm = document.getElementById('importForm');
-	if (importForm) {
-		$('#importDlg').dialog(
-				{
-					title : '导入数据',
-					width : 330,
-					height : 106,
-					modal : true,
-					closed : true,
-					buttons : [ {
-						text : '导入',
-						handler : function() {
-							$.ajax({
-								url : name + 'doImport',
-								data : new FormData($('#importForm')[0]),
-								type : 'post',
-								processData : false,
-								contentType : false,
-								dataType : 'json',
-								success : function(data) {
-									$.messager.alert('提示', data.msg,
-											'info', function() {
-												if (data.status==200) {
-													$('#importDlg').dialog('close');
-													$('#importForm').form('clear');
-													$('#product').datagrid('reload');
-												}
-											});
-								}
-							});
-						}
-					} ]
-				});
-	}
 	
 });
 
@@ -111,9 +75,14 @@ function loadProduct(){
 			title : '工序类型',
 			width : 70
 		}, {
-			field : 'avetime',
+			field : 'avgtime',
 			title : '工时历史均值',
 			width : 70
+		}, {
+			field : 'type',
+			title : '类型',
+			width : 0,
+			hidden:true
 		}] ],
 		
 		sortable : true,
@@ -146,7 +115,9 @@ function loadProduct(){
 			text : '修改',
 			iconCls : 'icon-edit',
 			handler : function() {
-				edit();
+				// 获取被选中行的数据
+				var selected = $('#gridc').datagrid('getSelected');
+				edit(selected);
 			}
 		}, '-', {
 			text : '删除',
@@ -158,7 +129,9 @@ function loadProduct(){
 			}
 		} ],
 		onDblClickRow : function() {
-			edit();
+			// 获取被选中行的数据
+			var selected = $('#gridc').datagrid('getSelected');
+			edit(selected);
 		},
 	});
 }
@@ -172,7 +145,7 @@ function lastProduct(){
 			title : '工序编号',
 			width : 70
 		}, {
-			field : 'processno',
+			field : 'processname',
 			title : '工序名称',
 			width : 70
 		}, {
@@ -180,15 +153,20 @@ function lastProduct(){
 			title : '工序类型',
 			width : 70
 		}, {
-			field : 'avetime',
+			field : 'avgtime',
 			title : '工时历史均值',
 			width : 70
+		}, {
+			field : 'type',
+			title : '类型',
+			width : 0,
+			hidden:true
 		}] ],
 		
 		sortable : true,
 		fitColumns:true,
 		iconCls : 'icon-tip',
-		singleSelect : false,// 如果为true，则只允许选择一行。
+		singleSelect : true,// 如果为true，则只允许选择一行。
 		pagination : true,// 如果为true，则在DataGrid控件底部显示分页工具栏。
 		striped : true,// 是否显示斑马线效果。
 		collapsible : true,	//定义是否显示可折叠按钮。
@@ -215,19 +193,21 @@ function lastProduct(){
 			text : '修改',
 			iconCls : 'icon-edit',
 			handler : function() {
-				edit();
+				var selected = $('#grida').datagrid('getSelected');
+				edit(selected);
 			}
 		}, '-', {
 			text : '删除',
 			iconCls : 'icon-cut',
 			handler : function() {
 				// 获取被选中行的数据
-				var selected = $('#gridc').datagrid('getSelected');
+				var selected = $('#grida').datagrid('getSelected');
 				del(selected);
 			}
 		} ],
 		onDblClickRow : function() {
-			edit();
+			var selected = $('#grida').datagrid('getSelected');
+			edit(selected);
 		},
 	});
 }
@@ -235,10 +215,10 @@ function lastProduct(){
 /**
  * 删除
  */
-function del(selected) {
+function dela(selected) {
 	$.messager.confirm("确认", "确认要删除吗？", function(yes) {
 		if (yes) {
-			alert(selected)
+			
 			$.ajax({
 				url : name + 'delete',
 				data : selected,
@@ -247,15 +227,38 @@ function del(selected) {
 				success : function(rtn) {
 					$.messager.alert("提示", rtn.msg, 'info', function() {
 						// 刷新表格数据
-						$('#product').datagrid('reload');
+						$('#grida').datagrid('reload');
 					});
 				}
 			});
 		}
 	});
 }
-
-function edit() {
+function delc(selected) {
+	$.messager.confirm("确认", "确认要删除吗？", function(yes) {
+		if (yes) {
+			$.ajax({
+				url : name + 'delete',
+				data : selected,
+				dataType : 'json',
+				type : 'post',
+				success : function(rtn) {
+					$.messager.alert("提示", rtn.msg, 'info', function() {
+						// 刷新表格数据
+						$('#gridc').datagrid('reload');
+					});
+				}
+			});
+		}
+	});
+}
+function edit(selected) {
+	
+	if(!selected){
+		alert("请选择要修改的数据")
+		return
+	}
+	
 	// 清空表单内容
 	$('#editForm').form('clear');
 	// 设置保存按钮提交的方法为update
@@ -263,7 +266,7 @@ function edit() {
 	// 弹出窗口
 	$('#editDlg').dialog('open');
 	// 获取被选中行的数据
-	var selected = $('#product').datagrid('getSelected');
+	//var selected = $('#product').datagrid('getSelected');
 	// 加载数据
 	$('#editForm').form('load', selected);
 }

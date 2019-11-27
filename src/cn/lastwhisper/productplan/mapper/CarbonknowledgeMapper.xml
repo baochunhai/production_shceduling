@@ -36,11 +36,13 @@
     from CARBONKNOWLEDGE
   </select>
   <select id="selectCave" resultMap="BaseResultMap">
-    select PROCESSNO as "processno", PROCESSNAME as "processname", PROCESSTYPE as "processtype", STATIONNAME
+    select PROCESSNO as "processno", PROCESSNAME as "processname", PROCESSTYPE as "processtype",
+     STATIONNAME,avgtime as "avgtime",type as "type"
     from CARBONKNOWLEDGE where type='C0001'
   </select>
   <select id="selectAave" resultMap="BaseResultMap">
-    select PROCESSNO as "processno", PROCESSNAME as "processname", PROCESSTYPE as "processtype", STATIONNAME
+    select PROCESSNO as "processno", PROCESSNAME as "processname", PROCESSTYPE as "processtype",
+     STATIONNAME,avgtime as "avgtime",type as "type"
     from CARBONKNOWLEDGE where type='A0001'
   </select>
   <select id="selectKnowledge" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -106,4 +108,10 @@
 			</if>
 		</trim>
 	</update>
+	<update id="update" parameterType="cn.lastwhisper.productplan.pojo.Carbonknowledge">
+	update Carbonknowledge set avgtime=#{avgtime}
+	where processno = #{processno} and type=#{type}
+	
+	</update>
+	
 </mapper>

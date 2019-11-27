@@ -10,8 +10,29 @@ public class Machine {
     private String machinename;
 
     private String coefficiency;
+    
+    private int adjusttime;
+    private int faultrate;
+    
+    
 
-    public String getMachineno() {
+    public int getAdjusttime() {
+		return adjusttime;
+	}
+
+	public void setAdjusttime(int adjusttime) {
+		this.adjusttime = adjusttime;
+	}
+
+	public int getFaultrate() {
+		return faultrate;
+	}
+
+	public void setFaultrate(int faultrate) {
+		this.faultrate = faultrate;
+	}
+
+	public String getMachineno() {
         return machineno;
     }
 

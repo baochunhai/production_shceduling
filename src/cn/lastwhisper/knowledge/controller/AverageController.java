@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.lastwhisper.core.util.GlobalResult;
 import cn.lastwhisper.knowledge.service.AvereageService;
 import cn.lastwhisper.productplan.pojo.Carbonknowledge;
 
@@ -27,5 +28,11 @@ public class AverageController {
 	@ResponseBody
 	public List aavelistByPage(Carbonknowledge type) {
 		return avereageService.cavelistByPage(type); 
+	}
+	
+	@RequestMapping(value="/update")
+	@ResponseBody
+	public GlobalResult update(Carbonknowledge type) {
+		return avereageService.update(type); 
 	}
 }

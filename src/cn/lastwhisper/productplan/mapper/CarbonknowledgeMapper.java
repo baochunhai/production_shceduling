@@ -29,4 +29,6 @@ public interface CarbonknowledgeMapper {
 	 * @return
 	 */
 	Integer insertKnowledge(Carbonknowledge Menu);
+	
+	int update(Carbonknowledge Menu);
 }
