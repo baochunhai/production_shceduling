@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastwhisper.knowledge.mapper.GeneticMapper">
+  <resultMap id="BaseResultMap" type="cn.lastwhisper.knowledge.pojo.Genetic">
+    <result column="GENENUMBER" jdbcType="VARCHAR" property="geneNumber" />
+    <result column="GENERATION" jdbcType="VARCHAR" property="generation" />
+    <result column="GENEGAP" jdbcType="VARCHAR" property="gap" />
+    <result column="GENECROSS" jdbcType="VARCHAR" property="cross" />
+    <result column="GENEABERRANCE" jdbcType="VARCHAR" property="aberrance" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.lastwhisper.knowledge.pojo.Genetic">
+    insert into GENETIC 
+    <!-- (GENE_NUMBER,GENERATION,GAP,CROSS,ABERRANCE) -->
+    values 
+    (#{geneNumber,jdbcType=VARCHAR}, 
+    #{generation,jdbcType=VARCHAR}, 
+    #{gap,jdbcType=VARCHAR}, 
+    #{cross,jdbcType=VARCHAR}, 
+    #{aberrance,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select GENENUMBER as "geneNumber", GENERATION as "generation", GENEGAP as "gap", GENECROSS as "cross",GENEABERRANCE as "aberrance" from genetic
+  </select>
+  <delete id="delete" parameterType="cn.lastwhisper.knowledge.pojo.Genetic">
+ 	delete from genetic
+  </delete>
+</mapper>
