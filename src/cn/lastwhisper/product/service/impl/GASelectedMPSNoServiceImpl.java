@@ -110,19 +110,18 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 //			gascheduleMapper.deleteAll();//删除gaschedule表所有数据
 //			gAParallelMapper.deleteAll();
 
-			// delete from GASchedule
-			gascheduleMapper.deleteAll();
-			// delete from GAParallel
-			gAParallelMapper.deleteAll();
-			// delete from GAMaxEndTime
-			gamaxendtimeMapper.deleteAll();
-
 			Gaschedule gaschedule = new Gaschedule();
 			Mps mps1 = new Mps();
 			String flag = "";
 			String mpsno = "";
 			List<Gaselectedmpsno> selectAll = gaselectedmpsnoMapper.selectAll();
 			for (int i = 0; i < mps.size(); i++) {
+				// delete from GASchedule
+				gascheduleMapper.deleteAll();
+				// delete from GAParallel
+				gAParallelMapper.deleteAll();
+				// delete from GAMaxEndTime
+				gamaxendtimeMapper.deleteAll();
 				// 1.埋件
 				mps1 = mps.get(i);
 				mpsno = mps.get(i).getMpsno();
@@ -130,7 +129,6 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				gaschedule.setMpsno(mpsno);
 				// 获取partno的最大值
 				String count = gascheduleMapper.selectPartno();
-
 				if (count != null) {
 					partno = Integer.parseInt(count) + 1;
 					gaschedule.setPartno(partno);
@@ -145,69 +143,61 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				mps1.setType("");
 				mps1.setStatus("待加工");
 				mpsMapper.updateByPrimaryKey(mps1);
-			}
-			flag = Calc();
-			if (!"Great".equals(flag))
-				return new GlobalResult(200, "排产失败,调用埋件遗传算法出错", null);
-			saveParallel();// 获取SaveParallelDao实例
-			// 2.面板准备
-			deleteData();
-			for (int i = 0; i < mps.size(); i++) {
-				mpsno = mps.get(i).getMpsno();
+
+				flag = Calc();
+				if (!"Great".equals(flag)) {
+					return new GlobalResult(200, "排产失败,调用埋件遗传算法出错", null);
+				}
+				saveParallel();// 获取SaveParallelDao实例
+				// 2.面板准备
+				deleteData();
 				calculate(gaschedule, 1, 5, 11, mpsno);
-			}
-			flag = Calc();
-			if (!"Great".equals(flag))
-				return new GlobalResult(200, "排产失败,调用面板准备遗传算法出错", null);
-			saveParallel();// 获取SaveParallelDao实例
-			// 3.蜂窝芯准备
-			deleteData();
-			for (int i = 0; i < mps.size(); i++) {
-				mpsno = mps.get(i).getMpsno();
+
+				flag = Calc();
+				if (!"Great".equals(flag)) {
+					return new GlobalResult(200, "排产失败,调用面板准备遗传算法出错", null);
+				}
+				saveParallel();// 获取SaveParallelDao实例
+				// 3.蜂窝芯准备
+				deleteData();
 				calculate(gaschedule, 1, 10, 16, mpsno);
-			}
-			flag = Calc();
-			if (!"Great".equals(flag))
-				return new GlobalResult(200, "排产失败,调用蜂窝芯准备遗传算法出错", null);
-			saveParallel();// 获取SaveParallelDao实例
-			// 4.工装准备
-			deleteData();
-			for (int i = 0; i < mps.size(); i++) {
-				mpsno = mps.get(i).getMpsno();
+				flag = Calc();
+				if (!"Great".equals(flag)) {
+					return new GlobalResult(200, "排产失败,调用蜂窝芯准备遗传算法出错", null);
+				}
+				saveParallel();// 获取SaveParallelDao实例
+				// 4.工装准备
+				deleteData();
 				calculate(gaschedule, 1, 15, 19, mpsno);
-			}
-			flag = Calc();
-			if (!"Great".equals(flag))
-				return new GlobalResult(200, "排产失败,调用工装准备遗传算法出错", null);
-			saveParallel();// 获取SaveParallelDao实例
-			// 5.热管准备--铝蒙皮才有这个工序
-			deleteData();
-			for (int i = 0; i < mps.size(); i++) {
+				flag = Calc();
+				if (!"Great".equals(flag)) {
+					return new GlobalResult(200, "排产失败,调用工装准备遗传算法出错", null);
+				}
+				saveParallel();// 获取SaveParallelDao实例
+				// 5.热管准备--铝蒙皮才有这个工序
+				deleteData();
 				if ("铝蒙皮".equals(mps.get(i).getType())) {
-					mpsno = mps.get(i).getMpsno();
 					calculate(gaschedule, 1, 18, 22, mpsno);
 				}
 				if (i == mps.size() - 1 && "铝蒙皮".equals(mps.get(i).getType())) {
 					flag = Calc();
-					if (!"Great".equals(flag))
-						// return new GlobalResult(200, "排产失败,调用热管准备遗传算法出错", null);
-						saveParallel();// 获取SaveParallelDao实例
+					if (!"Great".equals(flag)) {
+						return new GlobalResult(200, "排产失败,调用热管准备遗传算法出错", null);
+					}
+					saveParallel();// 获取SaveParallelDao实例
 				}
-			}
 
-			// 6.其他工序
-			deleteData();
-			for (int i = 0; i < mps.size(); i++) {
-				mpsno = mps.get(i).getMpsno();
-				int partno = 0;
+				// 6.其他工序
+				deleteData();
+				int partno1 = 0;
 				// 查询
-				String count = gascheduleMapper.selectPartno();
+				String count1 = gascheduleMapper.selectPartno();
 
-				if (count != null) {
-					partno = Integer.parseInt(count) + 1;
-					gaschedule.setPartno(partno);
+				if (count1 != null) {
+					partno1 = Integer.parseInt(count1) + 1;
+					gaschedule.setPartno(partno1);
 				} else {
-					gaschedule.setPartno(partno);
+					gaschedule.setPartno(partno1);
 				}
 				if ("铝蒙皮".equals(mps.get(i).getType())) {
 
@@ -227,20 +217,20 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 				// 更新计划表的partno，通过mpsno
 				gascheduleMapper.updateByMpsnoo(gaschedule);
 
-			}
-			flag = Calc();
-			if (!"Great".equals(flag))
-				// return new GlobalResult(200, "排产失败,调用其他工序遗传算法出错", null);
+				flag = Calc();
+				if (!"Great".equals(flag)) {
+					return new GlobalResult(200, "排产失败,调用其他工序遗传算法出错", null);
+				}
 				saveParallel();// 获取SaveParallelDao实例
-			//查询排查计划表是否有数据
-			int i = gAParallelMapper.queryScheduling(mpsno);
-			
-			if(i==0) {//将排产数据存入排产表
-				gAParallelMapper.inserScheduling();
-			}else {//更新排产计划表
-				gAParallelMapper.updateScheduling();
+				// 查询排查计划表是否有数据
+				int i1 = gAParallelMapper.queryScheduling(mpsno);
+
+				if (i1 == 0) {// 将排产数据存入排产表
+					gAParallelMapper.inserScheduling();
+				} else {// 更新排产计划表
+					gAParallelMapper.updateScheduling();
+				}
 			}
-			
 			return new GlobalResult(200, "排产成功", null);
 		} catch (Exception e) {
 			e.getMessage();
@@ -327,6 +317,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 		result.setRows(pageInfo.getList());
 		return result;
 	}
+
 	@Override
 	public EasyUIDataGridResult lastProductlistByPage(Mps mps, Integer page, Integer rows) {
 		PageHelper.startPage(page, rows);
@@ -337,6 +328,7 @@ public class GASelectedMPSNoServiceImpl implements GASelectedMPSNoService {
 		result.setRows(pageInfo.getList());
 		return result;
 	}
+
 	@Override
 	public GlobalResult insertFault(String machineno, String precovertime) {
 		try {

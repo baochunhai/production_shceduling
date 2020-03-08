@@ -55,15 +55,15 @@
   </select>
   <!--显示排产结果  -->
   <select id="selectGASchedlelistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
-	select GAParallel.MPSNo as "mpsno"
+	select GAParallelShow.MPSNo as "mpsno"
 		,Process.ProcessNo as "processno"
 		,Machine.MachineNo as "machineno"
 		,to_char(sysdate+starttime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "starttime"
 		,to_char(sysdate+endtime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "endtime"
- 	from GAParallel,Process,Machine 
-	where GAParallel.MachineNo=Machine.ID and GAParallel.MPSNo=Process.MPSNo 
-		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null order by GAParallel.MPSNO,
- 		cast(GAParallel.processno as integer)
+ 	from GAParallelShow,Process,Machine 
+	where GAParallelShow.MachineNo=Machine.ID and GAParallelShow.MPSNo=Process.MPSNo 
+		and GAParallelShow.ProcessNo=Process.SequenceNo and starttime is not null order by GAParallelShow.MPSNO,
+ 		cast(GAParallelShow.processno as integer)
 	</select>
 	<!--显示上次排产结果  -->
 	<select id="selectGASchedlastlistByPage" parameterType="cn.lastwhisper.productplan.pojo.Mps" resultType="java.util.Map">
@@ -77,16 +77,16 @@
 	</select>
 	<insert id="inserScheduling" parameterType="cn.lastwhisper.productplan.pojo.Gaparallel" >
 		insert into scheduling(mpsno,processno,machineno,starttime,endtime)
-		select GAParallel.MPSNo as "mpsno"
+		select GAParallelShow.MPSNo as "mpsno"
 		,Process.ProcessNo as "processno"
 		,Machine.MachineNo as "machineno"
 		,to_char(sysdate+starttime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "starttime"
 		,to_char(sysdate+endtime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "endtime"
-		from GAParallel,Process,Machine
-		where GAParallel.MachineNo=Machine.ID and GAParallel.MPSNo=Process.MPSNo
-		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null
-		order by GAParallel.MPSNO,
-		cast(GAParallel.processno as integer)
+		from GAParallelShow,Process,Machine
+		where GAParallelShow.MachineNo=Machine.ID and GAParallelShow.MPSNo=Process.MPSNo
+		and GAParallelShow.ProcessNo=Process.SequenceNo and starttime is not null
+		order by GAParallelShow.MPSNO,
+		cast(GAParallelShow.processno as integer)
 	</insert>
 	<select id="queryScheduling" parameterType="java.lang.String">
  		select count(*)
@@ -94,13 +94,13 @@
 	</select>
 	<select id="updateScheduling" parameterType="java.lang.String">
  		update scheduling s set starttime = (select to_char(sysdate+starttime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "starttime" from 
- 		GAParallel,Process,Machine
-		where GAParallel.MachineNo=Machine.ID and GAParallel.MPSNo=Process.MPSNo
-		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null and rtrim(s.mpsno)=rtrim(GAParallel.mpsno) ),
+ 		GAParallelShow,Process,Machine
+		where GAParallelShow.MachineNo=Machine.ID and GAParallelShow.MPSNo=Process.MPSNo
+		and GAParallelShow.ProcessNo=Process.SequenceNo and starttime is not null and rtrim(s.mpsno)=rtrim(GAParallelShow.mpsno) ),
 		endtime =(select to_char(sysdate+endtime/24/60/60,'yyyy-mm-dd hh24:mi:ss') as "endtime" from 
- 		GAParallel,Process,Machine
-		where GAParallel.MachineNo=Machine.ID and GAParallel.MPSNo=Process.MPSNo
-		and GAParallel.ProcessNo=Process.SequenceNo and starttime is not null and rtrim(s.mpsno)=rtrim(GAParallel.mpsno) ),
+ 		GAParallelShow,Process,Machine
+		where GAParallelShow.MachineNo=Machine.ID and GAParallelShow.MPSNo=Process.MPSNo
+		and GAParallelShow.ProcessNo=Process.SequenceNo and starttime is not null and rtrim(s.mpsno)=rtrim(GAParallelShow.mpsno) ),
 		set FIRSTFLAG='1'
 	</select>
 </mapper>
